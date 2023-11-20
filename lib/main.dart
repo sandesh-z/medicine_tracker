@@ -8,9 +8,7 @@ import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/routes/routes.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await configureDependencies();
-  await ScreenUtil.ensureScreenSize();
+  initApp();
   runApp(const MyApp());
 }
 
@@ -20,9 +18,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<AppLocalizationCubit>(),
+      lazy: false,
+      create: (context) => getIt<AppLocalizationCubit>(),
       child: BlocConsumer<AppLocalizationCubit, AppLocalizationState>(
-        listener: (_, state) {
+        listener: (context, state) {
           if (Intl.defaultLocale != null) {
             Intl.defaultLocale = state.appLocale.locale.languageCode;
           }
@@ -33,9 +32,10 @@ class MyApp extends StatelessWidget {
             key: localestate.key,
             routerConfig: router,
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              useMaterial3: true,
-            ),
+                colorScheme:
+                    ColorScheme.fromSeed(seedColor: Colors.green.shade400),
+                useMaterial3: true,
+                scaffoldBackgroundColor: const Color(0xffF7F6FB)),
             localeResolutionCallback:
                 (Locale? locale, Iterable<Locale> supportedLocales) {
               return locale;
@@ -48,4 +48,10 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+void initApp() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
+  await ScreenUtil.ensureScreenSize();
 }
