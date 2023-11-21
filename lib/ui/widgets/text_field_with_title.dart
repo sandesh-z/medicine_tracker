@@ -30,11 +30,11 @@ class TextFieldWithTitle extends StatelessWidget {
           readOnly: readOnly ?? false,
           controller: controller,
           decoration: InputDecoration(
-            isDense: true,
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(12.r)),
-            hintText: hintText,
-          ),
+              isDense: true,
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(12.r)),
+              hintText: hintText,
+              contentPadding: EdgeInsets.all(12.r)),
           onTap: onTap,
         ),
       ],

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TimeTableWidget extends StatelessWidget {
-  const TimeTableWidget({super.key});
+  final int medicineFrequency;
+  const TimeTableWidget({super.key, required this.medicineFrequency});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,7 @@ class TimeTableWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             "Time for taking Medicine",
@@ -21,22 +23,17 @@ class TimeTableWidget extends StatelessWidget {
           SizedBox(
             height: 10.h,
           ),
-          const TimeRowWidget(time: "6:00 am"),
-          SizedBox(
-            height: 10.h,
-          ),
-          const TimeRowWidget(time: "12:00 pm"),
-          SizedBox(
-            height: 10.h,
-          ),
-          const TimeRowWidget(
-            time: "18:00 pm",
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          const TimeRowWidget(
-            time: "12:00 pm",
+          Flexible(
+            child: ListView.separated(
+              shrinkWrap: true,
+              itemCount: medicineFrequency,
+              itemBuilder: (context, index) {
+                return const TimeRowWidget(time: "6:00 am");
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return SizedBox(height: 20.h);
+              },
+            ),
           ),
         ],
       ),
