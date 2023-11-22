@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medicine_tracker/app_constants/constants.dart';
+import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
+import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
+import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/widgets/custom_dropdown.dart';
 import 'package:medicine_tracker/ui/widgets/text_field_with_title.dart';
 import 'package:medicine_tracker/ui/widgets/time_table_widget.dart';
@@ -14,7 +17,7 @@ class AddMedicinePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => AddMedicineBloc(),
+      create: (_) => AddMedicineBloc(getIt<GetMedicineDetails>()),
       child: const MedicineFormBody(),
     );
   }
@@ -65,12 +68,25 @@ class MedicineFormBody extends StatelessWidget {
                     medicineFrequency: state.medicineFrequency);
               },
             ),
-            TextButton(
-                onPressed: () {},
-                child: Text(
-                  "Save",
-                  style: TextStyle(fontSize: 20.sp),
-                ))
+            BlocBuilder<AddMedicineBloc, AddMedicineState>(
+              builder: (context, state) {
+                return TextButton(
+                    onPressed: () async {
+                      var details = MedicineDetails(
+                          id: 1,
+                          medicineName: controller.text,
+                          frequency: state.medicineFrequency,
+                          schedule: "6:00");
+                      context
+                          .read<AddMedicineBloc>()
+                          .add(AddMedicineEvent.save(details));
+                    },
+                    child: Text(
+                      "Save",
+                      style: TextStyle(fontSize: 20.sp),
+                    ));
+              },
+            )
           ],
         ),
       ),

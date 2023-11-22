@@ -46,7 +46,9 @@ class _HomePageState extends State<HomePage> {
         onTap: (int i) {
           switch (i) {
             case 0:
-              getIt<AppLocalizationCubit>().changeLang(AppLocale.english);
+              context
+                  .read<AppLocalizationCubit>()
+                  .changeLang(AppLocale.english);
               break;
             case 1:
               context.go('/add');

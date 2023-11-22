@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      lazy: false,
       create: (context) => getIt<AppLocalizationCubit>(),
       child: BlocConsumer<AppLocalizationCubit, AppLocalizationState>(
         listener: (context, state) {
@@ -52,6 +51,6 @@ class MyApp extends StatelessWidget {
 
 void initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await configureDependencies();
+  configureDependencies();
   await ScreenUtil.ensureScreenSize();
 }
