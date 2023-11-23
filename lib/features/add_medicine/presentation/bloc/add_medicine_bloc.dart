@@ -15,6 +15,7 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
   AddMedicineBloc(this.getMedicineDetails) : super(AddMedicineState.initial()) {
     on<_SaveMedicineDetail>(_onSaveMedicineDetail);
     on<_ChangeMedicineTimeFrequency>(_onChangeMedicineTimeFrequency);
+    on<_GetAllMedicine>(_onGetAllMedicine);
   }
   _onSaveMedicineDetail(
       _SaveMedicineDetail event, Emitter<AddMedicineState> emit) {
@@ -24,5 +25,9 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
   _onChangeMedicineTimeFrequency(
       _ChangeMedicineTimeFrequency event, Emitter<AddMedicineState> emit) {
     emit(state.copyWith(medicineFrequency: event.medicineFrequency));
+  }
+
+  _onGetAllMedicine(_GetAllMedicine event, Emitter<AddMedicineState> emit) {
+    getMedicineDetails.getAllMedicine();
   }
 }

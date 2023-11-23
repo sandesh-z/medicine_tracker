@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<AppLocalizationCubit>(),
+      create: (context) => AppLocalizationCubit(),
       child: BlocConsumer<AppLocalizationCubit, AppLocalizationState>(
         listener: (context, state) {
           if (Intl.defaultLocale != null) {
@@ -51,6 +51,6 @@ class MyApp extends StatelessWidget {
 
 void initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
+  await configureDependencies();
   await ScreenUtil.ensureScreenSize();
 }

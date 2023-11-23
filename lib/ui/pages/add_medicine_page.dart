@@ -73,13 +73,15 @@ class MedicineFormBody extends StatelessWidget {
                 return TextButton(
                     onPressed: () async {
                       var details = MedicineDetails(
-                          id: 1,
                           medicineName: controller.text,
                           frequency: state.medicineFrequency,
-                          schedule: "6:00");
+                          schedule: "a");
                       context
                           .read<AddMedicineBloc>()
                           .add(AddMedicineEvent.save(details));
+                      // context
+                      //     .read<AddMedicineBloc>()
+                      //     .add(const AddMedicineEvent.getAllMedicine());
                     },
                     child: Text(
                       "Save",

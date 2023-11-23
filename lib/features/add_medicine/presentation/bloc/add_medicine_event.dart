@@ -4,6 +4,7 @@ part of 'add_medicine_bloc.dart';
 class AddMedicineEvent with _$AddMedicineEvent {
   const factory AddMedicineEvent.save(MedicineDetails medicineDetails) =
       _SaveMedicineDetail;
+  const factory AddMedicineEvent.getAllMedicine() = _GetAllMedicine;
   const factory AddMedicineEvent.changeMedicineTimeFrequency(
       int medicineFrequency) = _ChangeMedicineTimeFrequency;
 }

@@ -10,12 +10,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:shared_preferences/shared_preferences.dart' as _i5;
+import 'package:shared_preferences/shared_preferences.dart' as _i6;
 
-import '../core/database/local_database_provider.dart' as _i3;
-import '../core/database/medicine_detail_provider.dart' as _i4;
+import '../core/database/local_database_provider.dart' as _i4;
+import '../core/database/medicine_detail_provider.dart' as _i5;
 import '../features/add_medicine/data/data_sources/add_medicine_local_data_source.dart'
-    as _i6;
+    as _i7;
 import '../features/add_medicine/data/repositories/medicine_details_repository.dart'
     as _i9;
 import '../features/add_medicine/domain/repositories/medicine_details_repository.dart'
@@ -24,7 +24,7 @@ import '../features/add_medicine/domain/usecases/get_medicine_details.dart'
     as _i10;
 import '../features/add_medicine/presentation/bloc/add_medicine_bloc.dart'
     as _i11;
-import '../features/localization_cubit/app_localization_cubit.dart' as _i7;
+import '../features/localization_cubit/app_localization_cubit.dart' as _i3;
 import 'injectable/shared_preference_module.dart' as _i12;
 
 extension GetItInjectableX on _i1.GetIt {
@@ -39,21 +39,21 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     final sharedPreferenceModule = _$SharedPreferenceModule();
-    gh.singleton<_i3.DBProvider>(_i3.DBProviderImpl());
-    gh.singleton<_i4.MedicineDetailsProvider>(
-        _i4.MedicineProviderImpl(provider: gh<_i3.DBProvider>()));
-    await gh.factoryAsync<_i5.SharedPreferences>(
+    gh.lazySingleton<_i3.AppLocalizationCubit>(
+        () => _i3.AppLocalizationCubit());
+    gh.singleton<_i4.DBProvider>(_i4.DBProviderImpl());
+    gh.singleton<_i5.MedicineDetailsProvider>(
+        _i5.MedicineProviderImpl(provider: gh<_i4.DBProvider>()));
+    await gh.factoryAsync<_i6.SharedPreferences>(
       () => sharedPreferenceModule.prefs,
       preResolve: true,
     );
-    gh.lazySingleton<_i6.AddMedicineLocalDataSource>(() =>
-        _i6.AddMedicineDabasaseImpl(
-            medicineDetailsProvider: gh<_i4.MedicineDetailsProvider>()));
-    gh.lazySingleton<_i7.AppLocalizationCubit>(
-        () => _i7.AppLocalizationCubit(gh<_i5.SharedPreferences>()));
+    gh.lazySingleton<_i7.AddMedicineLocalDataSource>(() =>
+        _i7.AddMedicineDabasaseImpl(
+            medicineDetailsProvider: gh<_i5.MedicineDetailsProvider>()));
     gh.singleton<_i8.MedicineDetailsRepository>(
         _i9.MedicineDetailsRepositoryImpl(
-            medicineLocalDataSource: gh<_i6.AddMedicineLocalDataSource>()));
+            medicineLocalDataSource: gh<_i7.AddMedicineLocalDataSource>()));
     gh.lazySingleton<_i10.GetMedicineDetails>(() => _i10.GetMedicineDetails(
         repository: gh<_i8.MedicineDetailsRepository>()));
     gh.lazySingleton<_i11.AddMedicineBloc>(

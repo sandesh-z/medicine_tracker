@@ -14,8 +14,7 @@ class MedicineDetailsRepositoryImpl implements MedicineDetailsRepository {
   }
 
   @override
-  Future getAllMedicine() {
-    // TODO: implement getAllMedicine
-    throw UnimplementedError();
+  Future getAllMedicine() async {
+    await medicineLocalDataSource.getAllMedicineItems();
   }
 }

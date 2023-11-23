@@ -26,4 +26,8 @@ class GetMedicineDetails
   }) {
     return repository.saveMedicineDetail(medicineDetails: item);
   }
+
+  Future getAllMedicine() {
+    return repository.getAllMedicine();
+  }
 }

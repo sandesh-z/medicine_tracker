@@ -4,6 +4,7 @@ import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine
 
 abstract class MedicineDetailsProvider {
   Future insertMedicineDetailItem(MedicineDetails medicineDetails);
+  Future<List<MedicineDetails>>? getAllMedicne();
 }
 
 @Singleton(as: MedicineDetailsProvider)
@@ -20,5 +21,21 @@ class MedicineProviderImpl implements MedicineDetailsProvider {
       tableName: 'medicine_details',
       values: medicineDetails.toMap(),
     );
+  }
+
+  @override
+  Future<List<MedicineDetails>>? getAllMedicne() async {
+    final List<Map<String, dynamic>>? maps =
+        await provider.getAllFrom(tableName: 'medicine_details');
+    if (maps == null) return [];
+    print(maps.toList());
+    return List.generate(maps.length, (i) {
+      return MedicineDetails(
+        id: maps[i]['id'] as int,
+        medicineName: maps[i]['medicine_name'] as String,
+        frequency: maps[i]['frequency'] as int,
+        schedule: maps[i]['schedule'] as String,
+      );
+    });
   }
 }

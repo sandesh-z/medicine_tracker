@@ -1,10 +1,10 @@
 class MedicineDetails {
-  final int id;
+  final int? id;
   final String medicineName;
   final int frequency;
   final String schedule;
   MedicineDetails({
-    required this.id,
+    this.id,
     required this.medicineName,
     required this.frequency,
     required this.schedule,
