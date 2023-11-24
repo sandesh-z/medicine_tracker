@@ -8,7 +8,7 @@ import '../../../../core/usecase/usecase.dart';
 
 @lazySingleton
 class GetMedicineDetails
-    implements Usecase<ApiFailure, List<MedicineDetails>, NoParams> {
+    implements Usecase<ApiFailure, List<MedicineDetails>?, NoParams> {
   final MedicineDetailsRepository repository;
 
   GetMedicineDetails({
@@ -16,7 +16,7 @@ class GetMedicineDetails
   });
 
   @override
-  Future<Either<ApiFailure, List<MedicineDetails>>> call(
+  Future<Either<ApiFailure, List<MedicineDetails>?>> call(
       NoParams params) async {
     return Right(await repository.getAllMedicine());
   }
@@ -25,9 +25,5 @@ class GetMedicineDetails
     required MedicineDetails item,
   }) {
     return repository.saveMedicineDetail(medicineDetails: item);
-  }
-
-  Future getAllMedicine() {
-    return repository.getAllMedicine();
   }
 }

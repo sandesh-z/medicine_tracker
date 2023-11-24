@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:medicine_tracker/core/usecase/usecase.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medicine_details.dart';
 
@@ -27,7 +28,11 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
     emit(state.copyWith(medicineFrequency: event.medicineFrequency));
   }
 
-  _onGetAllMedicine(_GetAllMedicine event, Emitter<AddMedicineState> emit) {
-    getMedicineDetails.getAllMedicine();
+  _onGetAllMedicine(
+      _GetAllMedicine event, Emitter<AddMedicineState> emit) async {
+    final result = await getMedicineDetails.call(NoParams());
+    emit(result.fold((l) => state.copyWith(), (r) {
+      return state.copyWith(allMedicineList: r);
+    }));
   }
 }

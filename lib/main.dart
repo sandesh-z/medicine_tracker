@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medicine_details.dart';
+import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
 import 'package:medicine_tracker/features/localization_cubit/app_localization_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/routes/routes.dart';
@@ -17,8 +19,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppLocalizationCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AppLocalizationCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AddMedicineBloc(getIt<GetMedicineDetails>()),
+        ),
+      ],
       child: BlocConsumer<AppLocalizationCubit, AppLocalizationState>(
         listener: (context, state) {
           if (Intl.defaultLocale != null) {

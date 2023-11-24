@@ -4,7 +4,7 @@ import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine
 
 abstract class AddMedicineLocalDataSource {
   Future<void> saveMedicineDetailItem(MedicineDetails medicineDetails);
-  Future<List<MedicineDetails>>? getAllMedicineItems();
+  Future<List<MedicineDetails>?> getAllMedicineItems();
 }
 
 @LazySingleton(as: AddMedicineLocalDataSource)
@@ -18,9 +18,9 @@ class AddMedicineDabasaseImpl implements AddMedicineLocalDataSource {
   }
 
   @override
-  Future<List<MedicineDetails>>? getAllMedicineItems() async {
+  Future<List<MedicineDetails>?> getAllMedicineItems() async {
     final details = await medicineDetailsProvider.getAllMedicne();
-    if (details != null) {
+    if (details != null && details.isNotEmpty) {
       print(details[0].medicineName);
       return details;
     }

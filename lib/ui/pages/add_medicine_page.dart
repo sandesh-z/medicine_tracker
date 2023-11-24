@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:medicine_tracker/app_constants/constants.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medicine_details.dart';
@@ -75,13 +76,11 @@ class MedicineFormBody extends StatelessWidget {
                       var details = MedicineDetails(
                           medicineName: controller.text,
                           frequency: state.medicineFrequency,
-                          schedule: "a");
+                          schedule: "6:00");
                       context
                           .read<AddMedicineBloc>()
                           .add(AddMedicineEvent.save(details));
-                      // context
-                      //     .read<AddMedicineBloc>()
-                      //     .add(const AddMedicineEvent.getAllMedicine());
+                      context.pop();
                     },
                     child: Text(
                       "Save",

@@ -5,8 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medicine_tracker/core/localization/app_locale.dart';
 import 'package:medicine_tracker/core/localization/strings.dart';
+import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
 import 'package:medicine_tracker/features/localization_cubit/app_localization_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
+import 'package:medicine_tracker/ui/pages/home/medicine_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,18 +21,33 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const LanguageSelect(),
-          Text(
-            strings.hello_world,
-            style: TextStyle(fontSize: 25.spMin),
-          ),
-        ],
-      )),
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const LanguageSelect(),
+            Text(
+              strings.hello_world,
+              style: TextStyle(fontSize: 25.spMin),
+            ),
+            TextButton(
+                onPressed: () {
+                  context
+                      .read<AddMedicineBloc>()
+                      .add(const AddMedicineEvent.getAllMedicine());
+                },
+                child: const Text("Get medicine list")),
+            BlocBuilder<AddMedicineBloc, AddMedicineState>(
+              builder: (context, state) {
+                if (state.allMedicineList?.isEmpty ?? false) {
+                  return const SizedBox();
+                }
+                return MedicineList(list: state.allMedicineList ?? []);
+              },
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: ConvexAppBar(
         style: TabStyle.fixedCircle,
         backgroundColor: Colors.green,

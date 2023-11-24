@@ -14,7 +14,8 @@ class MedicineDetailsRepositoryImpl implements MedicineDetailsRepository {
   }
 
   @override
-  Future getAllMedicine() async {
-    await medicineLocalDataSource.getAllMedicineItems();
+  Future<List<MedicineDetails>?> getAllMedicine() async {
+    final result = await medicineLocalDataSource.getAllMedicineItems();
+    return result ?? [];
   }
 }
