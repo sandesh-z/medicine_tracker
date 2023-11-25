@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,35 +24,55 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: Stack(
           children: [
-            const LanguageSelect(),
-            Text(
-              strings.hello_world,
-              style: TextStyle(fontSize: 25.spMin),
+            ConstrainedBox(
+              constraints: const BoxConstraints.expand(),
+              child: ClipRRect(
+                child: ImageFiltered(
+                  imageFilter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                  child: Image.asset(
+                    'assets/images/green-background.jpg',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ),
-            TextButton(
-                onPressed: () {
-                  context
-                      .read<AddMedicineBloc>()
-                      .add(const AddMedicineEvent.getAllMedicine());
-                },
-                child: const Text("Get medicine list")),
-            BlocBuilder<AddMedicineBloc, AddMedicineState>(
-              builder: (context, state) {
-                if (state.allMedicineList?.isEmpty ?? false) {
-                  return const SizedBox();
-                }
-                return MedicineList(list: state.allMedicineList ?? []);
-              },
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const LanguageSelect(),
+                  Text(
+                    strings.hello_world,
+                    style: TextStyle(fontSize: 25.spMin),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        context
+                            .read<AddMedicineBloc>()
+                            .add(const AddMedicineEvent.getAllMedicine());
+                      },
+                      child: const Text("Get medicine list")),
+                  BlocBuilder<AddMedicineBloc, AddMedicineState>(
+                    buildWhen: (previous, current) =>
+                        previous.allMedicineList != current.allMedicineList,
+                    builder: (context, state) {
+                      if (state.allMedicineList?.isEmpty ?? false) {
+                        return const SizedBox();
+                      }
+                      return MedicineList(list: state.allMedicineList ?? []);
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
       bottomNavigationBar: ConvexAppBar(
         style: TabStyle.fixedCircle,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.green.shade900,
         color: Colors.white,
         items: const [
           TabItem(icon: Icons.list),
