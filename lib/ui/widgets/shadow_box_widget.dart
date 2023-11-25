@@ -28,7 +28,7 @@ class ShadowBoxWidget extends StatelessWidget {
         padding: padding,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
-          color: Colors.green.shade200,
+          color: Colors.green.withOpacity(.2),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.08),

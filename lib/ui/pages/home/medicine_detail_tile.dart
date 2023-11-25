@@ -18,7 +18,16 @@ class MedicineDetailTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Row(
-              children: [Text(item.medicineName)],
+              children: [
+                Text(
+                  item.medicineName,
+                  style: TextStyle(
+                      fontSize: 22.sp,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1.1),
+                )
+              ],
             ),
             Row(
               children: [
@@ -48,10 +57,14 @@ class CheckboxWithTime extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(mainAxisSize: MainAxisSize.min, children: [
-      Checkbox(value: false, onChanged: (checked) {}),
+      Checkbox(
+        value: false,
+        onChanged: (checked) {},
+        fillColor: MaterialStateProperty.all(Colors.white),
+      ),
       Text(
         time,
-        style: TextStyle(fontSize: 16.sp),
+        style: TextStyle(fontSize: 16.sp, color: Colors.white),
       )
     ]);
   }
