@@ -32,6 +32,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green.shade900,
+        automaticallyImplyLeading: false,
         title: const Text(
           'Medicine Tracker',
           style: TextStyle(color: Colors.white),
