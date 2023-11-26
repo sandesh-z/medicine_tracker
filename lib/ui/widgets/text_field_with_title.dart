@@ -6,6 +6,7 @@ class TextFieldWithTitle extends StatelessWidget {
   final void Function()? onTap;
   final String? hintText;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
   final bool? readOnly;
   const TextFieldWithTitle({
     super.key,
@@ -14,6 +15,7 @@ class TextFieldWithTitle extends StatelessWidget {
     this.readOnly,
     this.hintText,
     this.controller,
+    this.validator,
   });
 
   @override
@@ -26,9 +28,10 @@ class TextFieldWithTitle extends StatelessWidget {
           style: TextStyle(fontSize: 16.sp),
         ),
         SizedBox(height: 5.h),
-        TextField(
+        TextFormField(
           readOnly: readOnly ?? false,
           controller: controller,
+          validator: validator,
           decoration: InputDecoration(
               isDense: true,
               border:
