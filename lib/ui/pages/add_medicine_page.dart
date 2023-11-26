@@ -7,12 +7,12 @@ import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine
 import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
 import 'package:medicine_tracker/injections/injection.dart';
-import 'package:medicine_tracker/ui/pages/home/home_page.dart';
 import 'package:medicine_tracker/ui/routes/routes.dart';
 import 'package:medicine_tracker/ui/widgets/custom_dropdown.dart';
 import 'package:medicine_tracker/ui/widgets/text_field_with_title.dart';
 import 'package:medicine_tracker/ui/widgets/time_table_widget.dart';
 import 'package:medicine_tracker/utils/medicine_time_frequency_parser.dart';
+import 'package:medicine_tracker/utils/validator.dart';
 
 @RoutePage()
 class AddMedicinePage extends StatelessWidget {
@@ -27,12 +27,15 @@ class AddMedicinePage extends StatelessWidget {
   }
 }
 
+List<String> schedules = [];
+
 class MedicineFormBody extends StatelessWidget {
   const MedicineFormBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
+    var _formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add medicine"),
@@ -40,58 +43,70 @@ class MedicineFormBody extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20.r),
-        child: Column(
-          children: [
-            TextFieldWithTitle(
-              title: "Medicine Name",
-              hintText: "Enter the name of the Medicine",
-              controller: controller,
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            CustomDropdown(
-              title: "How many times you should take this medicine during day?",
-              itmes: AppConstants.medicineTimeitems,
-              callback: (selectedItem) {
-                if (selectedItem == null) return;
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFieldWithTitle(
+                title: "Medicine Name",
+                hintText: "Enter the name of the Medicine",
+                controller: controller,
+                validator: Validator.isNotEmpty,
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              CustomDropdown(
+                title:
+                    "How many times you should take this medicine during day?",
+                itmes: AppConstants.medicineTimeitems,
+                callback: (selectedItem) {
+                  if (selectedItem == null) return;
 
-                context.read<AddMedicineBloc>().add(
-                    AddMedicineEvent.changeMedicineTimeFrequency(
-                        parseMedicineFrequency(selectedItem)));
-              },
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            BlocBuilder<AddMedicineBloc, AddMedicineState>(
-              buildWhen: (previous, current) =>
-                  previous.medicineFrequency != current.medicineFrequency,
-              builder: (context, state) {
-                return TimeTableWidget(
-                    medicineFrequency: state.medicineFrequency);
-              },
-            ),
-            BlocBuilder<AddMedicineBloc, AddMedicineState>(
-              builder: (context, state) {
-                return TextButton(
-                    onPressed: () async {
-                      var details = MedicineDetails(
-                          medicineName: controller.text,
-                          frequency: state.medicineFrequency,
-                          schedule: "6:00");
-                      context
-                          .read<AddMedicineBloc>()
-                          .add(AddMedicineEvent.save(details));
-                      context.router.replace(const HomeRoute());
+                  context.read<AddMedicineBloc>().add(
+                      AddMedicineEvent.changeMedicineTimeFrequency(
+                          parseMedicineFrequency(selectedItem)));
+                },
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              BlocBuilder<AddMedicineBloc, AddMedicineState>(
+                buildWhen: (previous, current) =>
+                    previous.medicineFrequency != current.medicineFrequency,
+                builder: (context, state) {
+                  return TimeTableWidget(
+                    medicineFrequency: state.medicineFrequency,
+                    onSave: (list) {
+                      schedules = list;
+                      print(schedules);
                     },
-                    child: Text(
-                      "Save",
-                      style: TextStyle(fontSize: 20.sp),
-                    ));
-              },
-            )
-          ],
+                  );
+                },
+              ),
+              BlocBuilder<AddMedicineBloc, AddMedicineState>(
+                builder: (context, state) {
+                  return TextButton(
+                      onPressed: () async {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          var details = MedicineDetails(
+                              medicineName: controller.text,
+                              frequency: state.medicineFrequency,
+                              schedule: schedules.join(","));
+                          context
+                              .read<AddMedicineBloc>()
+                              .add(AddMedicineEvent.save(details));
+                          context.router.replace(const HomeRoute());
+                        }
+                      },
+                      child: Text(
+                        "Save",
+                        style: TextStyle(fontSize: 20.sp),
+                      ));
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

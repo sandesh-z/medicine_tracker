@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+List<String> schedules = [];
+
 class TimeTableWidget extends StatelessWidget {
   final int medicineFrequency;
-  const TimeTableWidget({super.key, required this.medicineFrequency});
+  final void Function(List<String>) onSave;
+  const TimeTableWidget(
+      {super.key, required this.medicineFrequency, required this.onSave});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,13 @@ class TimeTableWidget extends StatelessWidget {
               shrinkWrap: true,
               itemCount: medicineFrequency,
               itemBuilder: (context, index) {
-                return const TimeRowWidget(time: "6:00 am");
+                return TimeRowWidget(
+                  time: (time) {
+                    schedules.removeAt(index);
+                    schedules.insert(index, time?.format(context) ?? "");
+                    onSave(schedules);
+                  },
+                );
               },
               separatorBuilder: (BuildContext context, int index) {
                 return SizedBox(height: 20.h);
@@ -41,10 +51,17 @@ class TimeTableWidget extends StatelessWidget {
   }
 }
 
-class TimeRowWidget extends StatelessWidget {
-  final String time;
+class TimeRowWidget extends StatefulWidget {
+  final void Function(TimeOfDay?) time;
+
   const TimeRowWidget({super.key, required this.time});
 
+  @override
+  State<TimeRowWidget> createState() => _TimeRowWidgetState();
+}
+
+class _TimeRowWidgetState extends State<TimeRowWidget> {
+  TimeOfDay? pickedTime = TimeOfDay.now();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,10 +73,35 @@ class TimeRowWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            time,
+            pickedTime?.format(context) ?? "6:00 AM",
             style: TextStyle(fontSize: 23.sp, letterSpacing: 1),
           ),
-          const Icon(Icons.calendar_month_outlined)
+          InkWell(
+              onTap: () async {
+                pickedTime = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay.now(),
+                  builder: (context, child) {
+                    return Theme(
+                      data: ThemeData(
+                        timePickerTheme: TimePickerTheme.of(context).copyWith(
+                          backgroundColor: Colors.green.shade100,
+                          dialHandColor: Colors.green,
+                        ),
+                      ),
+                      child: MediaQuery(
+                        data: MediaQuery.of(context)
+                            .copyWith(alwaysUse24HourFormat: true),
+                        child: child ?? const SizedBox(),
+                      ),
+                    );
+                  },
+                );
+
+                widget.time(pickedTime);
+                setState(() {});
+              },
+              child: const Icon(Icons.calendar_month_outlined))
         ],
       ),
     );

@@ -499,6 +499,7 @@ mixin _$AddMedicineState {
   int get medicineFrequency => throw _privateConstructorUsedError;
   List<MedicineDetails>? get allMedicineList =>
       throw _privateConstructorUsedError;
+  List<String> get schedules => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddMedicineStateCopyWith<AddMedicineState> get copyWith =>
@@ -515,7 +516,8 @@ abstract class $AddMedicineStateCopyWith<$Res> {
       {Key key,
       bool isLoading,
       int medicineFrequency,
-      List<MedicineDetails>? allMedicineList});
+      List<MedicineDetails>? allMedicineList,
+      List<String> schedules});
 }
 
 /// @nodoc
@@ -535,6 +537,7 @@ class _$AddMedicineStateCopyWithImpl<$Res, $Val extends AddMedicineState>
     Object? isLoading = null,
     Object? medicineFrequency = null,
     Object? allMedicineList = freezed,
+    Object? schedules = null,
   }) {
     return _then(_value.copyWith(
       key: null == key
@@ -553,6 +556,10 @@ class _$AddMedicineStateCopyWithImpl<$Res, $Val extends AddMedicineState>
           ? _value.allMedicineList
           : allMedicineList // ignore: cast_nullable_to_non_nullable
               as List<MedicineDetails>?,
+      schedules: null == schedules
+          ? _value.schedules
+          : schedules // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -569,7 +576,8 @@ abstract class _$$AddMedicineStateImplCopyWith<$Res>
       {Key key,
       bool isLoading,
       int medicineFrequency,
-      List<MedicineDetails>? allMedicineList});
+      List<MedicineDetails>? allMedicineList,
+      List<String> schedules});
 }
 
 /// @nodoc
@@ -587,6 +595,7 @@ class __$$AddMedicineStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? medicineFrequency = null,
     Object? allMedicineList = freezed,
+    Object? schedules = null,
   }) {
     return _then(_$AddMedicineStateImpl(
       key: null == key
@@ -605,6 +614,10 @@ class __$$AddMedicineStateImplCopyWithImpl<$Res>
           ? _value._allMedicineList
           : allMedicineList // ignore: cast_nullable_to_non_nullable
               as List<MedicineDetails>?,
+      schedules: null == schedules
+          ? _value._schedules
+          : schedules // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -616,8 +629,10 @@ class _$AddMedicineStateImpl implements _AddMedicineState {
       {required this.key,
       required this.isLoading,
       required this.medicineFrequency,
-      required final List<MedicineDetails>? allMedicineList})
-      : _allMedicineList = allMedicineList;
+      required final List<MedicineDetails>? allMedicineList,
+      required final List<String> schedules})
+      : _allMedicineList = allMedicineList,
+        _schedules = schedules;
 
   @override
   final Key key;
@@ -635,9 +650,17 @@ class _$AddMedicineStateImpl implements _AddMedicineState {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<String> _schedules;
+  @override
+  List<String> get schedules {
+    if (_schedules is EqualUnmodifiableListView) return _schedules;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_schedules);
+  }
+
   @override
   String toString() {
-    return 'AddMedicineState(key: $key, isLoading: $isLoading, medicineFrequency: $medicineFrequency, allMedicineList: $allMedicineList)';
+    return 'AddMedicineState(key: $key, isLoading: $isLoading, medicineFrequency: $medicineFrequency, allMedicineList: $allMedicineList, schedules: $schedules)';
   }
 
   @override
@@ -651,12 +674,19 @@ class _$AddMedicineStateImpl implements _AddMedicineState {
             (identical(other.medicineFrequency, medicineFrequency) ||
                 other.medicineFrequency == medicineFrequency) &&
             const DeepCollectionEquality()
-                .equals(other._allMedicineList, _allMedicineList));
+                .equals(other._allMedicineList, _allMedicineList) &&
+            const DeepCollectionEquality()
+                .equals(other._schedules, _schedules));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, key, isLoading,
-      medicineFrequency, const DeepCollectionEquality().hash(_allMedicineList));
+  int get hashCode => Object.hash(
+      runtimeType,
+      key,
+      isLoading,
+      medicineFrequency,
+      const DeepCollectionEquality().hash(_allMedicineList),
+      const DeepCollectionEquality().hash(_schedules));
 
   @JsonKey(ignore: true)
   @override
@@ -668,11 +698,11 @@ class _$AddMedicineStateImpl implements _AddMedicineState {
 
 abstract class _AddMedicineState implements AddMedicineState {
   const factory _AddMedicineState(
-          {required final Key key,
-          required final bool isLoading,
-          required final int medicineFrequency,
-          required final List<MedicineDetails>? allMedicineList}) =
-      _$AddMedicineStateImpl;
+      {required final Key key,
+      required final bool isLoading,
+      required final int medicineFrequency,
+      required final List<MedicineDetails>? allMedicineList,
+      required final List<String> schedules}) = _$AddMedicineStateImpl;
 
   @override
   Key get key;
@@ -682,6 +712,8 @@ abstract class _AddMedicineState implements AddMedicineState {
   int get medicineFrequency;
   @override
   List<MedicineDetails>? get allMedicineList;
+  @override
+  List<String> get schedules;
   @override
   @JsonKey(ignore: true)
   _$$AddMedicineStateImplCopyWith<_$AddMedicineStateImpl> get copyWith =>
