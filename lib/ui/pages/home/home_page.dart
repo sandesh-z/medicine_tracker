@@ -1,17 +1,16 @@
 import 'dart:ui';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:medicine_tracker/core/localization/app_locale.dart';
-import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
 import 'package:medicine_tracker/features/localization_cubit/app_localization_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/pages/home/medicine_list.dart';
+import 'package:medicine_tracker/ui/routes/routes.dart';
 
+@RoutePage()
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -21,8 +20,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+    context
+        .read<AddMedicineBloc>()
+        .add(const AddMedicineEvent.getAllMedicine());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green.shade900,
+        title: const Text(
+          'Medicine Tracker',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       body: SafeArea(
         child: Stack(
           children: [
@@ -42,18 +56,6 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const LanguageSelect(),
-                  Text(
-                    strings.hello_world,
-                    style: TextStyle(fontSize: 25.spMin),
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        context
-                            .read<AddMedicineBloc>()
-                            .add(const AddMedicineEvent.getAllMedicine());
-                      },
-                      child: const Text("Get medicine list")),
                   BlocBuilder<AddMedicineBloc, AddMedicineState>(
                     buildWhen: (previous, current) =>
                         previous.allMedicineList != current.allMedicineList,
@@ -90,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                   .changeLang(AppLocale.english);
               break;
             case 1:
-              context.go('/add');
+              context.pushRoute(const AddMedicineRoute());
               break;
             case 2:
               break;

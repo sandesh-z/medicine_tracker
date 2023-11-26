@@ -25,6 +25,9 @@ class MedicineProviderImpl implements MedicineDetailsProvider {
 
   @override
   Future<List<MedicineDetails>?> getAllMedicne() async {
+    if (!provider.isOpen) {
+      await provider.open();
+    }
     final List<Map<String, dynamic>>? maps =
         await provider.getAllFrom(tableName: 'medicine_details');
     if (maps == null) return [];

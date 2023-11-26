@@ -32,6 +32,7 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
       _GetAllMedicine event, Emitter<AddMedicineState> emit) async {
     final result = await getMedicineDetails.call(NoParams());
     emit(result.fold((l) => state.copyWith(), (r) {
+      print(r?.length);
       return state.copyWith(allMedicineList: r);
     }));
   }

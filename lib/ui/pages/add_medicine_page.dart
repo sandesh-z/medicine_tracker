@@ -1,17 +1,20 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:medicine_tracker/app_constants/constants.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
 import 'package:medicine_tracker/injections/injection.dart';
+import 'package:medicine_tracker/ui/pages/home/home_page.dart';
+import 'package:medicine_tracker/ui/routes/routes.dart';
 import 'package:medicine_tracker/ui/widgets/custom_dropdown.dart';
 import 'package:medicine_tracker/ui/widgets/text_field_with_title.dart';
 import 'package:medicine_tracker/ui/widgets/time_table_widget.dart';
 import 'package:medicine_tracker/utils/medicine_time_frequency_parser.dart';
 
+@RoutePage()
 class AddMedicinePage extends StatelessWidget {
   const AddMedicinePage({super.key});
 
@@ -80,7 +83,7 @@ class MedicineFormBody extends StatelessWidget {
                       context
                           .read<AddMedicineBloc>()
                           .add(AddMedicineEvent.save(details));
-                      context.pop();
+                      context.router.replace(const HomeRoute());
                     },
                     child: Text(
                       "Save",

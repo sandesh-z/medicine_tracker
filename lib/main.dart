@@ -9,8 +9,9 @@ import 'package:medicine_tracker/features/localization_cubit/app_localization_cu
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/routes/routes.dart';
 
+final appRouter = AppRouter();
 void main() async {
-  initApp();
+  await initApp();
   runApp(const MyApp());
 }
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
           ScreenUtil.init(context);
           return MaterialApp.router(
             key: localestate.key,
-            routerConfig: router,
+            routerConfig: appRouter.config(),
             theme: ThemeData(
                 colorScheme:
                     ColorScheme.fromSeed(seedColor: Colors.green.shade400),
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-void initApp() async {
+Future<void> initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
   await ScreenUtil.ensureScreenSize();
