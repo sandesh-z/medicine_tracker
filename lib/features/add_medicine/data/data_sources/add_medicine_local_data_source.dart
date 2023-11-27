@@ -21,7 +21,6 @@ class AddMedicineDabasaseImpl implements AddMedicineLocalDataSource {
   Future<List<MedicineDetails>?> getAllMedicineItems() async {
     final details = await medicineDetailsProvider.getAllMedicne();
     if (details != null && details.isNotEmpty) {
-      print(details[0].medicineName);
       return details;
     }
     return [];
