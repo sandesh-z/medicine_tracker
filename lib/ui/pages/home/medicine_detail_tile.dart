@@ -39,7 +39,7 @@ class MedicineDetailTile extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return CheckboxWithTime(
-                          time: item.schedule,
+                          time: item.schedule.split(',').toList()[index],
                         );
                       }),
                 )

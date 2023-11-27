@@ -27,15 +27,16 @@ class AddMedicinePage extends StatelessWidget {
   }
 }
 
-List<String> schedules = [];
-
 class MedicineFormBody extends StatelessWidget {
   const MedicineFormBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
-    var _formKey = GlobalKey<FormState>();
+    var formKey = GlobalKey<FormState>();
+
+    List<String> schedules = [];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add medicine"),
@@ -44,7 +45,7 @@ class MedicineFormBody extends StatelessWidget {
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20.r),
         child: Form(
-          key: _formKey,
+          key: formKey,
           child: Column(
             children: [
               TextFieldWithTitle(
@@ -88,7 +89,7 @@ class MedicineFormBody extends StatelessWidget {
                 builder: (context, state) {
                   return TextButton(
                       onPressed: () async {
-                        if (_formKey.currentState?.validate() ?? false) {
+                        if (formKey.currentState?.validate() ?? false) {
                           var details = MedicineDetails(
                               medicineName: controller.text,
                               frequency: state.medicineFrequency,

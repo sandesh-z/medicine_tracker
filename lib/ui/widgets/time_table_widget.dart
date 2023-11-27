@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-List<String> schedules = [];
-
 class TimeTableWidget extends StatelessWidget {
   final int medicineFrequency;
   final void Function(List<String>) onSave;
@@ -11,6 +9,7 @@ class TimeTableWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> schedules = [];
     return Container(
       padding: EdgeInsets.all(12.r),
       decoration: BoxDecoration(
@@ -34,7 +33,6 @@ class TimeTableWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 return TimeRowWidget(
                   time: (time) {
-                    schedules.removeAt(index);
                     schedules.insert(index, time?.format(context) ?? "");
                     onSave(schedules);
                   },
