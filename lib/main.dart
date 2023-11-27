@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:medicine_tracker/core/notification/notification_service.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
 import 'package:medicine_tracker/features/localization_cubit/app_localization_cubit.dart';
@@ -62,5 +63,6 @@ class MyApp extends StatelessWidget {
 Future<void> initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
+  getIt<NotificationService>().initialise();
   await ScreenUtil.ensureScreenSize();
 }
