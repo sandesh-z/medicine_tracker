@@ -4,6 +4,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:injectable/injectable.dart';
 import 'package:medicine_tracker/features/notification/domain/enitities/notification_item.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:medicine_tracker/utils/time_parser.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -113,5 +114,43 @@ class NotificationService {
     await _flutterLocalNotificationsPlugin.show(
         id++, 'plain title', 'plain body', notificationDetails,
         payload: 'item x');
+  }
+
+  Future<void> scheduleNotification(
+      {required String medicineName, required String time}) async {
+    const AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+            'high_importance_channel', 'High Importance Notifications',
+            channelDescription: 'your channel description',
+            importance: Importance.max,
+            priority: Priority.high,
+            ticker: 'ticker');
+    const NotificationDetails notificationDetails =
+        NotificationDetails(android: androidNotificationDetails);
+
+    await _flutterLocalNotificationsPlugin.zonedSchedule(
+        id++,
+        'MedicineTime',
+        "Take your medice now. It's time",
+        tz.TZDateTime.parse(tz.local, to24hourTime(time)),
+        notificationDetails,
+        androidScheduleMode: AndroidScheduleMode.alarmClock,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
+  }
+
+  Future<void> zonedScheduleNotification() async {
+    await _flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        'scheduled title',
+        'scheduled body',
+        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+        const NotificationDetails(
+            android: AndroidNotificationDetails(
+                'your channel id', 'your channel name',
+                channelDescription: 'your channel description')),
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
   }
 }

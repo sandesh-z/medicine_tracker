@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:medicine_tracker/core/notification/notification_service.dart';
 import 'package:medicine_tracker/core/usecase/usecase.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medicine_details.dart';
+import 'package:medicine_tracker/injections/injection.dart';
 
 part 'add_medicine_bloc.freezed.dart';
 part 'add_medicine_event.dart';
@@ -19,7 +21,12 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
     on<_GetAllMedicine>(_onGetAllMedicine);
   }
   _onSaveMedicineDetail(
-      _SaveMedicineDetail event, Emitter<AddMedicineState> emit) {
+      _SaveMedicineDetail event, Emitter<AddMedicineState> emit) async {
+    var list = event.medicineDetails.schedule.split(',');
+    for (int i = 0; i < list.length; i++) {
+      getIt<NotificationService>().scheduleNotification(
+          medicineName: event.medicineDetails.medicineName, time: list[i]);
+    }
     getMedicineDetails.saveMedicineDetails(item: event.medicineDetails);
   }
 
