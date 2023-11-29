@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:medicine_tracker/core/database/local_database_provider.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
@@ -31,7 +32,7 @@ class MedicineProviderImpl implements MedicineDetailsProvider {
     final List<Map<String, dynamic>>? maps =
         await provider.getAllFrom(tableName: 'medicine_details');
     if (maps == null) return [];
-    print(maps.toList());
+    debugPrint(maps.toList().toString());
     return List.generate(maps.length, (i) {
       return MedicineDetails(
         id: maps[i]['id'] as int,

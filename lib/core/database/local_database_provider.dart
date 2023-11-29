@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:medicine_tracker/core/database/datbase_constants/database_table_constants.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -94,8 +95,7 @@ class DBProviderImpl implements DBProvider {
       _database = await openDatabase(
         join(await getDatabasesPath(), "medicine_detail_database.db"),
         onCreate: (db, version) {
-          return db.execute(
-              'CREATE TABLE medicine_details(id INTEGER PRIMARY KEY AUTOINCREMENT,medicine_name TEXT,frequency INTEGER,schedule TEXT,all_medicine_taken TEXT)');
+          return db.execute(_createMedicineDetailsTable());
         },
         version: _version,
       );
@@ -103,5 +103,19 @@ class DBProviderImpl implements DBProvider {
     } on Exception catch (e) {
       debugPrint(e.toString());
     }
+  }
+
+  String _createMedicineDetailsTable() {
+    return '''
+    CREATE TABLE IF NOT EXISTS ${MedicineDetailItems.medicineDetails}
+     ( 
+      ${MedicineDetailItems.medicineDetailsId} INT PRIMARY KEY AUTOINCREMENT,
+      ${MedicineDetailItems.medicineName} TEXT,
+      ${MedicineDetailItems.medicineReminderFrequency} INTEGER,
+      ${MedicineDetailItems.medicineTakingSchedule} TEXT,
+      ${MedicineDetailItems.allMedicineTaken} TEXT,
+      
+      )
+    ''';
   }
 }
