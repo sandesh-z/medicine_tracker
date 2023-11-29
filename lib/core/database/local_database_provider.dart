@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -94,13 +95,13 @@ class DBProviderImpl implements DBProvider {
         join(await getDatabasesPath(), "medicine_detail_database.db"),
         onCreate: (db, version) {
           return db.execute(
-              'CREATE TABLE medicine_details(id INTEGER PRIMARY KEY AUTOINCREMENT,medicine_name TEXT,frequency INTEGER,schedule TEXT)');
+              'CREATE TABLE medicine_details(id INTEGER PRIMARY KEY AUTOINCREMENT,medicine_name TEXT,frequency INTEGER,schedule TEXT,all_medicine_taken TEXT)');
         },
         version: _version,
       );
-      print("success");
+      debugPrint("success");
     } on Exception catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
   }
 }
