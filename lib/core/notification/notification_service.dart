@@ -130,26 +130,11 @@ class NotificationService {
 
     await _flutterLocalNotificationsPlugin.zonedSchedule(
         id++,
-        'MedicineTime',
-        "Take your medice now. It's time",
+        'Medicine Time',
+        "Take your medicine now. It's time for taking $medicineName",
         tz.TZDateTime.parse(tz.local, to24hourTime(time)),
         notificationDetails,
         androidScheduleMode: AndroidScheduleMode.alarmClock,
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime);
-  }
-
-  Future<void> zonedScheduleNotification() async {
-    await _flutterLocalNotificationsPlugin.zonedSchedule(
-        0,
-        'scheduled title',
-        'scheduled body',
-        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
-        const NotificationDetails(
-            android: AndroidNotificationDetails(
-                'your channel id', 'your channel name',
-                channelDescription: 'your channel description')),
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
   }
