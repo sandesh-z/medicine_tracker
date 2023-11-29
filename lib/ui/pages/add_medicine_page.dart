@@ -80,7 +80,7 @@ class MedicineFormBody extends StatelessWidget {
                     medicineFrequency: state.medicineFrequency,
                     onSave: (list) {
                       schedules = list;
-                      print(schedules);
+                      debugPrint(schedules.toString());
                     },
                   );
                 },
