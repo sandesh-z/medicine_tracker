@@ -18,7 +18,7 @@ class AppLocale {
 
   static const nepalese = AppLocale(
     locale: Locale('ne', ''),
-    flagSymbol: '🇯🇵',
+    flagSymbol: '🇳🇵',
     name: 'Nepali',
   );
 
