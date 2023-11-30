@@ -8,6 +8,6 @@ class AppLocalizationState with _$AppLocalizationState {
   }) = _AppLocalizationState;
 
   factory AppLocalizationState.initial(bool isEnglish) => AppLocalizationState(
-      appLocale: isEnglish ? AppLocale.english : AppLocale.nepalese, //default
+      appLocale: isEnglish ? AppLocale.nepalese : AppLocale.english, //default
       key: UniqueKey());
 }
