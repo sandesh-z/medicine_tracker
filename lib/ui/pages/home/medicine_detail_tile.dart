@@ -5,6 +5,7 @@ import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_med
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/widgets/custom_popup_widget.dart';
 import 'package:medicine_tracker/ui/widgets/shadow_box_widget.dart';
+import 'package:medicine_tracker/utils/medicine_time_frequency_parser.dart';
 import 'package:medicine_tracker/utils/time_difference_checker.dart';
 import 'package:medicine_tracker/utils/time_parser.dart';
 
@@ -46,11 +47,14 @@ class MedicineDetailTile extends StatelessWidget {
                         return CheckboxWithTime(
                           time: item.schedule.split(',').toList()[index],
                           id: item.id ?? 1,
-                          medicineTaken: item.allMedicineTakenList == null
+                          medicineTaken: (item.allMedicineTakenList == null ||
+                                  item.allMedicineTakenList?.isEmpty == true)
                               ? "false"
                               : item.allMedicineTakenList!
                                   .split(',')
                                   .toList()[index],
+                          medicineDetails: item,
+                          index: index,
                         );
                       }),
                 )
@@ -64,12 +68,16 @@ class MedicineDetailTile extends StatelessWidget {
 class CheckboxWithTime extends StatefulWidget {
   final String time;
   final int id;
+  final int index;
   final String medicineTaken;
+  final MedicineDetails medicineDetails;
   const CheckboxWithTime(
       {super.key,
       required this.time,
       required this.id,
-      required this.medicineTaken});
+      required this.medicineTaken,
+      required this.medicineDetails,
+      required this.index});
 
   @override
   State<CheckboxWithTime> createState() => _CheckboxWithTimeState();
@@ -80,7 +88,7 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.medicineTaken.toString() + "testing..");
+    print("frequency of the table: ${widget.medicineDetails.frequency}");
     return Row(mainAxisSize: MainAxisSize.min, children: [
       Checkbox(
         value: isChecked,
@@ -112,8 +120,20 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
               showDismiss: true,
               actionText: "Yes",
               onAction: () {
+                List<String> list = [];
+                if (widget.medicineDetails.allMedicineTakenList?.isEmpty ??
+                    true) {
+                  list = getListofStatus(widget.medicineDetails.frequency)
+                      .split(',')
+                      .toList();
+                } else {
+                  list = widget.medicineDetails.allMedicineTakenList!
+                      .split(',')
+                      .toList();
+                }
+                list.insert(widget.index, "true");
                 getIt<AddMedicineBloc>()
-                    .add(AddMedicineEvent.update(widget.id, "true"));
+                    .add(AddMedicineEvent.update(widget.id, list.toString()));
                 setState(() {
                   isChecked = true;
                 });

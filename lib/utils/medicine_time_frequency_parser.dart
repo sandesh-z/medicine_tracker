@@ -18,3 +18,22 @@ parseMedicineFrequency(String? name) {
   }
   return medicineFrequency;
 }
+
+String getListofStatus(int frequency) {
+  switch (frequency) {
+    case 1:
+      return "false";
+
+    case 2:
+      return "false,false";
+
+    case 3:
+      return "false,false,false";
+
+    case 4:
+      return "false,false,false,false";
+
+    default:
+      return "false";
+  }
+}
