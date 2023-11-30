@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
+import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
+import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/widgets/custom_popup_widget.dart';
 import 'package:medicine_tracker/ui/widgets/shadow_box_widget.dart';
 import 'package:medicine_tracker/utils/time_difference_checker.dart';
@@ -43,6 +45,12 @@ class MedicineDetailTile extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return CheckboxWithTime(
                           time: item.schedule.split(',').toList()[index],
+                          id: item.id ?? 1,
+                          medicineTaken: item.allMedicineTakenList == null
+                              ? "false"
+                              : item.allMedicineTakenList!
+                                  .split(',')
+                                  .toList()[index],
                         );
                       }),
                 )
@@ -55,16 +63,24 @@ class MedicineDetailTile extends StatelessWidget {
 
 class CheckboxWithTime extends StatefulWidget {
   final String time;
-  const CheckboxWithTime({super.key, required this.time});
+  final int id;
+  final String medicineTaken;
+  const CheckboxWithTime(
+      {super.key,
+      required this.time,
+      required this.id,
+      required this.medicineTaken});
 
   @override
   State<CheckboxWithTime> createState() => _CheckboxWithTimeState();
 }
 
 class _CheckboxWithTimeState extends State<CheckboxWithTime> {
-  bool isChecked = false;
+  late bool isChecked = widget.medicineTaken.contains('true') ? true : false;
+
   @override
   Widget build(BuildContext context) {
+    print(widget.medicineTaken.toString() + "testing..");
     return Row(mainAxisSize: MainAxisSize.min, children: [
       Checkbox(
         value: isChecked,
@@ -96,6 +112,8 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
               showDismiss: true,
               actionText: "Yes",
               onAction: () {
+                getIt<AddMedicineBloc>()
+                    .add(AddMedicineEvent.update(widget.id, "true"));
                 setState(() {
                   isChecked = true;
                 });

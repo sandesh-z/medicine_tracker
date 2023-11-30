@@ -4,6 +4,8 @@ import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine
 
 abstract class AddMedicineLocalDataSource {
   Future<void> saveMedicineDetailItem(MedicineDetails medicineDetails);
+  Future<void> updateMedicineDetailItem(String value, int id);
+
   Future<List<MedicineDetails>?> getAllMedicineItems();
 }
 
@@ -24,5 +26,10 @@ class AddMedicineDabasaseImpl implements AddMedicineLocalDataSource {
       return details;
     }
     return [];
+  }
+
+  @override
+  Future<void> updateMedicineDetailItem(String value, int id) async {
+    await medicineDetailsProvider.updateMedicineDetailItem(value, id);
   }
 }

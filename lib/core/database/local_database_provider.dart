@@ -20,6 +20,12 @@ abstract class DBProvider {
     required String where,
     required List<dynamic> whereArgs,
   });
+  Future update({
+    required String tableName,
+    required String columnName,
+    required String values,
+    required int id,
+  });
 
   Future delete({
     required String tableName,
@@ -105,15 +111,25 @@ class DBProviderImpl implements DBProvider {
     }
   }
 
+  @override
+  Future update(
+      {required String tableName,
+      required String columnName,
+      required String values,
+      required int id}) async {
+    return await _database?.update(tableName, {columnName: values},
+        where: '${"id"} = ?', whereArgs: [id]);
+  }
+
   String _createMedicineDetailsTable() {
     return '''
     CREATE TABLE IF NOT EXISTS ${MedicineDetailItems.medicineDetails}
      ( 
-      ${MedicineDetailItems.medicineDetailsId} INT PRIMARY KEY AUTOINCREMENT,
+      ${MedicineDetailItems.medicineDetailsId} INTEGER PRIMARY KEY AUTOINCREMENT,
       ${MedicineDetailItems.medicineName} TEXT,
       ${MedicineDetailItems.medicineReminderFrequency} INTEGER,
       ${MedicineDetailItems.medicineTakingSchedule} TEXT,
-      ${MedicineDetailItems.allMedicineTaken} TEXT,
+      ${MedicineDetailItems.allMedicineTaken} TEXT
       
       )
     ''';

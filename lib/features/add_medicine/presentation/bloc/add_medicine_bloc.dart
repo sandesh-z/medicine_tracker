@@ -19,6 +19,7 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
     on<_SaveMedicineDetail>(_onSaveMedicineDetail);
     on<_ChangeMedicineTimeFrequency>(_onChangeMedicineTimeFrequency);
     on<_GetAllMedicine>(_onGetAllMedicine);
+    on<_UpdateMedicineDetail>(_onUpdateMedicineDetail);
   }
   _onSaveMedicineDetail(
       _SaveMedicineDetail event, Emitter<AddMedicineState> emit) async {
@@ -40,5 +41,11 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
     final result = await getMedicineDetails.call(NoParams());
     emit(result.fold(
         (l) => state.copyWith(), (r) => state.copyWith(allMedicineList: r)));
+  }
+
+  _onUpdateMedicineDetail(
+      _UpdateMedicineDetail event, Emitter<AddMedicineState> emit) async {
+    await getMedicineDetails.updateMedineDetail(
+        value: event.value, id: event.id);
   }
 }

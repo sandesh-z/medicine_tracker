@@ -19,6 +19,7 @@ mixin _$AddMedicineEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(MedicineDetails medicineDetails) save,
+    required TResult Function(int id, String value) update,
     required TResult Function() getAllMedicine,
     required TResult Function(int medicineFrequency)
         changeMedicineTimeFrequency,
@@ -27,6 +28,7 @@ mixin _$AddMedicineEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(MedicineDetails medicineDetails)? save,
+    TResult? Function(int id, String value)? update,
     TResult? Function()? getAllMedicine,
     TResult? Function(int medicineFrequency)? changeMedicineTimeFrequency,
   }) =>
@@ -34,6 +36,7 @@ mixin _$AddMedicineEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(MedicineDetails medicineDetails)? save,
+    TResult Function(int id, String value)? update,
     TResult Function()? getAllMedicine,
     TResult Function(int medicineFrequency)? changeMedicineTimeFrequency,
     required TResult orElse(),
@@ -42,6 +45,7 @@ mixin _$AddMedicineEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_SaveMedicineDetail value) save,
+    required TResult Function(_UpdateMedicineDetail value) update,
     required TResult Function(_GetAllMedicine value) getAllMedicine,
     required TResult Function(_ChangeMedicineTimeFrequency value)
         changeMedicineTimeFrequency,
@@ -50,6 +54,7 @@ mixin _$AddMedicineEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SaveMedicineDetail value)? save,
+    TResult? Function(_UpdateMedicineDetail value)? update,
     TResult? Function(_GetAllMedicine value)? getAllMedicine,
     TResult? Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
@@ -58,6 +63,7 @@ mixin _$AddMedicineEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SaveMedicineDetail value)? save,
+    TResult Function(_UpdateMedicineDetail value)? update,
     TResult Function(_GetAllMedicine value)? getAllMedicine,
     TResult Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
@@ -151,6 +157,7 @@ class _$SaveMedicineDetailImpl implements _SaveMedicineDetail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(MedicineDetails medicineDetails) save,
+    required TResult Function(int id, String value) update,
     required TResult Function() getAllMedicine,
     required TResult Function(int medicineFrequency)
         changeMedicineTimeFrequency,
@@ -162,6 +169,7 @@ class _$SaveMedicineDetailImpl implements _SaveMedicineDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(MedicineDetails medicineDetails)? save,
+    TResult? Function(int id, String value)? update,
     TResult? Function()? getAllMedicine,
     TResult? Function(int medicineFrequency)? changeMedicineTimeFrequency,
   }) {
@@ -172,6 +180,7 @@ class _$SaveMedicineDetailImpl implements _SaveMedicineDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(MedicineDetails medicineDetails)? save,
+    TResult Function(int id, String value)? update,
     TResult Function()? getAllMedicine,
     TResult Function(int medicineFrequency)? changeMedicineTimeFrequency,
     required TResult orElse(),
@@ -186,6 +195,7 @@ class _$SaveMedicineDetailImpl implements _SaveMedicineDetail {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_SaveMedicineDetail value) save,
+    required TResult Function(_UpdateMedicineDetail value) update,
     required TResult Function(_GetAllMedicine value) getAllMedicine,
     required TResult Function(_ChangeMedicineTimeFrequency value)
         changeMedicineTimeFrequency,
@@ -197,6 +207,7 @@ class _$SaveMedicineDetailImpl implements _SaveMedicineDetail {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SaveMedicineDetail value)? save,
+    TResult? Function(_UpdateMedicineDetail value)? update,
     TResult? Function(_GetAllMedicine value)? getAllMedicine,
     TResult? Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
@@ -208,6 +219,7 @@ class _$SaveMedicineDetailImpl implements _SaveMedicineDetail {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SaveMedicineDetail value)? save,
+    TResult Function(_UpdateMedicineDetail value)? update,
     TResult Function(_GetAllMedicine value)? getAllMedicine,
     TResult Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
@@ -228,6 +240,167 @@ abstract class _SaveMedicineDetail implements AddMedicineEvent {
   @JsonKey(ignore: true)
   _$$SaveMedicineDetailImplCopyWith<_$SaveMedicineDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateMedicineDetailImplCopyWith<$Res> {
+  factory _$$UpdateMedicineDetailImplCopyWith(_$UpdateMedicineDetailImpl value,
+          $Res Function(_$UpdateMedicineDetailImpl) then) =
+      __$$UpdateMedicineDetailImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int id, String value});
+}
+
+/// @nodoc
+class __$$UpdateMedicineDetailImplCopyWithImpl<$Res>
+    extends _$AddMedicineEventCopyWithImpl<$Res, _$UpdateMedicineDetailImpl>
+    implements _$$UpdateMedicineDetailImplCopyWith<$Res> {
+  __$$UpdateMedicineDetailImplCopyWithImpl(_$UpdateMedicineDetailImpl _value,
+      $Res Function(_$UpdateMedicineDetailImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? value = null,
+  }) {
+    return _then(_$UpdateMedicineDetailImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateMedicineDetailImpl implements _UpdateMedicineDetail {
+  const _$UpdateMedicineDetailImpl(this.id, this.value);
+
+  @override
+  final int id;
+  @override
+  final String value;
+
+  @override
+  String toString() {
+    return 'AddMedicineEvent.update(id: $id, value: $value)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateMedicineDetailImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateMedicineDetailImplCopyWith<_$UpdateMedicineDetailImpl>
+      get copyWith =>
+          __$$UpdateMedicineDetailImplCopyWithImpl<_$UpdateMedicineDetailImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(MedicineDetails medicineDetails) save,
+    required TResult Function(int id, String value) update,
+    required TResult Function() getAllMedicine,
+    required TResult Function(int medicineFrequency)
+        changeMedicineTimeFrequency,
+  }) {
+    return update(id, value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(MedicineDetails medicineDetails)? save,
+    TResult? Function(int id, String value)? update,
+    TResult? Function()? getAllMedicine,
+    TResult? Function(int medicineFrequency)? changeMedicineTimeFrequency,
+  }) {
+    return update?.call(id, value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(MedicineDetails medicineDetails)? save,
+    TResult Function(int id, String value)? update,
+    TResult Function()? getAllMedicine,
+    TResult Function(int medicineFrequency)? changeMedicineTimeFrequency,
+    required TResult orElse(),
+  }) {
+    if (update != null) {
+      return update(id, value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SaveMedicineDetail value) save,
+    required TResult Function(_UpdateMedicineDetail value) update,
+    required TResult Function(_GetAllMedicine value) getAllMedicine,
+    required TResult Function(_ChangeMedicineTimeFrequency value)
+        changeMedicineTimeFrequency,
+  }) {
+    return update(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_SaveMedicineDetail value)? save,
+    TResult? Function(_UpdateMedicineDetail value)? update,
+    TResult? Function(_GetAllMedicine value)? getAllMedicine,
+    TResult? Function(_ChangeMedicineTimeFrequency value)?
+        changeMedicineTimeFrequency,
+  }) {
+    return update?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SaveMedicineDetail value)? save,
+    TResult Function(_UpdateMedicineDetail value)? update,
+    TResult Function(_GetAllMedicine value)? getAllMedicine,
+    TResult Function(_ChangeMedicineTimeFrequency value)?
+        changeMedicineTimeFrequency,
+    required TResult orElse(),
+  }) {
+    if (update != null) {
+      return update(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateMedicineDetail implements AddMedicineEvent {
+  const factory _UpdateMedicineDetail(final int id, final String value) =
+      _$UpdateMedicineDetailImpl;
+
+  int get id;
+  String get value;
+  @JsonKey(ignore: true)
+  _$$UpdateMedicineDetailImplCopyWith<_$UpdateMedicineDetailImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -269,6 +442,7 @@ class _$GetAllMedicineImpl implements _GetAllMedicine {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(MedicineDetails medicineDetails) save,
+    required TResult Function(int id, String value) update,
     required TResult Function() getAllMedicine,
     required TResult Function(int medicineFrequency)
         changeMedicineTimeFrequency,
@@ -280,6 +454,7 @@ class _$GetAllMedicineImpl implements _GetAllMedicine {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(MedicineDetails medicineDetails)? save,
+    TResult? Function(int id, String value)? update,
     TResult? Function()? getAllMedicine,
     TResult? Function(int medicineFrequency)? changeMedicineTimeFrequency,
   }) {
@@ -290,6 +465,7 @@ class _$GetAllMedicineImpl implements _GetAllMedicine {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(MedicineDetails medicineDetails)? save,
+    TResult Function(int id, String value)? update,
     TResult Function()? getAllMedicine,
     TResult Function(int medicineFrequency)? changeMedicineTimeFrequency,
     required TResult orElse(),
@@ -304,6 +480,7 @@ class _$GetAllMedicineImpl implements _GetAllMedicine {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_SaveMedicineDetail value) save,
+    required TResult Function(_UpdateMedicineDetail value) update,
     required TResult Function(_GetAllMedicine value) getAllMedicine,
     required TResult Function(_ChangeMedicineTimeFrequency value)
         changeMedicineTimeFrequency,
@@ -315,6 +492,7 @@ class _$GetAllMedicineImpl implements _GetAllMedicine {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SaveMedicineDetail value)? save,
+    TResult? Function(_UpdateMedicineDetail value)? update,
     TResult? Function(_GetAllMedicine value)? getAllMedicine,
     TResult? Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
@@ -326,6 +504,7 @@ class _$GetAllMedicineImpl implements _GetAllMedicine {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SaveMedicineDetail value)? save,
+    TResult Function(_UpdateMedicineDetail value)? update,
     TResult Function(_GetAllMedicine value)? getAllMedicine,
     TResult Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
@@ -413,6 +592,7 @@ class _$ChangeMedicineTimeFrequencyImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(MedicineDetails medicineDetails) save,
+    required TResult Function(int id, String value) update,
     required TResult Function() getAllMedicine,
     required TResult Function(int medicineFrequency)
         changeMedicineTimeFrequency,
@@ -424,6 +604,7 @@ class _$ChangeMedicineTimeFrequencyImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(MedicineDetails medicineDetails)? save,
+    TResult? Function(int id, String value)? update,
     TResult? Function()? getAllMedicine,
     TResult? Function(int medicineFrequency)? changeMedicineTimeFrequency,
   }) {
@@ -434,6 +615,7 @@ class _$ChangeMedicineTimeFrequencyImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(MedicineDetails medicineDetails)? save,
+    TResult Function(int id, String value)? update,
     TResult Function()? getAllMedicine,
     TResult Function(int medicineFrequency)? changeMedicineTimeFrequency,
     required TResult orElse(),
@@ -448,6 +630,7 @@ class _$ChangeMedicineTimeFrequencyImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_SaveMedicineDetail value) save,
+    required TResult Function(_UpdateMedicineDetail value) update,
     required TResult Function(_GetAllMedicine value) getAllMedicine,
     required TResult Function(_ChangeMedicineTimeFrequency value)
         changeMedicineTimeFrequency,
@@ -459,6 +642,7 @@ class _$ChangeMedicineTimeFrequencyImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SaveMedicineDetail value)? save,
+    TResult? Function(_UpdateMedicineDetail value)? update,
     TResult? Function(_GetAllMedicine value)? getAllMedicine,
     TResult? Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
@@ -470,6 +654,7 @@ class _$ChangeMedicineTimeFrequencyImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SaveMedicineDetail value)? save,
+    TResult Function(_UpdateMedicineDetail value)? update,
     TResult Function(_GetAllMedicine value)? getAllMedicine,
     TResult Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,

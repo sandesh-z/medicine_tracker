@@ -26,4 +26,8 @@ class GetMedicineDetails
   }) {
     return repository.saveMedicineDetail(medicineDetails: item);
   }
+
+  Future updateMedineDetail({required String value, required int id}) {
+    return repository.updateMedicineDetail(value: value, id: id);
+  }
 }

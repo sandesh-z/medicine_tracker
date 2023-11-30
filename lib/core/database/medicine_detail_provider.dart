@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:medicine_tracker/core/database/datbase_constants/database_table_constants.dart';
 import 'package:medicine_tracker/core/database/local_database_provider.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 
 abstract class MedicineDetailsProvider {
   Future insertMedicineDetailItem(MedicineDetails medicineDetails);
+  Future updateMedicineDetailItem(String value, int id);
+
   Future<List<MedicineDetails>?> getAllMedicne();
 }
 
@@ -39,7 +42,20 @@ class MedicineProviderImpl implements MedicineDetailsProvider {
         medicineName: maps[i]['medicine_name'] as String,
         frequency: maps[i]['frequency'] as int,
         schedule: maps[i]['schedule'] as String,
+        allMedicineTakenList: maps[i]['all_medicine_taken'] as String,
       );
     });
+  }
+
+  @override
+  Future updateMedicineDetailItem(String value, int id) async {
+    if (!provider.isOpen) {
+      await provider.open();
+    }
+    await provider.update(
+        tableName: MedicineDetailItems.medicineDetails,
+        columnName: MedicineDetailItems.allMedicineTaken,
+        values: value,
+        id: id);
   }
 }

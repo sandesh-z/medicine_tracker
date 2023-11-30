@@ -18,4 +18,9 @@ class MedicineDetailsRepositoryImpl implements MedicineDetailsRepository {
     final result = await medicineLocalDataSource.getAllMedicineItems();
     return result ?? [];
   }
+
+  @override
+  Future updateMedicineDetail({required String value, required int id}) async {
+    await medicineLocalDataSource.updateMedicineDetailItem(value, id);
+  }
 }

@@ -2,5 +2,7 @@ import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine
 
 abstract class MedicineDetailsRepository {
   Future saveMedicineDetail({required MedicineDetails medicineDetails});
+  Future updateMedicineDetail({required String value, required int id});
+
   Future<List<MedicineDetails>?> getAllMedicine();
 }
