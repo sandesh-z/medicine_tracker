@@ -9,7 +9,7 @@ class TimeTableWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> schedules = [];
+    List<String> schedules = ["", "", "", ""];
     return Container(
       padding: EdgeInsets.all(12.r),
       decoration: BoxDecoration(
@@ -33,7 +33,11 @@ class TimeTableWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 return TimeRowWidget(
                   time: (time) {
-                    schedules.insert(index, time?.format(context) ?? "");
+                    schedules.removeAt(index);
+                    schedules.insert(
+                        index,
+                        time?.format(context) ??
+                            TimeOfDay.now().format(context));
                     onSave(schedules);
                   },
                 );
@@ -59,7 +63,7 @@ class TimeRowWidget extends StatefulWidget {
 }
 
 class _TimeRowWidgetState extends State<TimeRowWidget> {
-  TimeOfDay? pickedTime = TimeOfDay.now();
+  TimeOfDay? pickedTime;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -71,8 +75,13 @@ class _TimeRowWidgetState extends State<TimeRowWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            pickedTime?.format(context) ?? "6:00 AM",
-            style: TextStyle(fontSize: 23.sp, letterSpacing: 1),
+            pickedTime?.format(context) ?? "Select time here >",
+            style: TextStyle(
+                fontSize: pickedTime == null ? 18.sp : 23.sp,
+                letterSpacing: 1,
+                color: pickedTime == null
+                    ? Colors.black.withOpacity(.7)
+                    : Colors.black),
           ),
           InkWell(
               onTap: () async {

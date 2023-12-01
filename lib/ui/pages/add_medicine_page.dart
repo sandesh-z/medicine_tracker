@@ -77,6 +77,7 @@ class MedicineFormBody extends StatelessWidget {
                     previous.medicineFrequency != current.medicineFrequency,
                 builder: (context, state) {
                   return TimeTableWidget(
+                    key: state.key,
                     medicineFrequency: state.medicineFrequency,
                     onSave: (list) {
                       schedules = list;
@@ -90,6 +91,23 @@ class MedicineFormBody extends StatelessWidget {
                   return TextButton(
                       onPressed: () async {
                         if (formKey.currentState?.validate() ?? false) {
+                          if (schedules.isEmpty) {
+                            var snackBar = const SnackBar(
+                              content: Text(
+                                  'Please select time by cliking on icon.'),
+                              backgroundColor: (Colors.red),
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+
+                            return;
+                          }
+                          List<String> temp = [];
+                          schedules.forEach((element) {
+                            if (temp.contains(element)) {
+                              print("duplicate");
+                            }
+                          });
                           var details = MedicineDetails(
                               medicineName: controller.text,
                               frequency: state.medicineFrequency,
