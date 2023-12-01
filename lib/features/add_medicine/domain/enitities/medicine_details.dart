@@ -21,6 +21,7 @@ class MedicineDetails {
   }
 
   @override
-  String toString() =>
-      'MedicineDetails(medicineName: $medicineName, frequency: $frequency, schedule: $schedule)';
+  String toString() {
+    return 'MedicineDetails(id: $id, medicineName: $medicineName, frequency: $frequency, schedule: $schedule, allMedicineTakenList: $allMedicineTakenList)';
+  }
 }

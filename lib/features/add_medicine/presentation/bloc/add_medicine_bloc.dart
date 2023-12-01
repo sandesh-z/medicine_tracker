@@ -28,7 +28,7 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
       getIt<NotificationService>().scheduleNotification(
           medicineName: event.medicineDetails.medicineName, time: list[i]);
     }
-    getMedicineDetails.saveMedicineDetails(item: event.medicineDetails);
+    await getMedicineDetails.saveMedicineDetails(item: event.medicineDetails);
   }
 
   _onChangeMedicineTimeFrequency(

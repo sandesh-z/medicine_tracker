@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
-import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/widgets/custom_popup_widget.dart';
 import 'package:medicine_tracker/ui/widgets/shadow_box_widget.dart';
 import 'package:medicine_tracker/utils/medicine_time_frequency_parser.dart';
@@ -45,14 +45,6 @@ class MedicineDetailTile extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return CheckboxWithTime(
-                          time: item.schedule.split(',').toList()[index],
-                          id: item.id ?? 1,
-                          medicineTaken: (item.allMedicineTakenList == null ||
-                                  item.allMedicineTakenList?.isEmpty == true)
-                              ? "false"
-                              : item.allMedicineTakenList!
-                                  .split(',')
-                                  .toList()[index],
                           medicineDetails: item,
                           index: index,
                         );
@@ -66,36 +58,40 @@ class MedicineDetailTile extends StatelessWidget {
 }
 
 class CheckboxWithTime extends StatefulWidget {
-  final String time;
-  final int id;
   final int index;
-  final String medicineTaken;
   final MedicineDetails medicineDetails;
-  const CheckboxWithTime(
-      {super.key,
-      required this.time,
-      required this.id,
-      required this.medicineTaken,
-      required this.medicineDetails,
-      required this.index});
+  const CheckboxWithTime({
+    super.key,
+    required this.medicineDetails,
+    required this.index,
+  });
 
   @override
   State<CheckboxWithTime> createState() => _CheckboxWithTimeState();
 }
 
 class _CheckboxWithTimeState extends State<CheckboxWithTime> {
-  late bool isChecked = widget.medicineTaken.contains('true') ? true : false;
-
+  late String time =
+      widget.medicineDetails.schedule.split(',').toList()[widget.index];
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
-    print("frequency of the table: ${widget.medicineDetails.frequency}");
+    bool medicineTaken = (widget.medicineDetails.allMedicineTakenList == null ||
+            widget.medicineDetails.allMedicineTakenList?.isEmpty == true)
+        ? false
+        : widget.medicineDetails.allMedicineTakenList!
+                .split(',')
+                .toList()[widget.index]
+                .contains('true')
+            ? true
+            : false;
     return Row(mainAxisSize: MainAxisSize.min, children: [
       Checkbox(
-        value: isChecked,
+        value: medicineTaken || isChecked,
         checkColor: Colors.green,
         onChanged: (checked) {
           final now = DateTime.now();
-          var parsed = to24hourTime(widget.time);
+          var parsed = to24hourTime(time);
           var oldDate = DateTime.parse(parsed);
           if (!canCheck(oldTime: oldDate, currentTime: now)) {
             showDialog(
@@ -110,7 +106,7 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
             );
             return;
           }
-          if (isChecked) return;
+          if (isChecked || medicineTaken) return;
           showDialog(
             context: context,
             builder: (BuildContext context) => CustomDialog(
@@ -131,13 +127,12 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
                       .split(',')
                       .toList();
                 }
-                list.insert(widget.index, "true");
-                getIt<AddMedicineBloc>()
-                    .add(AddMedicineEvent.update(widget.id, list.toString()));
+                list[widget.index] = "true";
+                context.read<AddMedicineBloc>().add(AddMedicineEvent.update(
+                    widget.medicineDetails.id ?? 0, list.toString()));
                 setState(() {
                   isChecked = true;
                 });
-
                 Navigator.pop(context);
               },
             ),
@@ -146,7 +141,7 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
         fillColor: MaterialStateProperty.all(Colors.white),
       ),
       Text(
-        widget.time,
+        time,
         style: TextStyle(fontSize: 16.sp, color: Colors.white),
       )
     ]);
