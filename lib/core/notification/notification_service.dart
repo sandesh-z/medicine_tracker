@@ -118,7 +118,6 @@ class NotificationService {
 
   Future<void> scheduleNotification(
       {required String medicineName, required String time}) async {
-    print(_nextInstanceOfTime(time).toString() + " :normal notification");
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
             'high_importance_channel', 'High Importance Notifications',
@@ -142,7 +141,6 @@ class NotificationService {
 
   Future<void> scheduleDailyNotification(
       {required String medicineName, required String time}) async {
-    print(_nextInstanceOfTime(time).toString() + " daily notification.");
     await _flutterLocalNotificationsPlugin.zonedSchedule(
         0,
         'Medicine Time',
