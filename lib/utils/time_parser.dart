@@ -7,14 +7,6 @@ String to24hourTime(String timeAsString) {
   DateTime dateTime = DateTime.now().copyWith(
       minute: minute, hour: hour, second: 0, millisecond: 0, microsecond: 0);
 
-  DateTime now =
-      DateTime.now().copyWith(second: 0, millisecond: 0, microsecond: 0);
-
-  if (dateTime.isBefore(now)) {
-    var day = dateTime.day;
-
-    dateTime = dateTime.copyWith(day: day + 1);
-  }
   if (timeAsString.contains("PM") && hour != 12) {
     dateTime = dateTime.add(const Duration(hours: 12));
   }

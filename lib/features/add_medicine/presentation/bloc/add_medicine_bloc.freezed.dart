@@ -681,6 +681,7 @@ abstract class _ChangeMedicineTimeFrequency implements AddMedicineEvent {
 mixin _$AddMedicineState {
   Key get key => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get success => throw _privateConstructorUsedError;
   int get medicineFrequency => throw _privateConstructorUsedError;
   List<MedicineDetails>? get allMedicineList =>
       throw _privateConstructorUsedError;
@@ -700,6 +701,7 @@ abstract class $AddMedicineStateCopyWith<$Res> {
   $Res call(
       {Key key,
       bool isLoading,
+      bool success,
       int medicineFrequency,
       List<MedicineDetails>? allMedicineList,
       List<String> schedules});
@@ -720,6 +722,7 @@ class _$AddMedicineStateCopyWithImpl<$Res, $Val extends AddMedicineState>
   $Res call({
     Object? key = null,
     Object? isLoading = null,
+    Object? success = null,
     Object? medicineFrequency = null,
     Object? allMedicineList = freezed,
     Object? schedules = null,
@@ -732,6 +735,10 @@ class _$AddMedicineStateCopyWithImpl<$Res, $Val extends AddMedicineState>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
               as bool,
       medicineFrequency: null == medicineFrequency
           ? _value.medicineFrequency
@@ -760,6 +767,7 @@ abstract class _$$AddMedicineStateImplCopyWith<$Res>
   $Res call(
       {Key key,
       bool isLoading,
+      bool success,
       int medicineFrequency,
       List<MedicineDetails>? allMedicineList,
       List<String> schedules});
@@ -778,6 +786,7 @@ class __$$AddMedicineStateImplCopyWithImpl<$Res>
   $Res call({
     Object? key = null,
     Object? isLoading = null,
+    Object? success = null,
     Object? medicineFrequency = null,
     Object? allMedicineList = freezed,
     Object? schedules = null,
@@ -790,6 +799,10 @@ class __$$AddMedicineStateImplCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
               as bool,
       medicineFrequency: null == medicineFrequency
           ? _value.medicineFrequency
@@ -813,6 +826,7 @@ class _$AddMedicineStateImpl implements _AddMedicineState {
   const _$AddMedicineStateImpl(
       {required this.key,
       required this.isLoading,
+      required this.success,
       required this.medicineFrequency,
       required final List<MedicineDetails>? allMedicineList,
       required final List<String> schedules})
@@ -823,6 +837,8 @@ class _$AddMedicineStateImpl implements _AddMedicineState {
   final Key key;
   @override
   final bool isLoading;
+  @override
+  final bool success;
   @override
   final int medicineFrequency;
   final List<MedicineDetails>? _allMedicineList;
@@ -845,7 +861,7 @@ class _$AddMedicineStateImpl implements _AddMedicineState {
 
   @override
   String toString() {
-    return 'AddMedicineState(key: $key, isLoading: $isLoading, medicineFrequency: $medicineFrequency, allMedicineList: $allMedicineList, schedules: $schedules)';
+    return 'AddMedicineState(key: $key, isLoading: $isLoading, success: $success, medicineFrequency: $medicineFrequency, allMedicineList: $allMedicineList, schedules: $schedules)';
   }
 
   @override
@@ -856,6 +872,7 @@ class _$AddMedicineStateImpl implements _AddMedicineState {
             (identical(other.key, key) || other.key == key) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.success, success) || other.success == success) &&
             (identical(other.medicineFrequency, medicineFrequency) ||
                 other.medicineFrequency == medicineFrequency) &&
             const DeepCollectionEquality()
@@ -869,6 +886,7 @@ class _$AddMedicineStateImpl implements _AddMedicineState {
       runtimeType,
       key,
       isLoading,
+      success,
       medicineFrequency,
       const DeepCollectionEquality().hash(_allMedicineList),
       const DeepCollectionEquality().hash(_schedules));
@@ -885,6 +903,7 @@ abstract class _AddMedicineState implements AddMedicineState {
   const factory _AddMedicineState(
       {required final Key key,
       required final bool isLoading,
+      required final bool success,
       required final int medicineFrequency,
       required final List<MedicineDetails>? allMedicineList,
       required final List<String> schedules}) = _$AddMedicineStateImpl;
@@ -893,6 +912,8 @@ abstract class _AddMedicineState implements AddMedicineState {
   Key get key;
   @override
   bool get isLoading;
+  @override
+  bool get success;
   @override
   int get medicineFrequency;
   @override

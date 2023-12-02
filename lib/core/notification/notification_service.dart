@@ -118,6 +118,7 @@ class NotificationService {
 
   Future<void> scheduleNotification(
       {required String medicineName, required String time}) async {
+    print(_nextInstanceOfTime(time).toString() + " :normal notification");
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
             'high_importance_channel', 'High Importance Notifications',
@@ -132,10 +133,40 @@ class NotificationService {
         id++,
         'Medicine Time',
         "Take your medicine now. It's time for taking $medicineName",
-        tz.TZDateTime.parse(tz.local, to24hourTime(time)),
+        _nextInstanceOfTime(time),
         notificationDetails,
         androidScheduleMode: AndroidScheduleMode.alarmClock,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
+  }
+
+  Future<void> scheduleDailyNotification(
+      {required String medicineName, required String time}) async {
+    print(_nextInstanceOfTime(time).toString() + " daily notification.");
+    await _flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        'Medicine Time',
+        "Take your medicine now. It's time for taking $medicineName daily",
+        _nextInstanceOfTime(time),
+        const NotificationDetails(
+          android: AndroidNotificationDetails('daily notification channel id',
+              'daily notification channel name',
+              channelDescription: 'daily notification description'),
+        ),
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.time);
+  }
+
+  tz.TZDateTime _nextInstanceOfTime(String time) {
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    tz.TZDateTime scheduledDate =
+        tz.TZDateTime.parse(tz.local, to24hourTime(time));
+
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+    return scheduledDate;
   }
 }

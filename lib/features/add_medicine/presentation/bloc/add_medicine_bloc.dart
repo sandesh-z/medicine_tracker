@@ -23,12 +23,15 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
   }
   _onSaveMedicineDetail(
       _SaveMedicineDetail event, Emitter<AddMedicineState> emit) async {
+    emit(state.copyWith(isLoading: true));
     var list = event.medicineDetails.schedule.split(',');
+    list.removeWhere((element) => element == '');
     for (int i = 0; i < list.length; i++) {
-      getIt<NotificationService>().scheduleNotification(
+      await getIt<NotificationService>().scheduleDailyNotification(
           medicineName: event.medicineDetails.medicineName, time: list[i]);
     }
     await getMedicineDetails.saveMedicineDetails(item: event.medicineDetails);
+    emit(state.copyWith(isLoading: false, success: true));
   }
 
   _onChangeMedicineTimeFrequency(

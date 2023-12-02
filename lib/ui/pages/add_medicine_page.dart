@@ -86,8 +86,20 @@ class MedicineFormBody extends StatelessWidget {
                   );
                 },
               ),
-              BlocBuilder<AddMedicineBloc, AddMedicineState>(
+              BlocConsumer<AddMedicineBloc, AddMedicineState>(
+                listener: (context, state) {
+                  if (!state.isLoading && state.success) {
+                    context.router.replace(const HomeRoute());
+                  }
+                },
                 builder: (context, state) {
+                  if (state.isLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.green,
+                      ),
+                    );
+                  }
                   return TextButton(
                       onPressed: () async {
                         if (formKey.currentState?.validate() ?? false) {
@@ -102,12 +114,7 @@ class MedicineFormBody extends StatelessWidget {
 
                             return;
                           }
-                          List<String> temp = [];
-                          schedules.forEach((element) {
-                            if (temp.contains(element)) {
-                              print("duplicate");
-                            }
-                          });
+
                           var details = MedicineDetails(
                               medicineName: controller.text,
                               frequency: state.medicineFrequency,
@@ -115,7 +122,6 @@ class MedicineFormBody extends StatelessWidget {
                           context
                               .read<AddMedicineBloc>()
                               .add(AddMedicineEvent.save(details));
-                          context.router.replace(const HomeRoute());
                         }
                       },
                       child: Text(
