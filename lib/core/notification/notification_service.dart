@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:medicine_tracker/features/notification/domain/enitities/notification_item.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:medicine_tracker/utils/time_parser.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -47,6 +48,15 @@ class NotificationService {
 
   Future<void> _localNotificationSetup() async {
     await _configureLocalTimeZone();
+
+    await Permission.notification.isDenied.then((value) async {
+      if (value) {
+        final status = await Permission.notification.request();
+        if (status == PermissionStatus.denied) {
+          Permission.notification.request();
+        }
+      }
+    });
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('mipmap/ic_launcher');
 
@@ -62,7 +72,6 @@ class NotificationService {
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
     );
-
     await _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
