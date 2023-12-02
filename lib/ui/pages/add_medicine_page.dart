@@ -42,95 +42,98 @@ class MedicineFormBody extends StatelessWidget {
         title: const Text("Add medicine"),
         backgroundColor: Colors.green.shade200,
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(20.r),
-        child: Form(
-          key: formKey,
-          child: Column(
-            children: [
-              TextFieldWithTitle(
-                title: "Medicine Name",
-                hintText: "Enter the name of the Medicine",
-                controller: controller,
-                validator: Validator.isNotEmpty,
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              CustomDropdown(
-                title:
-                    "How many times you should take this medicine during day?",
-                itmes: AppConstants.medicineTimeitems,
-                callback: (selectedItem) {
-                  if (selectedItem == null) return;
+      body: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(20.r),
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                TextFieldWithTitle(
+                  title: "Medicine Name",
+                  hintText: "Enter the name of the Medicine",
+                  controller: controller,
+                  validator: Validator.isNotEmpty,
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                CustomDropdown(
+                  title:
+                      "How many times you should take this medicine during day?",
+                  itmes: AppConstants.medicineTimeitems,
+                  callback: (selectedItem) {
+                    if (selectedItem == null) return;
 
-                  context.read<AddMedicineBloc>().add(
-                      AddMedicineEvent.changeMedicineTimeFrequency(
-                          parseMedicineFrequency(selectedItem)));
-                },
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              BlocBuilder<AddMedicineBloc, AddMedicineState>(
-                buildWhen: (previous, current) =>
-                    previous.medicineFrequency != current.medicineFrequency,
-                builder: (context, state) {
-                  return TimeTableWidget(
-                    key: state.key,
-                    medicineFrequency: state.medicineFrequency,
-                    onSave: (list) {
-                      schedules = list;
-                      debugPrint(schedules.toString());
-                    },
-                  );
-                },
-              ),
-              BlocConsumer<AddMedicineBloc, AddMedicineState>(
-                listener: (context, state) {
-                  if (!state.isLoading && state.success) {
-                    context.router.replace(const HomeRoute());
-                  }
-                },
-                builder: (context, state) {
-                  if (state.isLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.green,
-                      ),
-                    );
-                  }
-                  return TextButton(
-                      onPressed: () async {
-                        if (formKey.currentState?.validate() ?? false) {
-                          if (schedules.isEmpty) {
-                            var snackBar = const SnackBar(
-                              content: Text(
-                                  'Please select time by cliking on icon.'),
-                              backgroundColor: (Colors.red),
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-
-                            return;
-                          }
-
-                          var details = MedicineDetails(
-                              medicineName: controller.text,
-                              frequency: state.medicineFrequency,
-                              schedule: schedules.join(","));
-                          context
-                              .read<AddMedicineBloc>()
-                              .add(AddMedicineEvent.save(details));
-                        }
+                    context.read<AddMedicineBloc>().add(
+                        AddMedicineEvent.changeMedicineTimeFrequency(
+                            parseMedicineFrequency(selectedItem)));
+                  },
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                BlocBuilder<AddMedicineBloc, AddMedicineState>(
+                  buildWhen: (previous, current) =>
+                      previous.medicineFrequency != current.medicineFrequency,
+                  builder: (context, state) {
+                    return TimeTableWidget(
+                      key: state.key,
+                      medicineFrequency: state.medicineFrequency,
+                      onSave: (list) {
+                        schedules = list;
+                        debugPrint(schedules.toString());
                       },
-                      child: Text(
-                        "Save",
-                        style: TextStyle(fontSize: 20.sp),
-                      ));
-                },
-              )
-            ],
+                    );
+                  },
+                ),
+                BlocConsumer<AddMedicineBloc, AddMedicineState>(
+                  listener: (context, state) {
+                    if (!state.isLoading && state.success) {
+                      context.router.replace(const HomeRoute());
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state.isLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.green,
+                        ),
+                      );
+                    }
+                    return TextButton(
+                        onPressed: () async {
+                          if (formKey.currentState?.validate() ?? false) {
+                            if (schedules.isEmpty) {
+                              var snackBar = const SnackBar(
+                                content: Text(
+                                    'Please select time by cliking on icon.'),
+                                backgroundColor: (Colors.red),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+
+                              return;
+                            }
+
+                            var details = MedicineDetails(
+                                medicineName: controller.text,
+                                frequency: state.medicineFrequency,
+                                schedule: schedules.join(","));
+                            context
+                                .read<AddMedicineBloc>()
+                                .add(AddMedicineEvent.save(details));
+                          }
+                        },
+                        child: Text(
+                          "Save",
+                          style: TextStyle(fontSize: 20.sp),
+                        ));
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),
