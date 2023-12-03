@@ -63,6 +63,6 @@ class MyApp extends StatelessWidget {
 Future<void> initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
-  getIt<NotificationService>().initialise();
+  await getIt<NotificationService>().initialize();
   await ScreenUtil.ensureScreenSize();
 }

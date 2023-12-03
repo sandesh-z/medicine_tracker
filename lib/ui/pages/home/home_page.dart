@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medicine_tracker/core/localization/app_locale.dart';
+import 'package:medicine_tracker/core/notification/notification_service.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
 import 'package:medicine_tracker/features/localization_cubit/app_localization_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
@@ -24,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    NotificationService.startListeningNotificationEvents();
     context
         .read<AddMedicineBloc>()
         .add(const AddMedicineEvent.getAllMedicine());

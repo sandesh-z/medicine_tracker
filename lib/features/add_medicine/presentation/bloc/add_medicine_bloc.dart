@@ -7,6 +7,7 @@ import 'package:medicine_tracker/core/usecase/usecase.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medicine_details.dart';
 import 'package:medicine_tracker/injections/injection.dart';
+import 'package:medicine_tracker/utils/time_parser.dart';
 
 part 'add_medicine_bloc.freezed.dart';
 part 'add_medicine_event.dart';
@@ -26,10 +27,13 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
     emit(state.copyWith(isLoading: true));
     var list = event.medicineDetails.schedule.split(',');
     list.removeWhere((element) => element == '');
-    for (int i = 0; i < list.length; i++) {
-      await getIt<NotificationService>().scheduleDailyNotification(
-          medicineName: event.medicineDetails.medicineName, time: list[i]);
-    }
+
+    await getIt<NotificationService>().myNotifyScheduleInHours(
+        time: DateTime.parse(to24hourTime(list[0])),
+        title: "Medicine Time",
+        msg: "It's time for taking ${event.medicineDetails.medicineName}",
+        repeatNotif: true);
+
     await getMedicineDetails.saveMedicineDetails(item: event.medicineDetails);
     emit(state.copyWith(isLoading: false, success: true));
   }

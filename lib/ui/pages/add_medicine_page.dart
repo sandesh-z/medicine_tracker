@@ -108,7 +108,7 @@ class MedicineFormBody extends StatelessWidget {
                             if (schedules.isEmpty) {
                               var snackBar = const SnackBar(
                                 content: Text(
-                                    'Please select time by cliking on icon.'),
+                                    'Please select time by clicking on icon.'),
                                 backgroundColor: (Colors.red),
                               );
                               ScaffoldMessenger.of(context)
