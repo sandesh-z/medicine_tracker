@@ -12,8 +12,10 @@ class NotificationService {
   Future initialize() async {
     await initializeLocalNotifications();
     await initializeIsolateReceivePort();
-    bool isAllowed = await AwesomeNotifications().isNotificationAllowed();
-    if (!isAllowed) isAllowed = await displayNotificationRationale();
+    // bool isAllowed = await AwesomeNotifications().isNotificationAllowed();
+    // if (!isAllowed) {
+    //   isAllowed = await displayNotificationRationale();
+    // }
   }
 
   static ReceivedAction? initialAction;
