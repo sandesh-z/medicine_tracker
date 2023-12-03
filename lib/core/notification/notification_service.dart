@@ -6,16 +6,21 @@ import 'dart:ui';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:medicine_tracker/main.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 @lazySingleton
 class NotificationService {
   Future initialize() async {
     await initializeLocalNotifications();
     await initializeIsolateReceivePort();
-    // bool isAllowed = await AwesomeNotifications().isNotificationAllowed();
-    // if (!isAllowed) {
-    //   isAllowed = await displayNotificationRationale();
-    // }
+    await Permission.notification.isDenied.then((value) async {
+      if (value) {
+        final status = await Permission.notification.request();
+        if (status == PermissionStatus.denied) {
+          Permission.notification.request();
+        }
+      }
+    });
   }
 
   static ReceivedAction? initialAction;
