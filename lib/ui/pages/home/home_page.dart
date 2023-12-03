@@ -3,12 +3,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medicine_tracker/core/localization/app_locale.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
 import 'package:medicine_tracker/features/localization_cubit/app_localization_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/pages/home/medicine_list.dart';
 import 'package:medicine_tracker/ui/routes/routes.dart';
+import 'package:medicine_tracker/ui/widgets/shadow_box_widget.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {
@@ -53,22 +55,27 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  BlocBuilder<AddMedicineBloc, AddMedicineState>(
-                    buildWhen: (previous, current) =>
-                        previous.allMedicineList != current.allMedicineList,
-                    builder: (context, state) {
-                      if (state.allMedicineList?.isEmpty ?? false) {
-                        return const SizedBox();
-                      }
-                      return MedicineList(list: state.allMedicineList ?? []);
-                    },
-                  ),
-                ],
-              ),
+            BlocBuilder<AddMedicineBloc, AddMedicineState>(
+              buildWhen: (previous, current) =>
+                  previous.allMedicineList != current.allMedicineList,
+              builder: (context, state) {
+                if (state.allMedicineList?.isEmpty ?? false) {
+                  return Center(
+                      child: ShadowBoxWidget(
+                    margin: EdgeInsets.all(20.r),
+                    child: Text(
+                      "Please click add icon below to add medicine that you should take daily.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ));
+                }
+                return SingleChildScrollView(
+                    child: MedicineList(list: state.allMedicineList ?? []));
+              },
             ),
           ],
         ),
