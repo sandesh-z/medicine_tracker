@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff103927),
       appBar: AppBar(
         backgroundColor: Colors.green.shade900,
         automaticallyImplyLeading: false,
@@ -61,7 +62,8 @@ class _HomePageState extends State<HomePage> {
               buildWhen: (previous, current) =>
                   previous.allMedicineList != current.allMedicineList,
               builder: (context, state) {
-                if (state.allMedicineList?.isEmpty ?? false) {
+                if ((state.allMedicineList?.isEmpty ?? false) &&
+                    state.success) {
                   return Center(
                       child: ShadowBoxWidget(
                     margin: EdgeInsets.all(20.r),

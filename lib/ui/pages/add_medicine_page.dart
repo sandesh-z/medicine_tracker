@@ -9,6 +9,7 @@ import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_med
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/routes/routes.dart';
 import 'package:medicine_tracker/ui/widgets/custom_dropdown.dart';
+import 'package:medicine_tracker/ui/widgets/popup_success.dart';
 import 'package:medicine_tracker/ui/widgets/text_field_with_title.dart';
 import 'package:medicine_tracker/ui/widgets/time_table_widget.dart';
 import 'package:medicine_tracker/utils/medicine_time_frequency_parser.dart';
@@ -89,9 +90,17 @@ class MedicineFormBody extends StatelessWidget {
                   },
                 ),
                 BlocConsumer<AddMedicineBloc, AddMedicineState>(
-                  listener: (context, state) {
+                  listener: (ccontext, state) {
                     if (!state.isLoading && state.success) {
-                      context.router.replace(const HomeRoute());
+                      showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (_) => PopUpSuccessOverLay(
+                              title: "Medicine Added",
+                              bthTitle: "Goto Home Page",
+                              onPressed: () {
+                                context.router.replace(const HomeRoute());
+                              }));
                     }
                   },
                   builder: (context, state) {
@@ -102,6 +111,7 @@ class MedicineFormBody extends StatelessWidget {
                         ),
                       );
                     }
+
                     return TextButton(
                         onPressed: () async {
                           if (formKey.currentState?.validate() ?? false) {

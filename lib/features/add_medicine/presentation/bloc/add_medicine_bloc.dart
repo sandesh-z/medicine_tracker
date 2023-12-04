@@ -27,12 +27,13 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
     emit(state.copyWith(isLoading: true));
     var list = event.medicineDetails.schedule.split(',');
     list.removeWhere((element) => element == '');
-
-    await getIt<NotificationService>().myNotifyScheduleInHours(
-        time: DateTime.parse(to24hourTime(list[0])),
-        title: "Medicine Time",
-        msg: "It's time for taking ${event.medicineDetails.medicineName}",
-        repeatNotif: true);
+    for (int i = 0; i < list.length; i++) {
+      await getIt<NotificationService>().myNotifyScheduleInHours(
+          time: DateTime.parse(to24hourTime(list[i])),
+          title: "Medicine Time",
+          msg: "It's time for taking ${event.medicineDetails.medicineName}",
+          repeatNotif: true);
+    }
 
     await getMedicineDetails.saveMedicineDetails(item: event.medicineDetails);
     emit(state.copyWith(isLoading: false, success: true));
@@ -46,8 +47,8 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
   _onGetAllMedicine(
       _GetAllMedicine event, Emitter<AddMedicineState> emit) async {
     final result = await getMedicineDetails.call(NoParams());
-    emit(result.fold(
-        (l) => state.copyWith(), (r) => state.copyWith(allMedicineList: r)));
+    emit(result.fold((l) => state.copyWith(success: true),
+        (r) => state.copyWith(allMedicineList: r, success: true)));
   }
 
   _onUpdateMedicineDetail(
