@@ -9,6 +9,7 @@ import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_med
 import 'package:medicine_tracker/features/localization_cubit/app_localization_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/routes/routes.dart';
+import 'package:medicine_tracker/utils/schedule_task.dart';
 
 final appRouter = AppRouter();
 void main() async {
@@ -64,5 +65,6 @@ Future<void> initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
   await getIt<NotificationService>().initialize();
+  await getIt<ScheduleTask>().initPeriodicTask();
   await ScreenUtil.ensureScreenSize();
 }

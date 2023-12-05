@@ -89,10 +89,10 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.green.shade900,
         color: Colors.white,
         items: const [
-          TabItem(icon: Icons.list),
+          TabItem(icon: Icons.assessment),
           TabItem(icon: Icons.add, title: "Add medicine"),
           TabItem(
-            icon: Icons.assessment,
+            icon: Icons.list,
           ),
         ],
         initialActiveIndex: 1,

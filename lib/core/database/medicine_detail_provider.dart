@@ -7,7 +7,7 @@ import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine
 abstract class MedicineDetailsProvider {
   Future insertMedicineDetailItem(MedicineDetails medicineDetails);
   Future updateMedicineDetailItem(String value, int id);
-
+  Future resetAllMedicineTakenFlags();
   Future<List<MedicineDetails>?> getAllMedicne();
 }
 
@@ -57,5 +57,37 @@ class MedicineProviderImpl implements MedicineDetailsProvider {
         columnName: MedicineDetailItems.allMedicineTaken,
         values: value,
         id: id);
+  }
+
+  @override
+  Future resetAllMedicineTakenFlags() async {
+    if (!provider.isOpen) {
+      await provider.open();
+    }
+    final List<Map<String, dynamic>>? maps =
+        await provider.getAllFrom(tableName: 'medicine_details');
+    if (maps == null) return;
+
+    List<MedicineDetails> list = List.generate(maps.length, (i) {
+      return MedicineDetails(
+        id: maps[i]['id'] as int,
+        medicineName: maps[i]['medicine_name'] as String,
+        frequency: maps[i]['frequency'] as int,
+        schedule: maps[i]['schedule'] as String,
+        allMedicineTakenList: maps[i]['all_medicine_taken'] as String,
+      );
+    });
+
+    for (int i = 0; i < list.length; i++) {
+      if (!(list[i].allMedicineTakenList?.contains('true') ?? false)) {
+        continue;
+      }
+      await provider.update(
+          tableName: MedicineDetailItems.medicineDetails,
+          columnName: MedicineDetailItems.allMedicineTaken,
+          values:
+              list[i].allMedicineTakenList?.replaceAll("true", "false") ?? "",
+          id: list[i].id ?? 0);
+    }
   }
 }

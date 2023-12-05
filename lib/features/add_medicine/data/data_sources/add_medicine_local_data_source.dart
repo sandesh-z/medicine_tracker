@@ -5,7 +5,6 @@ import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine
 abstract class AddMedicineLocalDataSource {
   Future<void> saveMedicineDetailItem(MedicineDetails medicineDetails);
   Future<void> updateMedicineDetailItem(String value, int id);
-
   Future<List<MedicineDetails>?> getAllMedicineItems();
 }
 

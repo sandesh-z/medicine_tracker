@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:medicine_tracker/core/database/datbase_constants/database_table_constants.dart';
+import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -37,6 +38,7 @@ abstract class DBProvider {
   });
 
   Future<List<Map<String, dynamic>>>? getAllFrom({required String tableName});
+  Future<void> resetAllMedicineTakenFlags();
 }
 
 @Singleton(as: DBProvider)
@@ -105,7 +107,7 @@ class DBProviderImpl implements DBProvider {
         },
         version: _version,
       );
-      debugPrint("success");
+      debugPrint("db open success");
     } on Exception catch (e) {
       debugPrint(e.toString());
     }
@@ -119,6 +121,54 @@ class DBProviderImpl implements DBProvider {
       required int id}) async {
     return await _database?.update(tableName, {columnName: values},
         where: '${"id"} = ?', whereArgs: [id]);
+  }
+
+  @override
+  Future resetAllMedicineTakenFlags() async {
+    //open db
+    try {
+      _database = await openDatabase(
+        join(await getDatabasesPath(), "medicine_detail_database.db"),
+        onCreate: (db, version) {
+          return db.execute(_createMedicineDetailsTable());
+        },
+        version: _version,
+      );
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+    }
+    final result = await _database
+        ?.rawQuery("SELECT * from ${MedicineDetailItems.medicineDetails}");
+    final List<Map<String, dynamic>>? maps = result;
+
+    if (maps == null) {
+      return;
+    }
+
+    List<MedicineDetails> list = List.generate(maps.length, (i) {
+      return MedicineDetails(
+        id: maps[i]['id'] as int,
+        medicineName: maps[i]['medicine_name'] as String,
+        frequency: maps[i]['frequency'] as int,
+        schedule: maps[i]['schedule'] as String,
+        allMedicineTakenList: maps[i]['all_medicine_taken'] as String,
+      );
+    });
+    for (int i = 0; i < list.length; i++) {
+      //skip if no medicine taken
+      if (!(list[i].allMedicineTakenList?.contains('true') ?? false)) {
+        continue;
+      }
+      await _database?.update(
+          MedicineDetailItems.medicineDetails,
+          {
+            MedicineDetailItems.allMedicineTaken:
+                list[i].allMedicineTakenList?.replaceAll("true", "false") ?? ""
+          },
+          where: '${"id"} = ?',
+          whereArgs: [list[i].id ?? 0],
+          conflictAlgorithm: ConflictAlgorithm.replace);
+    }
   }
 
   String _createMedicineDetailsTable() {
