@@ -99,9 +99,7 @@ class _HomePageState extends State<HomePage> {
         onTap: (int i) {
           switch (i) {
             case 0:
-              context
-                  .read<AppLocalizationCubit>()
-                  .changeLang(AppLocale.english);
+              context.pushRoute(const MissedMedicineRoute());
               break;
             case 1:
               context.pushRoute(const AddMedicineRoute());

@@ -119,7 +119,8 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
                 List<String> list = [];
                 if (widget.medicineDetails.allMedicineTakenList?.isEmpty ??
                     true) {
-                  list = getListofStatus(widget.medicineDetails.frequency)
+                  list = MedicineFrequencyParser.getListofStatus(
+                          widget.medicineDetails.frequency)
                       .split(',')
                       .toList();
                 } else {
