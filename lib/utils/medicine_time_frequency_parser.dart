@@ -58,7 +58,6 @@ class MedicineFrequencyParser {
         schedule.removeAt(i);
       }
     }
-    print("filtered missed schedule: ${schedule.toString()}");
     return schedule;
   }
 }

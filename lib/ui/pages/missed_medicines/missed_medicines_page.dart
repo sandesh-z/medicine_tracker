@@ -30,7 +30,6 @@ class _MissedMedicinePageState extends State<MissedMedicinePage> {
       ),
       body: BlocBuilder<AddMedicineBloc, AddMedicineState>(
         builder: (context, state) {
-          print(state.missedMedicines!.length.toString() + "missed length");
           if (state.missedMedicines?.isEmpty ?? true) {
             return const Center(
               child: Text("Congratulations!! No medicine missed today."),
