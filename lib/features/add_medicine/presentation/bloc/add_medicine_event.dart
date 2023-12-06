@@ -7,6 +7,8 @@ class AddMedicineEvent with _$AddMedicineEvent {
   const factory AddMedicineEvent.update(int id, String value) =
       _UpdateMedicineDetail;
   const factory AddMedicineEvent.getAllMedicine() = _GetAllMedicine;
+  const factory AddMedicineEvent.getMissedMedicines() = _GetMissedMedicines;
+
   const factory AddMedicineEvent.changeMedicineTimeFrequency(
       int medicineFrequency) = _ChangeMedicineTimeFrequency;
 }

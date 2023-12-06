@@ -21,6 +21,7 @@ mixin _$AddMedicineEvent {
     required TResult Function(MedicineDetails medicineDetails) save,
     required TResult Function(int id, String value) update,
     required TResult Function() getAllMedicine,
+    required TResult Function() getMissedMedicines,
     required TResult Function(int medicineFrequency)
         changeMedicineTimeFrequency,
   }) =>
@@ -30,6 +31,7 @@ mixin _$AddMedicineEvent {
     TResult? Function(MedicineDetails medicineDetails)? save,
     TResult? Function(int id, String value)? update,
     TResult? Function()? getAllMedicine,
+    TResult? Function()? getMissedMedicines,
     TResult? Function(int medicineFrequency)? changeMedicineTimeFrequency,
   }) =>
       throw _privateConstructorUsedError;
@@ -38,6 +40,7 @@ mixin _$AddMedicineEvent {
     TResult Function(MedicineDetails medicineDetails)? save,
     TResult Function(int id, String value)? update,
     TResult Function()? getAllMedicine,
+    TResult Function()? getMissedMedicines,
     TResult Function(int medicineFrequency)? changeMedicineTimeFrequency,
     required TResult orElse(),
   }) =>
@@ -47,6 +50,7 @@ mixin _$AddMedicineEvent {
     required TResult Function(_SaveMedicineDetail value) save,
     required TResult Function(_UpdateMedicineDetail value) update,
     required TResult Function(_GetAllMedicine value) getAllMedicine,
+    required TResult Function(_GetMissedMedicines value) getMissedMedicines,
     required TResult Function(_ChangeMedicineTimeFrequency value)
         changeMedicineTimeFrequency,
   }) =>
@@ -56,6 +60,7 @@ mixin _$AddMedicineEvent {
     TResult? Function(_SaveMedicineDetail value)? save,
     TResult? Function(_UpdateMedicineDetail value)? update,
     TResult? Function(_GetAllMedicine value)? getAllMedicine,
+    TResult? Function(_GetMissedMedicines value)? getMissedMedicines,
     TResult? Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
   }) =>
@@ -65,6 +70,7 @@ mixin _$AddMedicineEvent {
     TResult Function(_SaveMedicineDetail value)? save,
     TResult Function(_UpdateMedicineDetail value)? update,
     TResult Function(_GetAllMedicine value)? getAllMedicine,
+    TResult Function(_GetMissedMedicines value)? getMissedMedicines,
     TResult Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
     required TResult orElse(),
@@ -159,6 +165,7 @@ class _$SaveMedicineDetailImpl implements _SaveMedicineDetail {
     required TResult Function(MedicineDetails medicineDetails) save,
     required TResult Function(int id, String value) update,
     required TResult Function() getAllMedicine,
+    required TResult Function() getMissedMedicines,
     required TResult Function(int medicineFrequency)
         changeMedicineTimeFrequency,
   }) {
@@ -171,6 +178,7 @@ class _$SaveMedicineDetailImpl implements _SaveMedicineDetail {
     TResult? Function(MedicineDetails medicineDetails)? save,
     TResult? Function(int id, String value)? update,
     TResult? Function()? getAllMedicine,
+    TResult? Function()? getMissedMedicines,
     TResult? Function(int medicineFrequency)? changeMedicineTimeFrequency,
   }) {
     return save?.call(medicineDetails);
@@ -182,6 +190,7 @@ class _$SaveMedicineDetailImpl implements _SaveMedicineDetail {
     TResult Function(MedicineDetails medicineDetails)? save,
     TResult Function(int id, String value)? update,
     TResult Function()? getAllMedicine,
+    TResult Function()? getMissedMedicines,
     TResult Function(int medicineFrequency)? changeMedicineTimeFrequency,
     required TResult orElse(),
   }) {
@@ -197,6 +206,7 @@ class _$SaveMedicineDetailImpl implements _SaveMedicineDetail {
     required TResult Function(_SaveMedicineDetail value) save,
     required TResult Function(_UpdateMedicineDetail value) update,
     required TResult Function(_GetAllMedicine value) getAllMedicine,
+    required TResult Function(_GetMissedMedicines value) getMissedMedicines,
     required TResult Function(_ChangeMedicineTimeFrequency value)
         changeMedicineTimeFrequency,
   }) {
@@ -209,6 +219,7 @@ class _$SaveMedicineDetailImpl implements _SaveMedicineDetail {
     TResult? Function(_SaveMedicineDetail value)? save,
     TResult? Function(_UpdateMedicineDetail value)? update,
     TResult? Function(_GetAllMedicine value)? getAllMedicine,
+    TResult? Function(_GetMissedMedicines value)? getMissedMedicines,
     TResult? Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
   }) {
@@ -221,6 +232,7 @@ class _$SaveMedicineDetailImpl implements _SaveMedicineDetail {
     TResult Function(_SaveMedicineDetail value)? save,
     TResult Function(_UpdateMedicineDetail value)? update,
     TResult Function(_GetAllMedicine value)? getAllMedicine,
+    TResult Function(_GetMissedMedicines value)? getMissedMedicines,
     TResult Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
     required TResult orElse(),
@@ -319,6 +331,7 @@ class _$UpdateMedicineDetailImpl implements _UpdateMedicineDetail {
     required TResult Function(MedicineDetails medicineDetails) save,
     required TResult Function(int id, String value) update,
     required TResult Function() getAllMedicine,
+    required TResult Function() getMissedMedicines,
     required TResult Function(int medicineFrequency)
         changeMedicineTimeFrequency,
   }) {
@@ -331,6 +344,7 @@ class _$UpdateMedicineDetailImpl implements _UpdateMedicineDetail {
     TResult? Function(MedicineDetails medicineDetails)? save,
     TResult? Function(int id, String value)? update,
     TResult? Function()? getAllMedicine,
+    TResult? Function()? getMissedMedicines,
     TResult? Function(int medicineFrequency)? changeMedicineTimeFrequency,
   }) {
     return update?.call(id, value);
@@ -342,6 +356,7 @@ class _$UpdateMedicineDetailImpl implements _UpdateMedicineDetail {
     TResult Function(MedicineDetails medicineDetails)? save,
     TResult Function(int id, String value)? update,
     TResult Function()? getAllMedicine,
+    TResult Function()? getMissedMedicines,
     TResult Function(int medicineFrequency)? changeMedicineTimeFrequency,
     required TResult orElse(),
   }) {
@@ -357,6 +372,7 @@ class _$UpdateMedicineDetailImpl implements _UpdateMedicineDetail {
     required TResult Function(_SaveMedicineDetail value) save,
     required TResult Function(_UpdateMedicineDetail value) update,
     required TResult Function(_GetAllMedicine value) getAllMedicine,
+    required TResult Function(_GetMissedMedicines value) getMissedMedicines,
     required TResult Function(_ChangeMedicineTimeFrequency value)
         changeMedicineTimeFrequency,
   }) {
@@ -369,6 +385,7 @@ class _$UpdateMedicineDetailImpl implements _UpdateMedicineDetail {
     TResult? Function(_SaveMedicineDetail value)? save,
     TResult? Function(_UpdateMedicineDetail value)? update,
     TResult? Function(_GetAllMedicine value)? getAllMedicine,
+    TResult? Function(_GetMissedMedicines value)? getMissedMedicines,
     TResult? Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
   }) {
@@ -381,6 +398,7 @@ class _$UpdateMedicineDetailImpl implements _UpdateMedicineDetail {
     TResult Function(_SaveMedicineDetail value)? save,
     TResult Function(_UpdateMedicineDetail value)? update,
     TResult Function(_GetAllMedicine value)? getAllMedicine,
+    TResult Function(_GetMissedMedicines value)? getMissedMedicines,
     TResult Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
     required TResult orElse(),
@@ -444,6 +462,7 @@ class _$GetAllMedicineImpl implements _GetAllMedicine {
     required TResult Function(MedicineDetails medicineDetails) save,
     required TResult Function(int id, String value) update,
     required TResult Function() getAllMedicine,
+    required TResult Function() getMissedMedicines,
     required TResult Function(int medicineFrequency)
         changeMedicineTimeFrequency,
   }) {
@@ -456,6 +475,7 @@ class _$GetAllMedicineImpl implements _GetAllMedicine {
     TResult? Function(MedicineDetails medicineDetails)? save,
     TResult? Function(int id, String value)? update,
     TResult? Function()? getAllMedicine,
+    TResult? Function()? getMissedMedicines,
     TResult? Function(int medicineFrequency)? changeMedicineTimeFrequency,
   }) {
     return getAllMedicine?.call();
@@ -467,6 +487,7 @@ class _$GetAllMedicineImpl implements _GetAllMedicine {
     TResult Function(MedicineDetails medicineDetails)? save,
     TResult Function(int id, String value)? update,
     TResult Function()? getAllMedicine,
+    TResult Function()? getMissedMedicines,
     TResult Function(int medicineFrequency)? changeMedicineTimeFrequency,
     required TResult orElse(),
   }) {
@@ -482,6 +503,7 @@ class _$GetAllMedicineImpl implements _GetAllMedicine {
     required TResult Function(_SaveMedicineDetail value) save,
     required TResult Function(_UpdateMedicineDetail value) update,
     required TResult Function(_GetAllMedicine value) getAllMedicine,
+    required TResult Function(_GetMissedMedicines value) getMissedMedicines,
     required TResult Function(_ChangeMedicineTimeFrequency value)
         changeMedicineTimeFrequency,
   }) {
@@ -494,6 +516,7 @@ class _$GetAllMedicineImpl implements _GetAllMedicine {
     TResult? Function(_SaveMedicineDetail value)? save,
     TResult? Function(_UpdateMedicineDetail value)? update,
     TResult? Function(_GetAllMedicine value)? getAllMedicine,
+    TResult? Function(_GetMissedMedicines value)? getMissedMedicines,
     TResult? Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
   }) {
@@ -506,6 +529,7 @@ class _$GetAllMedicineImpl implements _GetAllMedicine {
     TResult Function(_SaveMedicineDetail value)? save,
     TResult Function(_UpdateMedicineDetail value)? update,
     TResult Function(_GetAllMedicine value)? getAllMedicine,
+    TResult Function(_GetMissedMedicines value)? getMissedMedicines,
     TResult Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
     required TResult orElse(),
@@ -519,6 +543,130 @@ class _$GetAllMedicineImpl implements _GetAllMedicine {
 
 abstract class _GetAllMedicine implements AddMedicineEvent {
   const factory _GetAllMedicine() = _$GetAllMedicineImpl;
+}
+
+/// @nodoc
+abstract class _$$GetMissedMedicinesImplCopyWith<$Res> {
+  factory _$$GetMissedMedicinesImplCopyWith(_$GetMissedMedicinesImpl value,
+          $Res Function(_$GetMissedMedicinesImpl) then) =
+      __$$GetMissedMedicinesImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetMissedMedicinesImplCopyWithImpl<$Res>
+    extends _$AddMedicineEventCopyWithImpl<$Res, _$GetMissedMedicinesImpl>
+    implements _$$GetMissedMedicinesImplCopyWith<$Res> {
+  __$$GetMissedMedicinesImplCopyWithImpl(_$GetMissedMedicinesImpl _value,
+      $Res Function(_$GetMissedMedicinesImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$GetMissedMedicinesImpl implements _GetMissedMedicines {
+  const _$GetMissedMedicinesImpl();
+
+  @override
+  String toString() {
+    return 'AddMedicineEvent.getMissedMedicines()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GetMissedMedicinesImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(MedicineDetails medicineDetails) save,
+    required TResult Function(int id, String value) update,
+    required TResult Function() getAllMedicine,
+    required TResult Function() getMissedMedicines,
+    required TResult Function(int medicineFrequency)
+        changeMedicineTimeFrequency,
+  }) {
+    return getMissedMedicines();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(MedicineDetails medicineDetails)? save,
+    TResult? Function(int id, String value)? update,
+    TResult? Function()? getAllMedicine,
+    TResult? Function()? getMissedMedicines,
+    TResult? Function(int medicineFrequency)? changeMedicineTimeFrequency,
+  }) {
+    return getMissedMedicines?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(MedicineDetails medicineDetails)? save,
+    TResult Function(int id, String value)? update,
+    TResult Function()? getAllMedicine,
+    TResult Function()? getMissedMedicines,
+    TResult Function(int medicineFrequency)? changeMedicineTimeFrequency,
+    required TResult orElse(),
+  }) {
+    if (getMissedMedicines != null) {
+      return getMissedMedicines();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SaveMedicineDetail value) save,
+    required TResult Function(_UpdateMedicineDetail value) update,
+    required TResult Function(_GetAllMedicine value) getAllMedicine,
+    required TResult Function(_GetMissedMedicines value) getMissedMedicines,
+    required TResult Function(_ChangeMedicineTimeFrequency value)
+        changeMedicineTimeFrequency,
+  }) {
+    return getMissedMedicines(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_SaveMedicineDetail value)? save,
+    TResult? Function(_UpdateMedicineDetail value)? update,
+    TResult? Function(_GetAllMedicine value)? getAllMedicine,
+    TResult? Function(_GetMissedMedicines value)? getMissedMedicines,
+    TResult? Function(_ChangeMedicineTimeFrequency value)?
+        changeMedicineTimeFrequency,
+  }) {
+    return getMissedMedicines?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SaveMedicineDetail value)? save,
+    TResult Function(_UpdateMedicineDetail value)? update,
+    TResult Function(_GetAllMedicine value)? getAllMedicine,
+    TResult Function(_GetMissedMedicines value)? getMissedMedicines,
+    TResult Function(_ChangeMedicineTimeFrequency value)?
+        changeMedicineTimeFrequency,
+    required TResult orElse(),
+  }) {
+    if (getMissedMedicines != null) {
+      return getMissedMedicines(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetMissedMedicines implements AddMedicineEvent {
+  const factory _GetMissedMedicines() = _$GetMissedMedicinesImpl;
 }
 
 /// @nodoc
@@ -594,6 +742,7 @@ class _$ChangeMedicineTimeFrequencyImpl
     required TResult Function(MedicineDetails medicineDetails) save,
     required TResult Function(int id, String value) update,
     required TResult Function() getAllMedicine,
+    required TResult Function() getMissedMedicines,
     required TResult Function(int medicineFrequency)
         changeMedicineTimeFrequency,
   }) {
@@ -606,6 +755,7 @@ class _$ChangeMedicineTimeFrequencyImpl
     TResult? Function(MedicineDetails medicineDetails)? save,
     TResult? Function(int id, String value)? update,
     TResult? Function()? getAllMedicine,
+    TResult? Function()? getMissedMedicines,
     TResult? Function(int medicineFrequency)? changeMedicineTimeFrequency,
   }) {
     return changeMedicineTimeFrequency?.call(medicineFrequency);
@@ -617,6 +767,7 @@ class _$ChangeMedicineTimeFrequencyImpl
     TResult Function(MedicineDetails medicineDetails)? save,
     TResult Function(int id, String value)? update,
     TResult Function()? getAllMedicine,
+    TResult Function()? getMissedMedicines,
     TResult Function(int medicineFrequency)? changeMedicineTimeFrequency,
     required TResult orElse(),
   }) {
@@ -632,6 +783,7 @@ class _$ChangeMedicineTimeFrequencyImpl
     required TResult Function(_SaveMedicineDetail value) save,
     required TResult Function(_UpdateMedicineDetail value) update,
     required TResult Function(_GetAllMedicine value) getAllMedicine,
+    required TResult Function(_GetMissedMedicines value) getMissedMedicines,
     required TResult Function(_ChangeMedicineTimeFrequency value)
         changeMedicineTimeFrequency,
   }) {
@@ -644,6 +796,7 @@ class _$ChangeMedicineTimeFrequencyImpl
     TResult? Function(_SaveMedicineDetail value)? save,
     TResult? Function(_UpdateMedicineDetail value)? update,
     TResult? Function(_GetAllMedicine value)? getAllMedicine,
+    TResult? Function(_GetMissedMedicines value)? getMissedMedicines,
     TResult? Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
   }) {
@@ -656,6 +809,7 @@ class _$ChangeMedicineTimeFrequencyImpl
     TResult Function(_SaveMedicineDetail value)? save,
     TResult Function(_UpdateMedicineDetail value)? update,
     TResult Function(_GetAllMedicine value)? getAllMedicine,
+    TResult Function(_GetMissedMedicines value)? getMissedMedicines,
     TResult Function(_ChangeMedicineTimeFrequency value)?
         changeMedicineTimeFrequency,
     required TResult orElse(),
@@ -685,6 +839,8 @@ mixin _$AddMedicineState {
   int get medicineFrequency => throw _privateConstructorUsedError;
   List<MedicineDetails>? get allMedicineList =>
       throw _privateConstructorUsedError;
+  List<MedicineDetails>? get missedMedicines =>
+      throw _privateConstructorUsedError;
   List<String> get schedules => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -704,6 +860,7 @@ abstract class $AddMedicineStateCopyWith<$Res> {
       bool success,
       int medicineFrequency,
       List<MedicineDetails>? allMedicineList,
+      List<MedicineDetails>? missedMedicines,
       List<String> schedules});
 }
 
@@ -725,6 +882,7 @@ class _$AddMedicineStateCopyWithImpl<$Res, $Val extends AddMedicineState>
     Object? success = null,
     Object? medicineFrequency = null,
     Object? allMedicineList = freezed,
+    Object? missedMedicines = freezed,
     Object? schedules = null,
   }) {
     return _then(_value.copyWith(
@@ -748,6 +906,10 @@ class _$AddMedicineStateCopyWithImpl<$Res, $Val extends AddMedicineState>
           ? _value.allMedicineList
           : allMedicineList // ignore: cast_nullable_to_non_nullable
               as List<MedicineDetails>?,
+      missedMedicines: freezed == missedMedicines
+          ? _value.missedMedicines
+          : missedMedicines // ignore: cast_nullable_to_non_nullable
+              as List<MedicineDetails>?,
       schedules: null == schedules
           ? _value.schedules
           : schedules // ignore: cast_nullable_to_non_nullable
@@ -770,6 +932,7 @@ abstract class _$$AddMedicineStateImplCopyWith<$Res>
       bool success,
       int medicineFrequency,
       List<MedicineDetails>? allMedicineList,
+      List<MedicineDetails>? missedMedicines,
       List<String> schedules});
 }
 
@@ -789,6 +952,7 @@ class __$$AddMedicineStateImplCopyWithImpl<$Res>
     Object? success = null,
     Object? medicineFrequency = null,
     Object? allMedicineList = freezed,
+    Object? missedMedicines = freezed,
     Object? schedules = null,
   }) {
     return _then(_$AddMedicineStateImpl(
@@ -812,6 +976,10 @@ class __$$AddMedicineStateImplCopyWithImpl<$Res>
           ? _value._allMedicineList
           : allMedicineList // ignore: cast_nullable_to_non_nullable
               as List<MedicineDetails>?,
+      missedMedicines: freezed == missedMedicines
+          ? _value._missedMedicines
+          : missedMedicines // ignore: cast_nullable_to_non_nullable
+              as List<MedicineDetails>?,
       schedules: null == schedules
           ? _value._schedules
           : schedules // ignore: cast_nullable_to_non_nullable
@@ -829,8 +997,10 @@ class _$AddMedicineStateImpl implements _AddMedicineState {
       required this.success,
       required this.medicineFrequency,
       required final List<MedicineDetails>? allMedicineList,
+      required final List<MedicineDetails>? missedMedicines,
       required final List<String> schedules})
       : _allMedicineList = allMedicineList,
+        _missedMedicines = missedMedicines,
         _schedules = schedules;
 
   @override
@@ -851,6 +1021,16 @@ class _$AddMedicineStateImpl implements _AddMedicineState {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<MedicineDetails>? _missedMedicines;
+  @override
+  List<MedicineDetails>? get missedMedicines {
+    final value = _missedMedicines;
+    if (value == null) return null;
+    if (_missedMedicines is EqualUnmodifiableListView) return _missedMedicines;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   final List<String> _schedules;
   @override
   List<String> get schedules {
@@ -861,7 +1041,7 @@ class _$AddMedicineStateImpl implements _AddMedicineState {
 
   @override
   String toString() {
-    return 'AddMedicineState(key: $key, isLoading: $isLoading, success: $success, medicineFrequency: $medicineFrequency, allMedicineList: $allMedicineList, schedules: $schedules)';
+    return 'AddMedicineState(key: $key, isLoading: $isLoading, success: $success, medicineFrequency: $medicineFrequency, allMedicineList: $allMedicineList, missedMedicines: $missedMedicines, schedules: $schedules)';
   }
 
   @override
@@ -878,6 +1058,8 @@ class _$AddMedicineStateImpl implements _AddMedicineState {
             const DeepCollectionEquality()
                 .equals(other._allMedicineList, _allMedicineList) &&
             const DeepCollectionEquality()
+                .equals(other._missedMedicines, _missedMedicines) &&
+            const DeepCollectionEquality()
                 .equals(other._schedules, _schedules));
   }
 
@@ -889,6 +1071,7 @@ class _$AddMedicineStateImpl implements _AddMedicineState {
       success,
       medicineFrequency,
       const DeepCollectionEquality().hash(_allMedicineList),
+      const DeepCollectionEquality().hash(_missedMedicines),
       const DeepCollectionEquality().hash(_schedules));
 
   @JsonKey(ignore: true)
@@ -906,6 +1089,7 @@ abstract class _AddMedicineState implements AddMedicineState {
       required final bool success,
       required final int medicineFrequency,
       required final List<MedicineDetails>? allMedicineList,
+      required final List<MedicineDetails>? missedMedicines,
       required final List<String> schedules}) = _$AddMedicineStateImpl;
 
   @override
@@ -918,6 +1102,8 @@ abstract class _AddMedicineState implements AddMedicineState {
   int get medicineFrequency;
   @override
   List<MedicineDetails>? get allMedicineList;
+  @override
+  List<MedicineDetails>? get missedMedicines;
   @override
   List<String> get schedules;
   @override

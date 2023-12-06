@@ -7,6 +7,7 @@ import 'package:medicine_tracker/core/usecase/usecase.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medicine_details.dart';
 import 'package:medicine_tracker/injections/injection.dart';
+import 'package:medicine_tracker/utils/time_difference_checker.dart';
 import 'package:medicine_tracker/utils/time_parser.dart';
 
 part 'add_medicine_bloc.freezed.dart';
@@ -21,6 +22,7 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
     on<_ChangeMedicineTimeFrequency>(_onChangeMedicineTimeFrequency);
     on<_GetAllMedicine>(_onGetAllMedicine);
     on<_UpdateMedicineDetail>(_onUpdateMedicineDetail);
+    on<_GetMissedMedicines>(_onGetMissedMedicines);
   }
   _onSaveMedicineDetail(
       _SaveMedicineDetail event, Emitter<AddMedicineState> emit) async {
@@ -55,5 +57,41 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
       _UpdateMedicineDetail event, Emitter<AddMedicineState> emit) async {
     await getMedicineDetails.updateMedineDetail(
         value: event.value, id: event.id);
+  }
+
+  _onGetMissedMedicines(
+      _GetMissedMedicines event, Emitter<AddMedicineState> emit) async {
+    final result = await getMedicineDetails.call(NoParams());
+    List<MedicineDetails> missedMedicines = [];
+    emit(result.fold((l) => state.copyWith(), (allMedicineList) {
+      if (allMedicineList?.isEmpty ?? true) {
+        return state.copyWith();
+      }
+      int len = allMedicineList?.length ?? 0;
+
+      for (int i = 0; i < len; i++) {
+        if ((allMedicineList![i].allMedicineTakenList?.contains('false') ??
+                true) ||
+            allMedicineList[i].allMedicineTakenList!.trim().isEmpty) {
+          List<String> schedules =
+              allMedicineList[i].schedule.split(',').toList();
+          schedules.removeWhere((e) => e.trim().isEmpty);
+
+          List<String> flags =
+              (allMedicineList[i].allMedicineTakenList?.trim().isEmpty ?? false)
+                  ? []
+                  : allMedicineList[i]
+                          .allMedicineTakenList
+                          ?.split(',')
+                          .toList() ??
+                      [];
+
+          if (isAnyScheduleMissed(schedules, flags)) {
+            missedMedicines.add(allMedicineList[i]);
+          }
+        }
+      }
+      return state.copyWith(missedMedicines: missedMedicines);
+    }));
   }
 }

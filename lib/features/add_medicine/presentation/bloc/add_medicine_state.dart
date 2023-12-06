@@ -8,6 +8,7 @@ class AddMedicineState with _$AddMedicineState {
       required bool success,
       required int medicineFrequency,
       required List<MedicineDetails>? allMedicineList,
+      required List<MedicineDetails>? missedMedicines,
       required List<String> schedules}) = _AddMedicineState;
 
   factory AddMedicineState.initial() => AddMedicineState(
@@ -16,5 +17,6 @@ class AddMedicineState with _$AddMedicineState {
       key: UniqueKey(),
       medicineFrequency: 1,
       allMedicineList: [],
-      schedules: []);
+      schedules: [],
+      missedMedicines: []);
 }
