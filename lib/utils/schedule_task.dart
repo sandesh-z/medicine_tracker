@@ -18,7 +18,7 @@ class ScheduleTask {
       exact: true,
       allowWhileIdle: true, //the device will be woken up when the alarm fires
       startAt: DateTime(
-          DateTime.now().year, DateTime.now().month, DateTime.now().day, 1),
+          DateTime.now().year, DateTime.now().month, DateTime.now().day + 1, 1),
       rescheduleOnReboot: true, //Work after reboot
     );
   }
