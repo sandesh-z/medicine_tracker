@@ -165,7 +165,7 @@ class NotificationService {
       content: NotificationContent(
         id: Random().nextInt(100),
         channelKey: 'basic_channel',
-        title: '${Emojis.medical_pill} $title',
+        title: '$title ${Emojis.medical_pill} ',
         body: '  $msg',
         notificationLayout: NotificationLayout.Default,
         color: Colors.black,
