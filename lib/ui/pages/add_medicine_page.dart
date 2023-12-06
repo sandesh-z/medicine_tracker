@@ -69,7 +69,8 @@ class MedicineFormBody extends StatelessWidget {
 
                     context.read<AddMedicineBloc>().add(
                         AddMedicineEvent.changeMedicineTimeFrequency(
-                            parseMedicineFrequency(selectedItem)));
+                            MedicineFrequencyParser.parseMedicineFrequency(
+                                selectedItem)));
                   },
                 ),
                 SizedBox(
