@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AppLocalizationCubit(),
+          create: (context) => getIt<AppLocalizationCubit>(),
         ),
         BlocProvider(
           create: (context) => AddMedicineBloc(getIt<GetMedicineDetails>()),
@@ -41,7 +41,6 @@ class MyApp extends StatelessWidget {
           ScreenUtil.init(context);
           return MaterialApp.router(
             key: localestate.key,
-            routerConfig: appRouter.config(),
             theme: ThemeData(
                 colorScheme:
                     ColorScheme.fromSeed(seedColor: Colors.green.shade400),
@@ -51,6 +50,8 @@ class MyApp extends StatelessWidget {
                 (Locale? locale, Iterable<Locale> supportedLocales) {
               return locale;
             },
+            routerDelegate: appRouter.delegate(),
+            routeInformationParser: appRouter.defaultRouteParser(),
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             locale: localestate.appLocale.locale,
             supportedLocales: AppLocalizations.supportedLocales,

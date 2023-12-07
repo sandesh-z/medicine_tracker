@@ -9,7 +9,7 @@ part 'app_localization_cubit.freezed.dart';
 
 @lazySingleton
 class AppLocalizationCubit extends Cubit<AppLocalizationState> {
-  AppLocalizationCubit() : super(AppLocalizationState.initial(false));
+  AppLocalizationCubit() : super(AppLocalizationState.initial());
   void changeLang(AppLocale locale) {
     emit(state.copyWith(appLocale: locale, key: UniqueKey()));
   }

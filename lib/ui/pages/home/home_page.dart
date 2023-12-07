@@ -105,6 +105,7 @@ class _HomePageState extends State<HomePage> {
               context.pushRoute(const AddMedicineRoute());
               break;
             case 2:
+              context.pushRoute(const SettingsRoute());
               break;
           }
         },

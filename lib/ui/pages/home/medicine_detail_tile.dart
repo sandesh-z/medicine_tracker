@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
 import 'package:medicine_tracker/ui/widgets/custom_popup_widget.dart';
@@ -96,12 +97,12 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
           if (!canCheck(oldTime: oldDate, currentTime: now)) {
             showDialog(
               context: context,
-              builder: (BuildContext context) => const CustomDialog(
+              builder: (BuildContext context) => CustomDialog(
                 message:
                     "You can only check this medicine around 5 minutes before/after medicine taking time",
                 title: "Information",
                 showDismiss: true,
-                dismissText: "OK",
+                dismissText: strings.ok,
               ),
             );
             return;
