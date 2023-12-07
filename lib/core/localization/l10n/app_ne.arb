@@ -1,12 +1,4 @@
-{"invoice_label":"ご請求書",
-"usage_details_label":"ご利用明細",
-"payment_schedule_label":"お支払予定表",
-"msg_billing":"下のボタン選択で、",
-"download_invoice_label":"請求書ダウンロード",
-"payment_view_label":"各種変更届",
-"failed_to_load_profile":"プロファイルの読み込みに失敗しました。クリックし再試行してください。",
-"entry_date":"申込日",
-"card_type":"カード種類",
-"card_exp_date":"有効期限",
-"card_issue_date":"発行日",
-"hello_world":"नमस्कार संसार !"}
+{"hello_world":"नमस्कार संसार !",
+"settings":"सेटिङ",
+"change_language":"भाषा परिवर्तन गर्नुहोस्",
+"ok":"ठिक छ"}

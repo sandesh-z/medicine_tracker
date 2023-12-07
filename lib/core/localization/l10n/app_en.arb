@@ -1,12 +1,4 @@
-{"invoice_label":"Invoice",
-"usage_details_label":"Usage Details",
-"payment_schedule_label":"Payment Schedule",
-"msg_billing":"Select the button below to Billing for one year You can check it.*If there is no charge can not be displayed",
-"download_invoice_label":"Download Invoice",
-"payment_view_label":"Notification of various changes",
-"failed_to_load_profile":"Failed to load profile. Click to retry.",
-"entry_date":"Entry date",
-"card_type":"Card Type",
-"card_exp_date":"Card expiry date",
-"card_issue_date":"Card issue date",
-"hello_world":"Hello World"}
+{"hello_world":"Hello World",
+"settings":"Settings",
+"change_language":"Change Language",
+"ok":"OK"}
