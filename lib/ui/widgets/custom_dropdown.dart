@@ -5,18 +5,20 @@ class CustomDropdown extends StatefulWidget {
   final String title;
   final List<String> itmes;
   final void Function(String?) callback;
+  final String initalValue;
   const CustomDropdown(
       {super.key,
       required this.title,
       required this.itmes,
-      required this.callback});
+      required this.callback,
+      required this.initalValue});
 
   @override
   State<CustomDropdown> createState() => _CustomDropdownState();
 }
 
 class _CustomDropdownState extends State<CustomDropdown> {
-  String dropdownvalue = 'Once a day';
+  late String dropdownvalue = widget.initalValue;
 
   @override
   Widget build(BuildContext context) {

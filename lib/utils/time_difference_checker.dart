@@ -1,10 +1,13 @@
 import 'package:medicine_tracker/utils/time_parser.dart';
 
-bool canCheck({required DateTime oldTime, required DateTime currentTime}) {
+bool canCheck(
+    {required DateTime oldTime,
+    required DateTime currentTime,
+    required int diff}) {
   int difference = ((oldTime.minute - currentTime.minute).abs());
   bool sameHour() => (oldTime.hour == currentTime.hour);
 
-  if (difference <= 5 && sameHour()) {
+  if (difference <= diff && sameHour()) {
     return true;
   }
   return false;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicine_tracker/app_constants/constants.dart';
 import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:medicine_tracker/ui/widgets/shadow_box_widget.dart';
 import 'package:medicine_tracker/utils/medicine_time_frequency_parser.dart';
 import 'package:medicine_tracker/utils/time_difference_checker.dart';
 import 'package:medicine_tracker/utils/time_parser.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MedicineDetailTile extends StatelessWidget {
   final MedicineDetails item;
@@ -75,6 +77,24 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
   late String time =
       widget.medicineDetails.schedule.split(',').toList()[widget.index];
   bool isChecked = false;
+  int diff = 5;
+  Future<int> getCurrentDiff() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int diff = prefs.getInt(AppConstants.markingDurationKey) ?? 5;
+    return diff;
+  }
+
+  getDiff() async {
+    diff = await getCurrentDiff();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getDiff();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     bool medicineTaken = (widget.medicineDetails.allMedicineTakenList == null ||
@@ -94,7 +114,7 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
           final now = DateTime.now();
           var parsed = to24hourTime(time);
           var oldDate = DateTime.parse(parsed);
-          if (!canCheck(oldTime: oldDate, currentTime: now)) {
+          if (!canCheck(oldTime: oldDate, currentTime: now, diff: diff)) {
             showDialog(
               context: context,
               builder: (BuildContext context) => CustomDialog(

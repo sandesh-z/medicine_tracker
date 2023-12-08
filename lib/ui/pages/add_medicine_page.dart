@@ -64,6 +64,7 @@ class MedicineFormBody extends StatelessWidget {
                   title:
                       "How many times you should take this medicine during day?",
                   itmes: AppConstants.medicineTimeitems,
+                  initalValue: AppConstants.medicineTimeitems.first,
                   callback: (selectedItem) {
                     if (selectedItem == null) return;
 

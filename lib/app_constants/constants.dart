@@ -9,4 +9,10 @@ class AppConstants {
     '3 times a day',
     '4 times a day',
   ];
+  static const List<String> markingLists = [
+    '5 minutes before/after exact time (default)',
+    '10 minutes before/after exact time',
+    '15 minutes before/after exact time',
+  ];
+  static const String markingDurationKey = "marking_duration";
 }

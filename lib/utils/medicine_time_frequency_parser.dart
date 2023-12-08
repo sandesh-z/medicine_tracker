@@ -23,6 +23,20 @@ class MedicineFrequencyParser {
     return medicineFrequency;
   }
 
+  static int parseValidMarker(String? name) {
+    switch (name) {
+      case "5 minutes before/after exact time (default)":
+        return 5;
+      case "10 minutes before/after exact time":
+        return 10;
+      case "15 minutes before/after exact time":
+        return 15;
+
+      default:
+        return 5;
+    }
+  }
+
   static String getListofStatus(int frequency) {
     switch (frequency) {
       case 1:
