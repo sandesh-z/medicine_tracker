@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medicine_tracker/core/localization/app_locale.dart';
 import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/features/localization_cubit/app_localization_cubit.dart';
+import 'package:medicine_tracker/features/settings_cubit/settings_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/widgets/shadow_box_widget.dart';
 
@@ -18,12 +20,15 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(strings.settings),
-        backgroundColor: Colors.green.shade200,
+    return BlocProvider(
+      create: (_) => getIt<SettingsCubit>(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(strings.settings),
+          backgroundColor: Colors.green.shade200,
+        ),
+        body: const SettingsListWidget(),
       ),
-      body: const SettingsListWidget(),
     );
   }
 }
@@ -61,7 +66,6 @@ class SettingItem extends StatefulWidget {
 }
 
 class _SettingItemState extends State<SettingItem> {
-  bool isNepali = false;
   @override
   Widget build(BuildContext context) {
     return ShadowBoxWidget(
@@ -77,23 +81,27 @@ class _SettingItemState extends State<SettingItem> {
             style: TextStyle(fontSize: 18.sp),
           ),
           const Spacer(),
-          Transform.scale(
-            scale: 1.1,
-            child: Switch(
-              trackColor: MaterialStateProperty.all(const Color(0xffF7F6FB)),
-              activeThumbImage: const AssetImage('assets/icons/nepal.png'),
-              inactiveThumbImage:
-                  const AssetImage("assets/icons/united-kingdom.png"),
-              value: isNepali,
-              onChanged: (value) {
-                getIt<AppLocalizationCubit>().changeLang(
-                    isNepali ? AppLocale.english : AppLocale.nepalese);
-
-                setState(() {
-                  isNepali = value;
-                });
-              },
-            ),
+          BlocBuilder<SettingsCubit, SettingsState>(
+            builder: (context, state) {
+              return Transform.scale(
+                scale: 1.1,
+                child: Switch(
+                  trackColor:
+                      MaterialStateProperty.all(const Color(0xffF7F6FB)),
+                  activeThumbImage:
+                      const AssetImage('assets/icons/united-kingdom.png'),
+                  inactiveThumbImage:
+                      const AssetImage("assets/icons/nepal.png"),
+                  value: state.isEnglish,
+                  onChanged: (value) {
+                    getIt<AppLocalizationCubit>().changeLang(state.isEnglish
+                        ? AppLocale.nepalese
+                        : AppLocale.english);
+                    getIt<SettingsCubit>().changeLanguageKey(value);
+                  },
+                ),
+              );
+            },
           ),
         ],
       ),
