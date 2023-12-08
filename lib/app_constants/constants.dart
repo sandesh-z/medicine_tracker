@@ -1,5 +1,5 @@
 class AppLocalizationConstants {
-  static const hasselectedenglish = 'has_selected_english';
+  static const hasSelectedEnglish = 'has_selected_english';
 }
 
 class AppConstants {
