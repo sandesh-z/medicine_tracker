@@ -22,13 +22,12 @@ import '../features/add_medicine/data/repositories/medicine_details_repository.d
 import '../features/add_medicine/domain/repositories/medicine_details_repository.dart'
     as _i10;
 import '../features/add_medicine/domain/usecases/get_medicine_details.dart'
-    as _i13;
+    as _i12;
 import '../features/add_medicine/presentation/bloc/add_medicine_bloc.dart'
-    as _i14;
+    as _i13;
 import '../features/localization_cubit/app_localization_cubit.dart' as _i9;
-import '../features/settings_cubit/settings_cubit.dart' as _i12;
 import '../utils/schedule_task.dart' as _i6;
-import 'injectable/shared_preference_module.dart' as _i15;
+import 'injectable/shared_preference_module.dart' as _i14;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -59,14 +58,12 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i10.MedicineDetailsRepository>(
         _i11.MedicineDetailsRepositoryImpl(
             medicineLocalDataSource: gh<_i8.AddMedicineLocalDataSource>()));
-    gh.lazySingleton<_i12.SettingsCubit>(
-        () => _i12.SettingsCubit(gh<_i7.SharedPreferences>()));
-    gh.lazySingleton<_i13.GetMedicineDetails>(() => _i13.GetMedicineDetails(
+    gh.lazySingleton<_i12.GetMedicineDetails>(() => _i12.GetMedicineDetails(
         repository: gh<_i10.MedicineDetailsRepository>()));
-    gh.lazySingleton<_i14.AddMedicineBloc>(
-        () => _i14.AddMedicineBloc(gh<_i13.GetMedicineDetails>()));
+    gh.lazySingleton<_i13.AddMedicineBloc>(
+        () => _i13.AddMedicineBloc(gh<_i12.GetMedicineDetails>()));
     return this;
   }
 }
 
-class _$SharedPreferenceModule extends _i15.SharedPreferenceModule {}
+class _$SharedPreferenceModule extends _i14.SharedPreferenceModule {}

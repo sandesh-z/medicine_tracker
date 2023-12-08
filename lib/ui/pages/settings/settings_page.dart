@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicine_tracker/app_constants/constants.dart';
 import 'package:medicine_tracker/core/localization/app_locale.dart';
 import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/features/localization_cubit/app_localization_cubit.dart';
-import 'package:medicine_tracker/features/settings_cubit/settings_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/widgets/shadow_box_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
 class SettingsPage extends StatefulWidget {
@@ -20,15 +20,12 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<SettingsCubit>(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(strings.settings),
-          backgroundColor: Colors.green.shade200,
-        ),
-        body: const SettingsListWidget(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(strings.settings),
+        backgroundColor: Colors.green.shade200,
       ),
+      body: const SettingsListWidget(),
     );
   }
 }
@@ -66,6 +63,32 @@ class SettingItem extends StatefulWidget {
 }
 
 class _SettingItemState extends State<SettingItem> {
+  bool isSwitched = false;
+  @override
+  void initState() {
+    getSwitchValues();
+    super.initState();
+  }
+
+  getSwitchValues() async {
+    isSwitched = await getSwitchState();
+    setState(() {});
+  }
+
+  Future<bool> getSwitchState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isSwitchedFT =
+        prefs.getBool(AppLocalizationConstants.hasSelectedEnglish) ?? false;
+
+    return isSwitchedFT;
+  }
+
+  Future<bool> saveSwitchState(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(AppLocalizationConstants.hasSelectedEnglish, value);
+    return prefs.setBool(AppLocalizationConstants.hasSelectedEnglish, value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ShadowBoxWidget(
@@ -81,27 +104,24 @@ class _SettingItemState extends State<SettingItem> {
             style: TextStyle(fontSize: 18.sp),
           ),
           const Spacer(),
-          BlocBuilder<SettingsCubit, SettingsState>(
-            builder: (context, state) {
-              return Transform.scale(
-                scale: 1.1,
-                child: Switch(
-                  trackColor:
-                      MaterialStateProperty.all(const Color(0xffF7F6FB)),
-                  activeThumbImage:
-                      const AssetImage('assets/icons/united-kingdom.png'),
-                  inactiveThumbImage:
-                      const AssetImage("assets/icons/nepal.png"),
-                  value: state.isEnglish,
-                  onChanged: (value) {
-                    getIt<AppLocalizationCubit>().changeLang(state.isEnglish
-                        ? AppLocale.nepalese
-                        : AppLocale.english);
-                    getIt<SettingsCubit>().changeLanguageKey(value);
-                  },
-                ),
-              );
-            },
+          Transform.scale(
+            scale: 1.1,
+            child: Switch(
+              trackColor: MaterialStateProperty.all(const Color(0xffF7F6FB)),
+              activeThumbImage: const AssetImage('assets/icons/nepal.png'),
+              inactiveThumbImage:
+                  const AssetImage("assets/icons/united-kingdom.png"),
+              value: isSwitched,
+              onChanged: (value) {
+                setState(() {
+                  isSwitched = value;
+                  saveSwitchState(value);
+                });
+
+                getIt<AppLocalizationCubit>()
+                    .changeLang(value ? AppLocale.nepalese : AppLocale.english);
+              },
+            ),
           ),
         ],
       ),
