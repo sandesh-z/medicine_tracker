@@ -6,6 +6,7 @@ class ShadowBoxWidget extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry padding;
   final double radius;
+  final Color? color;
 
   const ShadowBoxWidget({
     super.key,
@@ -16,6 +17,7 @@ class ShadowBoxWidget extends StatelessWidget {
       horizontal: 12,
       vertical: 12,
     ),
+    this.color,
     this.radius = 10,
   });
 
@@ -28,10 +30,10 @@ class ShadowBoxWidget extends StatelessWidget {
         padding: padding,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
-          color: Colors.green.withOpacity(.2),
+          color: color ?? Color(0xff009E60),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.08),
+              color: Colors.black.withOpacity(0.12),
               spreadRadius: 2,
               blurRadius: 4,
               offset: const Offset(0, 3), // changes position of shadow

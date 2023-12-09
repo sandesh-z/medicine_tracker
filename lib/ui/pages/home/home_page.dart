@@ -1,14 +1,12 @@
-import 'dart:ui';
 import 'package:auto_route/auto_route.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:medicine_tracker/core/localization/app_locale.dart';
+
 import 'package:medicine_tracker/core/notification/notification_service.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
-import 'package:medicine_tracker/features/localization_cubit/app_localization_cubit.dart';
-import 'package:medicine_tracker/injections/injection.dart';
+
 import 'package:medicine_tracker/ui/pages/home/medicine_list.dart';
 import 'package:medicine_tracker/ui/routes/routes.dart';
 import 'package:medicine_tracker/ui/widgets/shadow_box_widget.dart';
@@ -34,59 +32,107 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff103927),
+      backgroundColor: Colors.green.shade700,
       appBar: AppBar(
-        backgroundColor: Colors.green.shade900,
-        automaticallyImplyLeading: false,
-        title: const Text(
-          'Medicine Tracker',
-          style: TextStyle(color: Colors.white),
+        backgroundColor: Colors.green.shade700,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(20.r),
+          child: Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.symmetric(horizontal: 20.r, vertical: 10.r),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Medicine Tracker',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.1),
+                ),
+                Text(
+                  'Never miss to take medicine again.',
+                  style: TextStyle(
+                      color: Colors.black.withOpacity(.6),
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                      fontStyle: FontStyle.italic,
+                      letterSpacing: 1.1),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints.expand(),
-              child: ClipRRect(
-                child: ImageFiltered(
-                  imageFilter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                  child: Image.asset(
-                    'assets/images/green-background.jpg',
-                    fit: BoxFit.cover,
+      body: Container(
+        decoration: BoxDecoration(
+            color: Colors.white.withOpacity(.8),
+            borderRadius: BorderRadius.only(topRight: Radius.circular(45.r))),
+        child: SafeArea(
+          child: BlocBuilder<AddMedicineBloc, AddMedicineState>(
+            buildWhen: (previous, current) =>
+                previous.allMedicineList != current.allMedicineList,
+            builder: (context, state) {
+              if ((state.allMedicineList?.isEmpty ?? false) && state.success) {
+                return Center(
+                    child: ShadowBoxWidget(
+                  margin: EdgeInsets.all(20.r),
+                  child: Text(
+                    "Please click add icon below to add medicine that you should take daily.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w500),
                   ),
-                ),
-              ),
-            ),
-            BlocBuilder<AddMedicineBloc, AddMedicineState>(
-              buildWhen: (previous, current) =>
-                  previous.allMedicineList != current.allMedicineList,
-              builder: (context, state) {
-                if ((state.allMedicineList?.isEmpty ?? false) &&
-                    state.success) {
-                  return Center(
-                      child: ShadowBoxWidget(
-                    margin: EdgeInsets.all(20.r),
-                    child: Text(
-                      "Please click add icon below to add medicine that you should take daily.",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w500),
+                ));
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.fromLTRB(21.r, 20.r, 21.r, 10.r),
+                    padding: EdgeInsets.all(8.r),
+                    decoration: BoxDecoration(
+                        color: Colors.green.shade600,
+                        borderRadius:
+                            BorderRadius.only(topRight: Radius.circular(30.r))),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Today's Schedule",
+                          style: TextStyle(
+                              fontSize: 18.sp,
+                              color: Colors.black.withOpacity(.7),
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
-                  ));
-                }
-                return SingleChildScrollView(
-                    child: MedicineList(list: state.allMedicineList ?? []));
-              },
-            ),
-          ],
+                  ),
+                  Expanded(
+                    child: RawScrollbar(
+                      thickness: 8,
+                      thumbVisibility: true,
+                      trackVisibility: true,
+                      radius: Radius.circular(8.r),
+                      thumbColor: Colors.green.shade700,
+                      child: SingleChildScrollView(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 5.r, vertical: 0),
+                          child:
+                              MedicineList(list: state.allMedicineList ?? [])),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
       bottomNavigationBar: ConvexAppBar(
         style: TabStyle.fixedCircle,
-        backgroundColor: Colors.green.shade900,
+        backgroundColor: Colors.green.shade700,
         color: Colors.white,
         items: const [
           TabItem(icon: Icons.assessment),
@@ -110,61 +156,6 @@ class _HomePageState extends State<HomePage> {
           }
         },
       ),
-    );
-  }
-}
-
-class LanguageSelect extends StatelessWidget {
-  const LanguageSelect({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<AppLocalizationCubit, AppLocalizationState>(
-      builder: (context, state) {
-        return PopupMenuButton(
-          padding: const EdgeInsets.only(top: 1, bottom: 1), //
-          icon: SizedBox(
-            height: 28,
-            child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Center(
-                  child: Text(
-                    state.appLocale.locale.languageCode.toUpperCase() == 'EN'
-                        ? 'ENGLISH'
-                        : 'NEPALI',
-                    style: const TextStyle(
-                      fontSize: 8,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                )),
-          ),
-          itemBuilder: (context) {
-            return AppLocale.allLocales
-                .map(
-                  (e) => PopupMenuItem(
-                    onTap: () {
-                      getIt<AppLocalizationCubit>().changeLang(e);
-                    },
-
-                    // ),
-                    child: Text(
-                      e.name,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 15),
-                    ),
-                  ),
-                )
-                .toList();
-          },
-        );
-      },
     );
   }
 }

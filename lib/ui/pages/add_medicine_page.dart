@@ -41,7 +41,7 @@ class MedicineFormBody extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add medicine"),
-        backgroundColor: Colors.green.shade200,
+        backgroundColor: Colors.green.shade700,
       ),
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -117,10 +117,14 @@ class MedicineFormBody extends StatelessWidget {
                     return TextButton(
                         onPressed: () async {
                           if (formKey.currentState?.validate() ?? false) {
-                            if (schedules.isEmpty) {
+                            var list = schedules;
+                            list.removeWhere((e) => e.trim().isEmpty);
+
+                            if (schedules.isEmpty ||
+                                list.length < state.medicineFrequency) {
                               var snackBar = const SnackBar(
                                 content: Text(
-                                    'Please select time by clicking on icon.'),
+                                    'Please select all time by clicking on icon.'),
                                 backgroundColor: (Colors.red),
                               );
                               ScaffoldMessenger.of(context)

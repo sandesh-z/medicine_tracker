@@ -22,7 +22,7 @@ class MedicineDetailTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShadowBoxWidget(
-        margin: EdgeInsets.all(16.r),
+        margin: EdgeInsets.fromLTRB(16.r, 0, 16.r, 10.r),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -32,7 +32,7 @@ class MedicineDetailTile extends StatelessWidget {
                   item.medicineName,
                   style: TextStyle(
                       fontSize: 22.sp,
-                      color: Colors.white,
+                      color: Colors.black,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 1.1),
                 )

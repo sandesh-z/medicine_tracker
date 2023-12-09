@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
           ScreenUtil.init(context);
           return MaterialApp.router(
             key: localestate.key,
+            debugShowCheckedModeBanner: false,
             theme: ThemeData(
                 colorScheme:
                     ColorScheme.fromSeed(seedColor: Colors.green.shade400),

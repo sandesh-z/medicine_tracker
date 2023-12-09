@@ -25,7 +25,7 @@ class _MissedMedicinePageState extends State<MissedMedicinePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green.shade200,
+        backgroundColor: Colors.green.shade700,
         title: const Text('Missed medicines today'),
       ),
       body: BlocBuilder<AddMedicineBloc, AddMedicineState>(

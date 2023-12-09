@@ -33,11 +33,10 @@ class TimeTableWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 return TimeRowWidget(
                   time: (time) {
-                    schedules.removeAt(index);
-                    schedules.insert(
-                        index,
-                        time?.format(context) ??
-                            TimeOfDay.now().format(context));
+                    if (schedules.length == medicineFrequency) {
+                      schedules.removeAt(index);
+                    }
+                    schedules.insert(index, time?.format(context) ?? "");
                     onSave(schedules);
                   },
                 );
@@ -69,7 +68,7 @@ class _TimeRowWidgetState extends State<TimeRowWidget> {
     return Container(
       padding: EdgeInsets.all(12.r),
       decoration: BoxDecoration(
-          color: Colors.green.shade300,
+          color: Colors.green.shade500,
           borderRadius: BorderRadius.circular(8.r)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
