@@ -114,7 +114,8 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
           final now = DateTime.now();
           var parsed = to24hourTime(time);
           var oldDate = DateTime.parse(parsed);
-          if (!canCheck(oldTime: oldDate, currentTime: now, diff: diff)) {
+          if (!canCheck(oldTime: oldDate, currentTime: now, diff: diff) &&
+              !medicineTaken) {
             showDialog(
               context: context,
               builder: (BuildContext context) => CustomDialog(
