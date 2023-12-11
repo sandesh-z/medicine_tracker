@@ -1,3 +1,4 @@
+import 'package:medicine_tracker/ui/pages/settings/medicine_marker_widget.dart';
 import 'package:medicine_tracker/utils/time_difference_checker.dart';
 import 'package:medicine_tracker/utils/time_parser.dart';
 
@@ -23,15 +24,14 @@ class MedicineFrequencyParser {
     return medicineFrequency;
   }
 
-  static int parseValidMarker(String? name) {
+  static int parseValidMarker(ValidTime? name) {
     switch (name) {
-      case "5 minutes before/after exact time (default)":
+      case ValidTime.five:
         return 5;
-      case "10 minutes before/after exact time":
+      case ValidTime.ten:
         return 10;
-      case "15 minutes before/after exact time":
+      case ValidTime.fifteen:
         return 15;
-
       default:
         return 5;
     }
