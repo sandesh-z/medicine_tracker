@@ -9,6 +9,7 @@ import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_med
 import 'package:medicine_tracker/features/localization_cubit/app_localization_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/routes/routes.dart';
+import 'package:medicine_tracker/ui/widgets/colors.dart';
 import 'package:medicine_tracker/utils/schedule_task.dart';
 
 final appRouter = AppRouter();
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
                 colorScheme:
-                    ColorScheme.fromSeed(seedColor: Colors.green.shade400),
+                    ColorScheme.fromSeed(seedColor: Palette.primaryBackground1),
                 useMaterial3: true,
                 scaffoldBackgroundColor: const Color(0xffF7F6FB)),
             localeResolutionCallback:

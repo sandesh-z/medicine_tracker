@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
 import 'package:medicine_tracker/ui/pages/missed_medicines/missed_medicine_item.dart';
+import 'package:medicine_tracker/ui/widgets/colors.dart';
 
 @RoutePage()
 class MissedMedicinePage extends StatefulWidget {
@@ -25,7 +26,7 @@ class _MissedMedicinePageState extends State<MissedMedicinePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green.shade700,
+        backgroundColor: Palette.primaryBackground1,
         title: const Text('Missed medicines today'),
       ),
       body: BlocBuilder<AddMedicineBloc, AddMedicineState>(

@@ -8,6 +8,7 @@ import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medic
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/routes/routes.dart';
+import 'package:medicine_tracker/ui/widgets/colors.dart';
 import 'package:medicine_tracker/ui/widgets/custom_dropdown.dart';
 import 'package:medicine_tracker/ui/widgets/popup_success.dart';
 import 'package:medicine_tracker/ui/widgets/text_field_with_title.dart';
@@ -41,7 +42,7 @@ class MedicineFormBody extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add medicine"),
-        backgroundColor: Colors.green.shade700,
+        backgroundColor: Palette.primaryBackground1,
       ),
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),

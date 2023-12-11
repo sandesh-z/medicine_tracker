@@ -6,6 +6,16 @@ class Palette {
   static Color white = HexColor.fromHex('#ffffff');
   static Color black = HexColor.fromHex('#000000');
   static Color primaryBackground = HexColor.fromHex('#efefef');
+
+  static Color primaryBackground5 = HexColor.fromHex('#0db8a6');
+
+  static Color primaryBackground3 = HexColor.fromHex('#a2e4dc');
+
+  static Color primaryBackground2 = HexColor.fromHex('#0cb4a4');
+
+  static Color primaryBackground4 = HexColor.fromHex('#22766c');
+
+  static Color primaryBackground1 = HexColor.fromHex('#098f7d');
 }
 
 extension HexColor on Color {

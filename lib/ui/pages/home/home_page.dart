@@ -9,6 +9,7 @@ import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_med
 
 import 'package:medicine_tracker/ui/pages/home/medicine_list.dart';
 import 'package:medicine_tracker/ui/routes/routes.dart';
+import 'package:medicine_tracker/ui/widgets/colors.dart';
 import 'package:medicine_tracker/ui/widgets/shadow_box_widget.dart';
 
 @RoutePage()
@@ -32,9 +33,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green.shade700,
+      backgroundColor: Palette.primaryBackground1,
       appBar: AppBar(
-        backgroundColor: Colors.green.shade700,
+        backgroundColor: Palette.primaryBackground1,
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(20.r),
           child: Container(
@@ -95,16 +96,16 @@ class _HomePageState extends State<HomePage> {
                     margin: EdgeInsets.fromLTRB(21.r, 20.r, 21.r, 10.r),
                     padding: EdgeInsets.all(8.r),
                     decoration: BoxDecoration(
-                        color: Colors.green.shade600,
+                        color: Palette.primaryBackground2,
                         borderRadius:
                             BorderRadius.only(topRight: Radius.circular(30.r))),
                     child: Row(
                       children: [
                         Text(
-                          "Today's Schedule",
+                          "Today's Schedule : ",
                           style: TextStyle(
                               fontSize: 18.sp,
-                              color: Colors.black.withOpacity(.7),
+                              color: Palette.black,
                               fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -116,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                       thumbVisibility: true,
                       trackVisibility: true,
                       radius: Radius.circular(8.r),
-                      thumbColor: Colors.green.shade700,
+                      thumbColor: Palette.primaryBackground2,
                       child: SingleChildScrollView(
                           padding: EdgeInsets.symmetric(
                               horizontal: 5.r, vertical: 0),
@@ -132,7 +133,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: ConvexAppBar(
         style: TabStyle.fixedCircle,
-        backgroundColor: Colors.green.shade700,
+        backgroundColor: Palette.primaryBackground1,
         color: Colors.white,
         items: const [
           TabItem(icon: Icons.assessment),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicine_tracker/ui/widgets/colors.dart';
 
 class TimeTableWidget extends StatelessWidget {
   final int medicineFrequency;
@@ -13,7 +14,7 @@ class TimeTableWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(12.r),
       decoration: BoxDecoration(
-          color: Colors.green.shade100,
+          color: Palette.primaryBackground1,
           borderRadius: BorderRadius.circular(12.r)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +69,7 @@ class _TimeRowWidgetState extends State<TimeRowWidget> {
     return Container(
       padding: EdgeInsets.all(12.r),
       decoration: BoxDecoration(
-          color: Colors.green.shade500,
+          color: Palette.primaryBackground3,
           borderRadius: BorderRadius.circular(8.r)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,8 +92,8 @@ class _TimeRowWidgetState extends State<TimeRowWidget> {
                     return Theme(
                       data: ThemeData(
                         timePickerTheme: TimePickerTheme.of(context).copyWith(
-                          backgroundColor: Colors.green.shade100,
-                          dialHandColor: Colors.green,
+                          backgroundColor: Palette.primaryBackground3,
+                          dialHandColor: Palette.primaryBackground3,
                         ),
                       ),
                       child: MediaQuery(

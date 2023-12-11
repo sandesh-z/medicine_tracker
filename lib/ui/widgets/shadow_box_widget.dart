@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medicine_tracker/ui/widgets/colors.dart';
 
 class ShadowBoxWidget extends StatelessWidget {
   final GestureTapCallback? ontap;
@@ -30,7 +31,7 @@ class ShadowBoxWidget extends StatelessWidget {
         padding: padding,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
-          color: color ?? Color(0xff009E60),
+          color: color ?? Palette.primaryBackground2,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.12),
