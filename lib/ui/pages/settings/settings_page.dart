@@ -6,8 +6,8 @@ import 'package:medicine_tracker/core/localization/app_locale.dart';
 import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/features/localization_cubit/app_localization_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
-import 'package:medicine_tracker/ui/routes/routes.dart';
-import 'package:medicine_tracker/ui/widgets/shadow_box_widget.dart';
+import 'package:medicine_tracker/ui/pages/settings/medicine_marker_widget.dart';
+import 'package:medicine_tracker/ui/widgets/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
@@ -24,7 +24,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(strings.settings),
-        backgroundColor: Colors.green.shade200,
+        backgroundColor: Palette.primaryBackground1,
       ),
       body: const SettingsListWidget(),
     );
@@ -48,13 +48,7 @@ class _SettingsListWidgetState extends State<SettingsListWidget> {
           icon: Icons.flag,
           languageToggle: true,
         ),
-        SettingItem(
-          name: "Change duration when you can mark medicine as taken",
-          icon: Icons.lock_clock,
-          onTap: () {
-            context.pushRoute(const MarkMedicineSettingRoute());
-          },
-        )
+        const MedicineMarkerWidget(),
       ],
     );
   }
@@ -105,9 +99,10 @@ class _SettingItemState extends State<SettingItem> {
 
   @override
   Widget build(BuildContext context) {
-    return ShadowBoxWidget(
-      margin: EdgeInsets.fromLTRB(0, 0, 0, 10.r),
-      padding: EdgeInsets.symmetric(horizontal: 20.r, vertical: 10.h),
+    return Container(
+      margin: EdgeInsets.only(top: 5.r),
+      color: Palette.primaryBackground1.withOpacity(.2),
+      padding: EdgeInsets.symmetric(horizontal: 20.r, vertical: 5.h),
       child: InkWell(
         onTap: widget.onTap,
         child: Row(
