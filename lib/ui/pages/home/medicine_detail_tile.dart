@@ -110,8 +110,7 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
     return Row(mainAxisSize: MainAxisSize.min, children: [
       Checkbox(
         value: medicineTaken || isChecked,
-        checkColor: Colors.green,
-        activeColor: Colors.amber,
+        checkColor: Palette.primaryBackground1,
         onChanged: (checked) {
           final now = DateTime.now();
           var parsed = to24hourTime(time);

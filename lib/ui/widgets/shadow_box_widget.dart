@@ -32,6 +32,7 @@ class ShadowBoxWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
           color: color ?? Palette.gray.withOpacity(.7),
+          border: Border.all(color: Palette.primaryBackground1.withOpacity(.2)),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(.08),
