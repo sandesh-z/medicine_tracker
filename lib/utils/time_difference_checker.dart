@@ -6,7 +6,7 @@ bool canCheck(
     required int diff}) {
   int difference = ((oldTime.minute - currentTime.minute).abs());
   bool sameHour() => (oldTime.hour == currentTime.hour);
-  int diff2 = currentTime.difference(oldTime).inMinutes;
+  int diff2 = currentTime.difference(oldTime).inMinutes.abs();
   if ((difference <= diff && sameHour()) || diff2 <= diff) {
     return true;
   }
