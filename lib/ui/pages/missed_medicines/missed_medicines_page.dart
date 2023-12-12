@@ -27,7 +27,11 @@ class _MissedMedicinePageState extends State<MissedMedicinePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Palette.primaryBackground1,
-        title: const Text('Missed medicines today'),
+        iconTheme: IconThemeData(color: Palette.white),
+        title: Text(
+          'Missed medicines today',
+          style: TextStyle(color: Palette.white),
+        ),
       ),
       body: BlocBuilder<AddMedicineBloc, AddMedicineState>(
         builder: (context, state) {

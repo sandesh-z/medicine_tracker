@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicine_tracker/ui/widgets/colors.dart';
 
 class PopUpSuccessOverLay extends StatefulWidget {
   final String title;
@@ -84,7 +85,7 @@ class PopUpSuccessOverLayState extends State<PopUpSuccessOverLay>
                       child: TextButton(
                         onPressed: widget.onPressed,
                         style: TextButton.styleFrom(
-                          backgroundColor: Colors.green,
+                          backgroundColor: Palette.primaryBackground1,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                           ),

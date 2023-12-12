@@ -14,7 +14,7 @@ class TimeTableWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(12.r),
       decoration: BoxDecoration(
-          color: Palette.primaryBackground1,
+          color: Palette.primaryBackground2,
           borderRadius: BorderRadius.circular(12.r)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

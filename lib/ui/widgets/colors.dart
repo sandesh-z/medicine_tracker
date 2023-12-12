@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 class Palette {
   static Color white = HexColor.fromHex('#ffffff');
   static Color black = HexColor.fromHex('#000000');
+  static Color gray = HexColor.fromHex('#f8f8ff');
+  static Color scaffoldBackgroundColor = HexColor.fromHex('#F7F6FB');
+
   static Color primaryBackground = HexColor.fromHex('#efefef');
 
   static Color primaryBackground5 = HexColor.fromHex('#0db8a6');

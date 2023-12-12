@@ -5,6 +5,7 @@ import 'package:medicine_tracker/app_constants/constants.dart';
 import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
+import 'package:medicine_tracker/ui/widgets/colors.dart';
 import 'package:medicine_tracker/ui/widgets/custom_popup_widget.dart';
 import 'package:medicine_tracker/ui/widgets/shadow_box_widget.dart';
 import 'package:medicine_tracker/utils/medicine_time_frequency_parser.dart';
@@ -22,7 +23,7 @@ class MedicineDetailTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShadowBoxWidget(
-        margin: EdgeInsets.fromLTRB(16.r, 0, 16.r, 10.r),
+        margin: EdgeInsets.fromLTRB(16.r, 0, 16.r, 15.r),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -31,9 +32,9 @@ class MedicineDetailTile extends StatelessWidget {
                 Text(
                   item.medicineName,
                   style: TextStyle(
-                      fontSize: 22.sp,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 18.sp,
+                      color: Palette.primaryBackground5,
+                      fontWeight: FontWeight.w700,
                       letterSpacing: 1.1),
                 )
               ],
@@ -110,6 +111,7 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
       Checkbox(
         value: medicineTaken || isChecked,
         checkColor: Colors.green,
+        activeColor: Colors.amber,
         onChanged: (checked) {
           final now = DateTime.now();
           var parsed = to24hourTime(time);
@@ -120,7 +122,7 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
               context: context,
               builder: (BuildContext context) => CustomDialog(
                 message:
-                    "You can only check this medicine around 5 minutes before/after medicine taking time",
+                    "You can only mark this medicine as taken $diff minutes before/after exact schedule",
                 title: "Information",
                 showDismiss: true,
                 dismissText: strings.ok,
@@ -165,7 +167,10 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
       ),
       Text(
         time,
-        style: TextStyle(fontSize: 16.sp, color: Colors.white),
+        style: TextStyle(
+            fontSize: 17.sp,
+            color: Palette.primaryBackground4,
+            fontWeight: FontWeight.w700),
       )
     ]);
   }

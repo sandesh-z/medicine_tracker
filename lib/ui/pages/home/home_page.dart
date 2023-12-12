@@ -47,15 +47,15 @@ class _HomePageState extends State<HomePage> {
                 Text(
                   'Medicine Tracker',
                   style: TextStyle(
-                      color: Colors.black,
+                      color: Palette.white,
                       fontSize: 20.sp,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.bold,
                       letterSpacing: 1.1),
                 ),
                 Text(
                   'Never miss to take medicine again.',
                   style: TextStyle(
-                      color: Colors.black.withOpacity(.6),
+                      color: Colors.white.withOpacity(.4),
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.italic,
@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-            color: Colors.white.withOpacity(.8),
+            color: Palette.scaffoldBackgroundColor,
             borderRadius: BorderRadius.only(topRight: Radius.circular(45.r))),
         child: SafeArea(
           child: BlocBuilder<AddMedicineBloc, AddMedicineState>(
@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> {
               if ((state.allMedicineList?.isEmpty ?? false) && state.success) {
                 return Center(
                     child: ShadowBoxWidget(
+                  color: Palette.primaryBackground1,
                   margin: EdgeInsets.all(20.r),
                   child: Text(
                     "Please click add icon below to add medicine that you should take daily.",
@@ -96,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                     margin: EdgeInsets.fromLTRB(21.r, 20.r, 21.r, 10.r),
                     padding: EdgeInsets.all(8.r),
                     decoration: BoxDecoration(
-                        color: Palette.primaryBackground2,
+                        color: Palette.primaryBackground4.withOpacity(.8),
                         borderRadius:
                             BorderRadius.only(topRight: Radius.circular(30.r))),
                     child: Row(
@@ -105,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                           "Today's Schedule : ",
                           style: TextStyle(
                               fontSize: 18.sp,
-                              color: Palette.black,
+                              color: Palette.white,
                               fontWeight: FontWeight.bold),
                         ),
                       ],

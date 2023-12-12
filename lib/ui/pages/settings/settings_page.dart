@@ -23,7 +23,11 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(strings.settings),
+        title: Text(
+          strings.settings,
+          style: TextStyle(color: Palette.white),
+        ),
+        iconTheme: IconThemeData(color: Palette.white),
         backgroundColor: Palette.primaryBackground1,
       ),
       body: const SettingsListWidget(),
@@ -100,9 +104,11 @@ class _SettingItemState extends State<SettingItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 5.r),
-      color: Palette.primaryBackground1.withOpacity(.2),
+      margin: EdgeInsets.fromLTRB(16.r, 16.r, 16.r, 10.r),
       padding: EdgeInsets.symmetric(horizontal: 20.r, vertical: 5.h),
+      decoration: BoxDecoration(
+          color: Palette.primaryBackground1.withOpacity(.2),
+          borderRadius: BorderRadius.all(Radius.circular(12.r))),
       child: InkWell(
         onTap: widget.onTap,
         child: Row(
@@ -113,7 +119,7 @@ class _SettingItemState extends State<SettingItem> {
             Expanded(
               child: Text(
                 widget.name,
-                style: TextStyle(fontSize: 18.sp),
+                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
               ),
             ),
             if (widget.languageToggle) ...[

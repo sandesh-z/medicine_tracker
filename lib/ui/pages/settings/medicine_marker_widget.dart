@@ -1,20 +1,21 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medicine_tracker/app_constants/constants.dart';
+import 'package:medicine_tracker/ui/routes/routes.dart';
 import 'package:medicine_tracker/ui/widgets/colors.dart';
+import 'package:medicine_tracker/ui/widgets/popup_success.dart';
 import 'package:medicine_tracker/utils/medicine_time_frequency_parser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum ValidTime { five, ten, fifteen }
 
-/// This is the stateful widget that the main application instantiates.
 class MedicineMarkerWidget extends StatefulWidget {
   const MedicineMarkerWidget({super.key});
   @override
   State<MedicineMarkerWidget> createState() => _MedicineMarkerWidgetState();
 }
 
-/// This is the private State class that goes with MedicineMarkerWidget.
 class _MedicineMarkerWidgetState extends State<MedicineMarkerWidget> {
   ValidTime _validTime = ValidTime.five;
   saveMarkDuration(int value) async {
@@ -50,42 +51,82 @@ class _MedicineMarkerWidgetState extends State<MedicineMarkerWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10.r),
-      color: Palette.primaryBackground1.withOpacity(.2),
-      padding: EdgeInsets.all(10.r),
+      margin: EdgeInsets.symmetric(vertical: 10.r, horizontal: 16.r),
+      padding: EdgeInsets.all(8.r),
+      decoration: BoxDecoration(
+          color: Palette.primaryBackground1.withOpacity(.2),
+          borderRadius: BorderRadius.all(Radius.circular(12.r))),
       child: Column(
         children: [
-          const Text("Change duration when you can mark medicine as taken"),
+          Text(
+            "Duration when you can mark medicine as taken.",
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+          ),
           SizedBox(height: 10.h),
           RadioItem(
             value: ValidTime.five,
             groupValue: _validTime,
-            title:
-                "5 minutes before/after exact medicing taking time. (Default) ",
+            title: "5 minutes before/after exact schedule. (Default) ",
             onChanged: (ValidTime? value) {
               _validTime = value ?? ValidTime.five;
               setState(() {});
               saveMarkDuration(MedicineFrequencyParser.parseValidMarker(value));
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (ctx) => PopScope(
+                        canPop: false,
+                        child: PopUpSuccessOverLay(
+                            title: "Settings Changed",
+                            bthTitle: "Goto Homepage",
+                            onPressed: () {
+                              context.replaceRoute(const HomeRoute());
+                            }),
+                      ));
             },
           ),
           RadioItem(
             value: ValidTime.ten,
             groupValue: _validTime,
-            title: "10 minutes before/after exact medicing taking time.  ",
+            title: "10 minutes before/after exact schedule.  ",
             onChanged: (ValidTime? value) async {
               _validTime = value ?? ValidTime.five;
               setState(() {});
               saveMarkDuration(MedicineFrequencyParser.parseValidMarker(value));
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (ctx) => PopScope(
+                        canPop: false,
+                        child: PopUpSuccessOverLay(
+                            title: "Settings Changed",
+                            bthTitle: "Goto Homepage",
+                            onPressed: () {
+                              context.replaceRoute(const HomeRoute());
+                            }),
+                      ));
             },
           ),
           RadioItem(
             value: ValidTime.fifteen,
             groupValue: _validTime,
-            title: "15 minutes before/after exact medicing taking time.  ",
+            title: "15 minutes before/after exact schedule.  ",
             onChanged: (ValidTime? value) {
               _validTime = value ?? ValidTime.five;
               setState(() {});
               saveMarkDuration(MedicineFrequencyParser.parseValidMarker(value));
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (ctx) => PopScope(
+                        canPop: false,
+                        child: PopUpSuccessOverLay(
+                            title: "Settings Changed",
+                            bthTitle: "Goto Homepage",
+                            onPressed: () {
+                              context.replaceRoute(const HomeRoute());
+                            }),
+                      ));
             },
           ),
         ],
@@ -123,7 +164,11 @@ class _RadioItemState extends State<RadioItem> {
           onChanged: widget.onChanged,
         ),
         SizedBox(width: 5.w),
-        Expanded(child: Text(widget.title))
+        Expanded(
+            child: Text(
+          widget.title,
+          style: TextStyle(fontSize: 13.sp),
+        ))
       ],
     );
   }

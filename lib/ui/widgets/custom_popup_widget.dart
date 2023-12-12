@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medicine_tracker/ui/widgets/colors.dart';
 
 class CustomDialog extends StatelessWidget {
   final String message;
@@ -42,8 +43,8 @@ class CustomDialog extends StatelessWidget {
                       const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
                   child: Text(
                     title,
-                    style: const TextStyle(
-                      color: Colors.green,
+                    style: TextStyle(
+                      color: Palette.primaryBackground4,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                     ),

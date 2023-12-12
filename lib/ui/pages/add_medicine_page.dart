@@ -41,7 +41,11 @@ class MedicineFormBody extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add medicine"),
+        iconTheme: IconThemeData(color: Palette.white),
+        title: Text(
+          "Add medicine",
+          style: TextStyle(color: Palette.white),
+        ),
         backgroundColor: Palette.primaryBackground1,
       ),
       body: GestureDetector(

@@ -31,12 +31,12 @@ class ShadowBoxWidget extends StatelessWidget {
         padding: padding,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
-          color: color ?? Palette.primaryBackground2,
+          color: color ?? Palette.gray.withOpacity(.7),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.12),
+              color: Colors.black.withOpacity(.08),
               spreadRadius: 2,
-              blurRadius: 4,
+              blurRadius: 3,
               offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
