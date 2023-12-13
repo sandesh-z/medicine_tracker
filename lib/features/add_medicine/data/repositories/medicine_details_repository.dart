@@ -23,4 +23,9 @@ class MedicineDetailsRepositoryImpl implements MedicineDetailsRepository {
   Future updateMedicineDetail({required String value, required int id}) async {
     await medicineLocalDataSource.updateMedicineDetailItem(value, id);
   }
+
+  @override
+  Future<void> delete({required int id}) async {
+    await medicineLocalDataSource.delete(id);
+  }
 }

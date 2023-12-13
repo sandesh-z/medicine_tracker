@@ -30,4 +30,8 @@ class GetMedicineDetails
   Future updateMedineDetail({required String value, required int id}) {
     return repository.updateMedicineDetail(value: value, id: id);
   }
+
+  Future delete({required int id}) {
+    return repository.delete(id: id);
+  }
 }

@@ -5,9 +5,10 @@ import 'package:medicine_tracker/core/database/local_database_provider.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 
 abstract class MedicineDetailsProvider {
-  Future insertMedicineDetailItem(MedicineDetails medicineDetails);
-  Future updateMedicineDetailItem(String value, int id);
-  Future resetAllMedicineTakenFlags();
+  Future<void> insertMedicineDetailItem(MedicineDetails medicineDetails);
+  Future<void> updateMedicineDetailItem(String value, int id);
+  Future<void> delete(int id);
+  Future<void> resetAllMedicineTakenFlags();
   Future<List<MedicineDetails>?> getAllMedicne();
 }
 
@@ -89,5 +90,11 @@ class MedicineProviderImpl implements MedicineDetailsProvider {
               list[i].allMedicineTakenList?.replaceAll("true", "false") ?? "",
           id: list[i].id ?? 0);
     }
+  }
+
+  @override
+  Future delete(int id) async {
+    await provider.delete(
+        tableName: MedicineDetailItems.medicineDetails, values: {"id": id});
   }
 }

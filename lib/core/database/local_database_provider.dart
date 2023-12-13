@@ -72,8 +72,9 @@ class DBProviderImpl implements DBProvider {
   @override
   Future delete(
       {required String tableName, required Map<String, dynamic> values}) async {
-    await _database
-        ?.delete(tableName, where: '${"id"} = ?', whereArgs: [values["id"]]);
+    await _database?.delete(tableName,
+        where: '${MedicineDetailItems.medicineDetailsId} = ?',
+        whereArgs: [values[MedicineDetailItems.medicineDetailsId]]);
   }
 
   @override

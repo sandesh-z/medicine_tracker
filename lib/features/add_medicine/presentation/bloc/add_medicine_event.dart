@@ -6,6 +6,7 @@ class AddMedicineEvent with _$AddMedicineEvent {
       _SaveMedicineDetail;
   const factory AddMedicineEvent.update(int id, String value) =
       _UpdateMedicineDetail;
+  const factory AddMedicineEvent.delete(int id) = _DeleteMedicineDetail;
   const factory AddMedicineEvent.getAllMedicine() = _GetAllMedicine;
   const factory AddMedicineEvent.getMissedMedicines() = _GetMissedMedicines;
 

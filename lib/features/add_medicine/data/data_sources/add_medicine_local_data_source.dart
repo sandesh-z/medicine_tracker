@@ -5,6 +5,7 @@ import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine
 abstract class AddMedicineLocalDataSource {
   Future<void> saveMedicineDetailItem(MedicineDetails medicineDetails);
   Future<void> updateMedicineDetailItem(String value, int id);
+  Future<void> delete(int id);
   Future<List<MedicineDetails>?> getAllMedicineItems();
 }
 
@@ -30,5 +31,10 @@ class AddMedicineDabasaseImpl implements AddMedicineLocalDataSource {
   @override
   Future<void> updateMedicineDetailItem(String value, int id) async {
     await medicineDetailsProvider.updateMedicineDetailItem(value, id);
+  }
+
+  @override
+  Future<void> delete(int id) async {
+    await medicineDetailsProvider.delete(id);
   }
 }

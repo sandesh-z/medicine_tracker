@@ -23,6 +23,7 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
     on<_GetAllMedicine>(_onGetAllMedicine);
     on<_UpdateMedicineDetail>(_onUpdateMedicineDetail);
     on<_GetMissedMedicines>(_onGetMissedMedicines);
+    on<_DeleteMedicineDetail>(_onDeleteMedicineDetail);
   }
   _onSaveMedicineDetail(
       _SaveMedicineDetail event, Emitter<AddMedicineState> emit) async {
@@ -34,6 +35,7 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
           time: DateTime.parse(to24hourTime(list[i])),
           title: "Medicine Time",
           msg: "It's time for taking ${event.medicineDetails.medicineName}",
+          id: event.medicineDetails.id ?? 0,
           repeatNotif: true);
     }
 
@@ -48,15 +50,28 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
 
   _onGetAllMedicine(
       _GetAllMedicine event, Emitter<AddMedicineState> emit) async {
+    emit(state.copyWith(isLoading: true));
     final result = await getMedicineDetails.call(NoParams());
-    emit(result.fold((l) => state.copyWith(success: true),
-        (r) => state.copyWith(allMedicineList: r, success: true)));
+    emit(result.fold(
+        (l) => state.copyWith(success: true, isLoading: false),
+        (r) => state.copyWith(
+            allMedicineList: r, success: true, isLoading: false)));
   }
 
   _onUpdateMedicineDetail(
       _UpdateMedicineDetail event, Emitter<AddMedicineState> emit) async {
     await getMedicineDetails.updateMedineDetail(
         value: event.value, id: event.id);
+  }
+
+  _onDeleteMedicineDetail(
+      _DeleteMedicineDetail event, Emitter<AddMedicineState> emit) async {
+    try {
+      await getMedicineDetails.delete(id: event.id);
+      getIt<NotificationService>().cancelNotifications(id: event.id);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   _onGetMissedMedicines(
