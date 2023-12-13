@@ -72,9 +72,13 @@ class _HomePageState extends State<HomePage> {
             borderRadius: BorderRadius.only(topRight: Radius.circular(45.r))),
         child: SafeArea(
           child: BlocBuilder<AddMedicineBloc, AddMedicineState>(
-            buildWhen: (previous, current) =>
-                previous.allMedicineList != current.allMedicineList,
-            builder: (context, state) {
+            builder: (blocCtx, state) {
+              if (state.isLoading) {
+                return Center(
+                  child: CircularProgressIndicator(
+                      color: Palette.primaryBackground1),
+                );
+              }
               if ((state.allMedicineList?.isEmpty ?? false) && state.success) {
                 return Center(
                     child: ShadowBoxWidget(
@@ -147,13 +151,13 @@ class _HomePageState extends State<HomePage> {
         onTap: (int i) {
           switch (i) {
             case 0:
-              context.pushRoute(const MissedMedicineRoute());
+              context.router.push(const MissedMedicineRoute());
               break;
             case 1:
-              context.pushRoute(const AddMedicineRoute());
+              context.router.push(const AddMedicineRoute());
               break;
             case 2:
-              context.pushRoute(const SettingsRoute());
+              context.router.push(const SettingsRoute());
               break;
           }
         },

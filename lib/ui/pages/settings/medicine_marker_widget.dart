@@ -79,8 +79,11 @@ class _MedicineMarkerWidgetState extends State<MedicineMarkerWidget> {
                         child: PopUpSuccessOverLay(
                             title: "Settings Changed",
                             bthTitle: "Goto Homepage",
-                            onPressed: () {
-                              context.replaceRoute(const HomeRoute());
+                            onPressed: () async {
+                              await context.router.pushAndPopUntil(
+                                const HomeRoute(),
+                                predicate: (_) => false,
+                              );
                             }),
                       ));
             },

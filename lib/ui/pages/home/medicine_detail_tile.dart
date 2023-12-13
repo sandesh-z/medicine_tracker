@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,6 +6,8 @@ import 'package:medicine_tracker/app_constants/constants.dart';
 import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
+import 'package:medicine_tracker/injections/injection.dart';
+import 'package:medicine_tracker/ui/routes/routes.dart';
 import 'package:medicine_tracker/ui/widgets/colors.dart';
 import 'package:medicine_tracker/ui/widgets/custom_popup_widget.dart';
 import 'package:medicine_tracker/ui/widgets/shadow_box_widget.dart';
@@ -28,6 +31,7 @@ class MedicineDetailTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   item.medicineName,
@@ -36,7 +40,35 @@ class MedicineDetailTile extends StatelessWidget {
                       color: Palette.primaryBackground5,
                       fontWeight: FontWeight.w700,
                       letterSpacing: 1.1),
-                )
+                ),
+                InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (ctx) => CustomDialog(
+                        message:
+                            "Are you sure you want to delete this medicine?",
+                        title: "Confirmation",
+                        showDismiss: true,
+                        actionText: "Yes",
+                        onAction: () async {
+                          getIt<AddMedicineBloc>()
+                              .add(AddMedicineEvent.delete(item.id ?? 0));
+                          Navigator.pop(ctx);
+                          await context.router.pushAndPopUntil(
+                            const HomeRoute(),
+                            predicate: (_) => false,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  child: Icon(
+                    Icons.delete_forever,
+                    color: Colors.red.withOpacity(.7),
+                    size: 20.r,
+                  ),
+                ),
               ],
             ),
             Row(

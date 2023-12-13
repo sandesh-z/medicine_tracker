@@ -102,12 +102,18 @@ class MedicineFormBody extends StatelessWidget {
                       showDialog(
                           barrierDismissible: false,
                           context: context,
-                          builder: (_) => PopUpSuccessOverLay(
-                              title: "Medicine Added",
-                              bthTitle: "Goto Home Page",
-                              onPressed: () {
-                                context.router.replace(const HomeRoute());
-                              }));
+                          builder: (_) => PopScope(
+                                canPop: false,
+                                child: PopUpSuccessOverLay(
+                                    title: "Medicine Added",
+                                    bthTitle: "Goto Homepage",
+                                    onPressed: () async {
+                                      await context.router.pushAndPopUntil(
+                                        const HomeRoute(),
+                                        predicate: (_) => false,
+                                      );
+                                    }),
+                              ));
                     }
                   },
                   builder: (context, state) {
