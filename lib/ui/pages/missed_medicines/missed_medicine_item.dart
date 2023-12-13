@@ -17,9 +17,6 @@ class MissedMedicineList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      SizedBox(
-        height: 20.h,
-      ),
       PieChartWidget(list: list),
       ...list.map((e) => MissedMedicineItem(
             medicineName: e.medicineName,
@@ -99,7 +96,8 @@ class BoldTitleWithRichText extends StatelessWidget {
           text: TextSpan(
             text: title,
             style: TextStyle(
-                fontWeight: FontWeight.normal,
+                fontWeight:
+                    boldSubtitleLightly ? FontWeight.bold : FontWeight.normal,
                 fontStyle: FontStyle.normal,
                 color: Colors.black,
                 fontSize: 14.sp),

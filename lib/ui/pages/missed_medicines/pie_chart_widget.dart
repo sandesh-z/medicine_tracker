@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/ui/widgets/colors.dart';
 import 'package:medicine_tracker/utils/medicine_time_frequency_parser.dart';
@@ -34,12 +35,10 @@ class PieChartWidget extends StatelessWidget {
       ChartData('Missed', data.missed, Colors.red),
       ChartData('Taken', data.total - data.missed, Palette.primaryBackground1),
     ];
-    return Center(
-        child: SfCircularChart(
-            legend: const Legend(
-              isVisible: true,
-            ),
-            series: <CircularSeries>[
+    return SfCircularChart(
+        margin: EdgeInsets.zero,
+        legend: Legend(isVisible: true, itemPadding: 15.h),
+        series: <CircularSeries>[
           // Render pie chart
           PieSeries<ChartData, String>(
             explode: true,
@@ -53,7 +52,7 @@ class PieChartWidget extends StatelessWidget {
             ),
             selectionBehavior: SelectionBehavior(enable: true),
           )
-        ]));
+        ]);
   }
 }
 
