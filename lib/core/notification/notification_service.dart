@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'dart:isolate';
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -148,6 +147,7 @@ class NotificationService {
   }
 
   Future<void> myNotifyScheduleInHours({
+    required int id,
     required DateTime time,
     required String title,
     required String msg,
@@ -163,7 +163,7 @@ class NotificationService {
         allowWhileIdle: true,
       ),
       content: NotificationContent(
-        id: Random().nextInt(100),
+        id: id,
         channelKey: 'basic_channel',
         title: '$title ${Emojis.medical_pill} ',
         body: '  $msg',
@@ -176,5 +176,9 @@ class NotificationService {
         },
       ),
     );
+  }
+
+  Future<void> cancelNotifications({required id}) async {
+    await AwesomeNotifications().cancel(id);
   }
 }
