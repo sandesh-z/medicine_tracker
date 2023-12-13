@@ -15,4 +15,5 @@ class AppConstants {
     '15 minutes before/after exact time',
   ];
   static const String markingDurationKey = "marking_duration";
+  static const String switchState = "swtich_state";
 }

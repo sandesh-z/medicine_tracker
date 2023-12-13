@@ -7,8 +7,9 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 class PieChartWidget extends StatelessWidget {
   final List<MedicineDetails> list;
+  final int diff;
 
-  const PieChartWidget({super.key, required this.list});
+  const PieChartWidget({super.key, required this.list, required this.diff});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,8 @@ class PieChartWidget extends StatelessWidget {
                     list[i].schedule.split(','),
                     (list[i].allMedicineTakenList?.trim().isEmpty ?? false)
                         ? []
-                        : list[i].allMedicineTakenList?.split(',') ?? [])
+                        : list[i].allMedicineTakenList?.split(',') ?? [],
+                    diff)
                 .length;
       }
       return Data(total: total, missed: missed);

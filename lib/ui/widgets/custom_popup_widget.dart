@@ -102,7 +102,7 @@ class CustomDialog extends StatelessWidget {
                         child: TextButton(
                           onPressed: onAction,
                           style: TextButton.styleFrom(
-                            backgroundColor: Colors.green,
+                            backgroundColor: Palette.primaryBackground1,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
                             ),

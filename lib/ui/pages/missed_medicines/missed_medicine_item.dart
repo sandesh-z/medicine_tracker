@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
+import 'package:medicine_tracker/features/settings/presentation/bloc/settings_cubit.dart';
 import 'package:medicine_tracker/ui/pages/missed_medicines/pie_chart_widget.dart';
 import 'package:medicine_tracker/ui/widgets/colors.dart';
 import 'package:medicine_tracker/ui/widgets/shadow_box_widget.dart';
@@ -16,18 +18,23 @@ class MissedMedicineList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      PieChartWidget(list: list),
-      ...list.map((e) => MissedMedicineItem(
-            medicineName: e.medicineName,
-            frequency: e.frequency,
-            times: MedicineFrequencyParser.getMissedTime(
-                e.schedule.split(','),
-                (e.allMedicineTakenList?.trim().isEmpty ?? false)
-                    ? []
-                    : e.allMedicineTakenList?.split(',') ?? []),
-          ))
-    ]);
+    return BlocBuilder<SettingsCubit, SettingsState>(
+      builder: (context, state) {
+        return Column(children: [
+          PieChartWidget(list: list, diff: state.validDiff),
+          ...list.map((e) => MissedMedicineItem(
+                medicineName: e.medicineName,
+                frequency: e.frequency,
+                times: MedicineFrequencyParser.getMissedTime(
+                    e.schedule.split(','),
+                    (e.allMedicineTakenList?.trim().isEmpty ?? false)
+                        ? []
+                        : e.allMedicineTakenList?.split(',') ?? [],
+                    state.validDiff),
+              ))
+        ]);
+      },
+    );
   }
 }
 

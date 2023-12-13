@@ -6,6 +6,7 @@ import 'package:medicine_tracker/core/notification/notification_service.dart';
 import 'package:medicine_tracker/core/usecase/usecase.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medicine_details.dart';
+import 'package:medicine_tracker/features/settings/presentation/bloc/settings_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/utils/time_difference_checker.dart';
 import 'package:medicine_tracker/utils/time_parser.dart';
@@ -77,6 +78,7 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
   _onGetMissedMedicines(
       _GetMissedMedicines event, Emitter<AddMedicineState> emit) async {
     final result = await getMedicineDetails.call(NoParams());
+    final validDff = await getIt<SettingsCubit>().getCurrentDiff();
     List<MedicineDetails> missedMedicines = [];
     emit(result.fold((l) => state.copyWith(), (allMedicineList) {
       if (allMedicineList?.isEmpty ?? true) {
@@ -101,7 +103,7 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
                           .toList() ??
                       [];
 
-          if (isAnyScheduleMissed(schedules, flags)) {
+          if (isAnyScheduleMissed(schedules, flags, validDff)) {
             missedMedicines.add(allMedicineList[i]);
           }
         }

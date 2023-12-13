@@ -22,12 +22,17 @@ import '../features/add_medicine/data/repositories/medicine_details_repository.d
 import '../features/add_medicine/domain/repositories/medicine_details_repository.dart'
     as _i10;
 import '../features/add_medicine/domain/usecases/get_medicine_details.dart'
-    as _i12;
+    as _i16;
 import '../features/add_medicine/presentation/bloc/add_medicine_bloc.dart'
-    as _i13;
+    as _i18;
 import '../features/localization_cubit/app_localization_cubit.dart' as _i9;
+import '../features/settings/data/data_sources/local_data_source.dart' as _i12;
+import '../features/settings/data/repositories/settingss_repo.dart' as _i14;
+import '../features/settings/domain/repositories/settings_repo.dart' as _i13;
+import '../features/settings/domain/usecases/get_settings.dart' as _i15;
+import '../features/settings/presentation/bloc/settings_cubit.dart' as _i17;
 import '../utils/schedule_task.dart' as _i6;
-import 'injectable/shared_preference_module.dart' as _i14;
+import 'injectable/shared_preference_module.dart' as _i19;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -58,12 +63,20 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i10.MedicineDetailsRepository>(
         _i11.MedicineDetailsRepositoryImpl(
             medicineLocalDataSource: gh<_i8.AddMedicineLocalDataSource>()));
-    gh.lazySingleton<_i12.GetMedicineDetails>(() => _i12.GetMedicineDetails(
+    gh.singleton<_i12.SettingsLocalDataSource>(_i12.SettingsLocalDataSourceImpl(
+        sharedPreferences: gh<_i7.SharedPreferences>()));
+    gh.singleton<_i13.SettingsRepository>(_i14.SettingsRepositoryImpl(
+        settingsLocalDataSource: gh<_i12.SettingsLocalDataSource>()));
+    gh.lazySingleton<_i15.GetAllSettings>(() =>
+        _i15.GetAllSettings(settingsRepository: gh<_i13.SettingsRepository>()));
+    gh.lazySingleton<_i16.GetMedicineDetails>(() => _i16.GetMedicineDetails(
         repository: gh<_i10.MedicineDetailsRepository>()));
-    gh.lazySingleton<_i13.AddMedicineBloc>(
-        () => _i13.AddMedicineBloc(gh<_i12.GetMedicineDetails>()));
+    gh.lazySingleton<_i17.SettingsCubit>(
+        () => _i17.SettingsCubit(gh<_i15.GetAllSettings>()));
+    gh.lazySingleton<_i18.AddMedicineBloc>(
+        () => _i18.AddMedicineBloc(gh<_i16.GetMedicineDetails>()));
     return this;
   }
 }
 
-class _$SharedPreferenceModule extends _i14.SharedPreferenceModule {}
+class _$SharedPreferenceModule extends _i19.SharedPreferenceModule {}
