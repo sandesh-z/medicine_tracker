@@ -16,7 +16,7 @@ class AppLocalizationCubit extends Cubit<AppLocalizationState> {
   AppLocalizationCubit(this._sharedPreferences)
       : super(AppLocalizationState.initial(_sharedPreferences
                 .getBool(AppLocalizationConstants.hasSelectedEnglish) ??
-            false));
+            true));
   void changeLang(AppLocale locale) {
     if (locale.name == 'English') {
       _sharedPreferences.setBool(
