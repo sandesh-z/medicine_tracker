@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicine_tracker/core/localization/app_locale.dart';
 import 'package:medicine_tracker/ui/widgets/colors.dart';
+import 'package:medicine_tracker/utils/time_parser.dart';
 
 class TimeTableWidget extends StatelessWidget {
   final int medicineFrequency;
@@ -37,7 +39,7 @@ class TimeTableWidget extends StatelessWidget {
                     if (schedules.length == medicineFrequency) {
                       schedules.removeAt(index);
                     }
-                    schedules.insert(index, time?.format(context) ?? "");
+                    schedules.insert(index, parseTimeOfDay(time));
                     onSave(schedules);
                   },
                 );
@@ -74,14 +76,18 @@ class _TimeRowWidgetState extends State<TimeRowWidget> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            pickedTime?.format(context) ?? "Select time here >",
-            style: TextStyle(
-                fontSize: pickedTime == null ? 18.sp : 23.sp,
-                letterSpacing: 1,
-                color: pickedTime == null
-                    ? Colors.black.withOpacity(.7)
-                    : Colors.black),
+          Localizations.override(
+            context: context,
+            locale: AppLocale.english.locale,
+            child: Text(
+              parseTimeOfDay(pickedTime),
+              style: TextStyle(
+                  fontSize: pickedTime == null ? 18.sp : 23.sp,
+                  letterSpacing: 1,
+                  color: pickedTime == null
+                      ? Colors.black.withOpacity(.7)
+                      : Colors.black),
+            ),
           ),
           InkWell(
               onTap: () async {
@@ -99,7 +105,10 @@ class _TimeRowWidgetState extends State<TimeRowWidget> {
                       child: MediaQuery(
                         data: MediaQuery.of(context)
                             .copyWith(alwaysUse24HourFormat: true),
-                        child: child ?? const SizedBox(),
+                        child: Localizations.override(
+                            context: context,
+                            locale: const Locale('en', ''),
+                            child: child ?? const SizedBox()),
                       ),
                     );
                   },
