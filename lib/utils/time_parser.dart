@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 String to24hourTime(String timeAsString) {
@@ -13,4 +14,12 @@ String to24hourTime(String timeAsString) {
 
   String formattedDate = DateFormat('yyyy-MM-dd kk:mm:ss').format(dateTime);
   return formattedDate;
+}
+
+String parseTimeOfDay(TimeOfDay? timeOfDay) {
+  if (timeOfDay == null) return "Select time here";
+
+  var minute = (timeOfDay.minute % 60).toString().padLeft(2, '0');
+  var hour = (timeOfDay.hour % 60).toString().padLeft(2, '0');
+  return "$hour:$minute";
 }

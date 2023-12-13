@@ -13,22 +13,26 @@ bool canCheck(
   return false;
 }
 
-bool isScheduleMissed({required DateTime schedule, required String isChecked}) {
+bool isScheduleMissed(
+    {required DateTime schedule,
+    required String isChecked,
+    required validDiff}) {
   DateTime now = DateTime.now();
   bool isMissed = schedule.isBefore(now);
   int diff = now.difference(schedule).inMinutes;
-
-  if (isMissed && diff >= 10 && isChecked.contains('false')) {
+  if (isMissed && diff >= validDiff && isChecked.contains('false')) {
     return true;
   }
   return false;
 }
 
-bool isAnyScheduleMissed(List<String> schedules, List<String> flags) {
+bool isAnyScheduleMissed(
+    List<String> schedules, List<String> flags, validDiff) {
   for (int j = 0; j < schedules.length; j++) {
     if (isScheduleMissed(
         isChecked: flags.isEmpty ? "false" : flags[j],
-        schedule: DateTime.parse(to24hourTime(schedules[j])))) {
+        schedule: DateTime.parse(to24hourTime(schedules[j])),
+        validDiff: validDiff)) {
       return true;
     }
   }

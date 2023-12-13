@@ -1,4 +1,4 @@
-import 'package:medicine_tracker/ui/pages/settings/medicine_marker_widget.dart';
+import 'package:medicine_tracker/features/settings/presentation/bloc/settings_cubit.dart';
 import 'package:medicine_tracker/utils/time_difference_checker.dart';
 import 'package:medicine_tracker/utils/time_parser.dart';
 
@@ -56,7 +56,8 @@ class MedicineFrequencyParser {
     }
   }
 
-  static List<String> getMissedTime(List<String> schedule, List<String> flags) {
+  static List<String> getMissedTime(
+      List<String> schedule, List<String> flags, int diff) {
     // assert(schedule.length==flags.length);
 
     schedule.removeWhere((e) => e.trim().isEmpty);
@@ -65,7 +66,8 @@ class MedicineFrequencyParser {
       if (flags.isEmpty) {
         if (!isScheduleMissed(
             schedule: DateTime.parse(to24hourTime(schedule[i])),
-            isChecked: "false")) {
+            isChecked: "false",
+            validDiff: diff)) {
           schedule.removeAt(i);
         }
       } else if (flags[i].contains('true')) {
