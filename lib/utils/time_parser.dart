@@ -12,7 +12,12 @@ String to24hourTime(String timeAsString) {
     dateTime = dateTime.add(const Duration(hours: 12));
   }
 
-  String formattedDate = DateFormat('yyyy-MM-dd kk:mm:ss').format(dateTime);
+  //We can pass locale inside DateFormat as follows:
+  //if we don't, it uses locale from localization
+  //in this case: Nepali date will return without specifying locale
+  String formattedDate =
+      DateFormat('yyyy-MM-dd kk:mm:ss', 'en').format(dateTime);
+
   return formattedDate;
 }
 
