@@ -7,9 +7,9 @@ once_a_day	Once a day	दिनमा एकपटक
 twice_a_day	Twice a day	दिनको दुई पटक
 thrice_a_day	3 times a day	दिनको तीन पटक
 four_times_a_day	4 times a day	दिनको चार पटक
-five_min_before	5 minutes before/after exact time (default)	औषधि लिने समय भन्दा ५ मिनेट अघि वा पछि  (पूर्वनिर्धारित)
-ten_min_before	10 minutes before/after exact time	औषधि लिने समय भन्दा १० मिनेट अघि वा पछि 
-fifteen_min_before	15 minutes before/after exact time	औषधि लिने समय भन्दा १५ मिनेट अघि वा पछि 
+five_min_before	5 minutes before/after exact time (default)	औषधि खाने समय भन्दा ५ मिनेट अघि वा पछि  (पूर्वनिर्धारित)
+ten_min_before	10 minutes before/after exact time	औषधि खाने समय भन्दा १० मिनेट अघि वा पछि 
+fifteen_min_before	15 minutes before/after exact time	औषधि खाने समय भन्दा १५ मिनेट अघि वा पछि 
 app_name	Medicine Tracker	औषधि ट्र्याकर
 add_medicine_msg	Please click add icon below to add medicine that you should take daily.	तपाईंले दैनिक लिनु पर्ने औषधी थप्न कृपया तल आइकन थप्नुहोस् क्लिक गर्नुहोस्।
 todays_shedule	Today's Schedule	आज खानुपर्ने औषधिहरु
@@ -39,7 +39,7 @@ medicine_added	Medicine Added	औषधि थपियो
 go_home	Goto Homepage	गृह पृष्ठमा जानुहोस्
 select_all_time	Please select all time by clicking on calender icon.	कृपया क्यालेन्डर आइकनमा क्लिक गरेर सबै समय चयन गर्नुहोस्
 select_time_here	Select time here >	यहाँ समय चयन गर्नुहोस् >
-when_can_mark	When you can tick mark medicine as taken?	तपाईले लिइएको औषधिलाई कहिले टिक मार्क गर्न सक्नुहुन्छ?
+when_can_mark	When you can tick mark medicine as taken?	तपाईले खाने औषधिलाई कहिले टिक मार्क गर्न सक्नुहुन्छ?
 settings_changed	settings changed	सेटिङहरू परिवर्तन भयो
 cancel	cancel	रद्द गर्नुहोस्
 thank_u	Thank You.	धन्यवाद !!
