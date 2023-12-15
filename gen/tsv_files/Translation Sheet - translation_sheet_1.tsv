@@ -11,7 +11,7 @@ five_min_before	5 minutes before/after exact time (default)	औषधि खा�
 ten_min_before	10 minutes before/after exact time	औषधि खाने समय भन्दा १० मिनेट अघि वा पछि 
 fifteen_min_before	15 minutes before/after exact time	औषधि खाने समय भन्दा १५ मिनेट अघि वा पछि 
 app_name	Medicine Tracker	औषधि ट्र्याकर
-add_medicine_msg	Please click add icon below to add medicine that you should take daily.	तपाईंले दैनिक लिनु पर्ने औषधी थप्न कृपया तल आइकन थप्नुहोस् क्लिक गर्नुहोस्।
+add_medicine_msg	Please click add icon below to add medicine that you should take daily.	तपाईंले दैनिक लिनु पर्ने औषधी थप्न कृपया तलको "+" आइकन  क्लिक गर्नुहोस्।
 todays_shedule	Today's Schedule	आज खानुपर्ने औषधिहरु
 delete_confirmation_msg	Are you sure you want to delete this medicine?	के तपाईं यो औषधि मेटाउन निश्चित हुनुहुन्छ?
 never_miss_msg	Never miss to take medicine again	फेरि औषधि लिन कहिले पनि नबिर्सनुहोस्
@@ -47,3 +47,4 @@ return_back	Return	फर्कनुहोस्
 time_for_taking_med	Time of taking medicines	औषधि खाने समय
 med_name_cannot_be_empty	Medicine name can not be empty.	कृपया औषधिको नाम लेख्नुहोस्
 save	Save	सेभ गर्नुहोस 
+medicine_time	Medicine Time	औषधि खाने समय भयो

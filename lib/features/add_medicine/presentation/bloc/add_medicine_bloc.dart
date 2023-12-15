@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/core/notification/notification_service.dart';
 import 'package:medicine_tracker/core/usecase/usecase.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medicine_details.dart';
+import 'package:medicine_tracker/features/localization_cubit/app_localization_cubit.dart';
 import 'package:medicine_tracker/features/settings/presentation/bloc/settings_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/utils/time_difference_checker.dart';
@@ -31,11 +33,20 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
     emit(state.copyWith(isLoading: true));
     var list = event.medicineDetails.schedule.split(',');
     list.removeWhere((element) => element == '');
+    bool isCurrentLanguageEnglish = getIt<AppLocalizationCubit>()
+            .state
+            .appLocale
+            .locale
+            .languageCode
+            .compareTo('en') ==
+        0;
     for (int i = 0; i < list.length; i++) {
       await getIt<NotificationService>().myNotifyScheduleInHours(
           time: DateTime.parse(to24hourTime(list[i])),
-          title: "Medicine Time",
-          msg: "It's time for taking ${event.medicineDetails.medicineName}",
+          title: strings.medicine_time,
+          msg: isCurrentLanguageEnglish
+              ? "It's time for taking ${event.medicineDetails.medicineName}"
+              : "${event.medicineDetails.medicineName} ${strings.medicine_time}",
           id: event.medicineDetails.id ?? 0,
           repeatNotif: true);
     }

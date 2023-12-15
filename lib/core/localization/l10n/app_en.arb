@@ -44,4 +44,5 @@
 "return_back":"Return",
 "time_for_taking_med":"Time of taking medicines",
 "med_name_cannot_be_empty":"Medicine name can not be empty.",
-"save":"Save"}
+"save":"Save",
+"medicine_time":"Medicine Time"}
