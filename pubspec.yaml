@@ -35,19 +35,17 @@ dependencies:
   flutter_timezone: ^1.0.8
   awesome_notifications_core: ^0.8.0 
   awesome_notifications: any
-  flutter_test:
-    sdk: flutter
-  
+  permission_handler: ^11.1.0
+  android_alarm_manager_plus: ^3.0.4
+  flutter_launcher_icons: ^0.13.1
+  syncfusion_flutter_charts: ^23.2.7
+dev_dependencies: 
   flutter_lints: ^3.0.1
   injectable_generator: ^2.4.1
   build_runner: ^2.4.6
   auto_route_generator: ^7.3.2
-  permission_handler: ^11.1.0
-  android_alarm_manager_plus: ^3.0.4
-  flutter_launcher_icons: ^0.13.1
-  flutter_native_splash: ^2.3.8
-  syncfusion_flutter_charts: ^23.2.7
- 
+  flutter_test:
+    sdk: flutter
 
 flutter:
   generate: true 
