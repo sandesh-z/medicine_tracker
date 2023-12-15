@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:medicine_tracker/core/localization/strings.dart';
 
 String to24hourTime(String timeAsString) {
   int minute = int.tryParse(timeAsString.split(':').last.split(" ").first) ?? 0;
@@ -22,7 +23,7 @@ String to24hourTime(String timeAsString) {
 }
 
 String parseTimeOfDay(TimeOfDay? timeOfDay) {
-  if (timeOfDay == null) return "Select time here";
+  if (timeOfDay == null) return strings.select_time_here;
 
   var minute = (timeOfDay.minute % 60).toString().padLeft(2, '0');
   var hour = (timeOfDay.hour % 60).toString().padLeft(2, '0');

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/ui/widgets/colors.dart';
 
 class PopUpSuccessOverLay extends StatefulWidget {
@@ -64,7 +65,7 @@ class PopUpSuccessOverLayState extends State<PopUpSuccessOverLay>
                 padding:
                     const EdgeInsets.only(top: 10.0, left: 30.0, right: 30.0),
                 child: Text(
-                  widget.message ?? "Thank you!",
+                  widget.message ?? strings.thank_u,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 12.0.sp,
@@ -91,7 +92,7 @@ class PopUpSuccessOverLayState extends State<PopUpSuccessOverLay>
                           ),
                         ),
                         child: Text(
-                          widget.bthTitle ?? "Return",
+                          widget.bthTitle ?? strings.return_back,
                           style: const TextStyle(
                             fontSize: 10,
                             color: Colors.white,
