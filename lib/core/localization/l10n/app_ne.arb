@@ -42,4 +42,5 @@
 "cancel":"रद्द गर्नुहोस्",
 "thank_u":"धन्यवाद",
 "return_back":"फर्कनुहोस्",
-"time_for_taking_med":"औषधि खाने समय"}
+"time_for_taking_med":"औषधि खाने समय",
+"med_name_cannot_be_empty":"कृपया औषधिको नाम लेख्नुहोस्"}

@@ -45,3 +45,4 @@ cancel	cancel	रद्द गर्नुहोस्
 thank_u	Thank You.	धन्यवाद
 return_back	Return	फर्कनुहोस्
 time_for_taking_med	Time of taking medicines	औषधि खाने समय
+med_name_cannot_be_empty	Medicine name can not be empty.	कृपया औषधिको नाम लेख्नुहोस्

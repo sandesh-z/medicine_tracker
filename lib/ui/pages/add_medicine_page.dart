@@ -7,6 +7,7 @@ import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
+import 'package:medicine_tracker/features/localization_cubit/app_localization_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/routes/routes.dart';
 import 'package:medicine_tracker/ui/widgets/colors.dart';
@@ -39,7 +40,13 @@ class MedicineFormBody extends StatelessWidget {
     var formKey = GlobalKey<FormState>();
 
     List<String> schedules = [];
-
+    bool isCurrentLanguageEnglish = getIt<AppLocalizationCubit>()
+            .state
+            .appLocale
+            .locale
+            .languageCode
+            .compareTo('en') ==
+        0;
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Palette.white),
@@ -68,8 +75,12 @@ class MedicineFormBody extends StatelessWidget {
                 ),
                 CustomDropdown(
                   title: strings.how_many_times_med_take,
-                  itmes: AppConstants.medicineTimeitems,
-                  initalValue: AppConstants.medicineTimeitems.first,
+                  itmes: isCurrentLanguageEnglish
+                      ? AppConstants.medicineTimeitems
+                      : AppConstants.medicineTimeitemsNp,
+                  initalValue: isCurrentLanguageEnglish
+                      ? AppConstants.medicineTimeitems.first
+                      : AppConstants.medicineTimeitemsNp.first,
                   callback: (selectedItem) {
                     if (selectedItem == null) return;
 

@@ -29,15 +29,19 @@ class _MedicineMarkerWidgetState extends State<MedicineMarkerWidget> {
               borderRadius: BorderRadius.all(Radius.circular(12.r))),
           child: Column(
             children: [
-              Text(
-                strings.when_can_mark,
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.r),
+                child: Text(
+                  strings.when_can_mark,
+                  style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+                ),
               ),
               SizedBox(height: 10.h),
               RadioItem(
                 value: ValidTime.five,
                 groupValue: state.validTime,
-                title: strings.fifteen_min_before,
+                title: strings.five_min_before,
                 onChanged: (ValidTime? value) async {
                   getIt<SettingsCubit>().saveCurrentDiff(
                       MedicineFrequencyParser.parseValidMarker(value));

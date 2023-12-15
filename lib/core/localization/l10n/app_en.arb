@@ -42,4 +42,5 @@
 "cancel":"cancel",
 "thank_u":"Thank You.",
 "return_back":"Return",
-"time_for_taking_med":"Time of taking medicines"}
+"time_for_taking_med":"Time of taking medicines",
+"med_name_cannot_be_empty":"Medicine name can not be empty."}
