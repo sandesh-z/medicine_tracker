@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  strings.app_name,
+                  "Medicine Tracker",
                   style: TextStyle(
                       color: Palette.white,
                       fontSize: 20.sp,
@@ -56,11 +56,11 @@ class _HomePageState extends State<HomePage> {
                 Text(
                   strings.never_miss_msg,
                   style: TextStyle(
-                      color: Colors.white.withOpacity(.4),
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.italic,
-                      letterSpacing: 1.1),
+                    color: Colors.white.withOpacity(.4),
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
               ],
             ),
