@@ -22,7 +22,7 @@ String to24hourTime(String timeAsString) {
   return formattedDate;
 }
 
-String parseTimeOfDay(TimeOfDay? timeOfDay) {
+String parseTimeOfDay(TimeOfDay? timeOfDay, [bool forWidget = false]) {
   if (timeOfDay == null) return strings.select_time_here;
 
   var minute = (timeOfDay.minute % 60).toString().padLeft(2, '0');
