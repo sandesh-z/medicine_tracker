@@ -27,8 +27,8 @@
 "times":"पटक",
 "missed_at":"छुटेको समय",
 "total_med_taking_time":"कुल औषधि लिने समय",
-"missed_med_today":"आज छुटेको औषधी",
-"no_missed_med_msg":"बधाई छ !!आज कुनै औषधि खान छुटेको छैन।",
+"missed_med_today":"आज खान छुटेको औषधीहरू",
+"no_missed_med_msg":"बधाई छ !! आज कुनै औषधि खान छुटेको छैन।",
 "total":"कुल",
 "taken":"खानुभएको",
 "enter_name_of_med":"औषधि को नाम यहाँ लेख्नुहोस्",
@@ -40,7 +40,8 @@
 "when_can_mark":"तपाईले लिइएको औषधिलाई कहिले टिक मार्क गर्न सक्नुहुन्छ?",
 "settings_changed":"सेटिङहरू परिवर्तन भयो",
 "cancel":"रद्द गर्नुहोस्",
-"thank_u":"धन्यवाद",
+"thank_u":"धन्यवाद !!",
 "return_back":"फर्कनुहोस्",
 "time_for_taking_med":"औषधि खाने समय",
-"med_name_cannot_be_empty":"कृपया औषधिको नाम लेख्नुहोस्"}
+"med_name_cannot_be_empty":"कृपया औषधिको नाम लेख्नुहोस्",
+"save":"सेभ गर्नुहोस"}

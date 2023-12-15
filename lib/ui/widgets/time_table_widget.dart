@@ -81,7 +81,7 @@ class _TimeRowWidgetState extends State<TimeRowWidget> {
             context: context,
             locale: AppLocale.english.locale,
             child: Text(
-              parseTimeOfDay(pickedTime),
+              parseTimeOfDay(pickedTime, true),
               style: TextStyle(
                   fontSize: pickedTime == null ? 18.sp : 23.sp,
                   letterSpacing: 1,

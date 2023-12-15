@@ -107,6 +107,7 @@ class MedicineFormBody extends StatelessWidget {
                     );
                   },
                 ),
+                SizedBox(height: 20.h),
                 BlocConsumer<AddMedicineBloc, AddMedicineState>(
                   listener: (ccontext, state) {
                     if (!state.isLoading && state.success) {
@@ -136,7 +137,7 @@ class MedicineFormBody extends StatelessWidget {
                       );
                     }
 
-                    return TextButton(
+                    return ElevatedButton(
                         onPressed: () async {
                           if (formKey.currentState?.validate() ?? false) {
                             var list = schedules;
@@ -164,7 +165,7 @@ class MedicineFormBody extends StatelessWidget {
                           }
                         },
                         child: Text(
-                          "Save",
+                          strings.save,
                           style: TextStyle(fontSize: 20.sp),
                         ));
                   },

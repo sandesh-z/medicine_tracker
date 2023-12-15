@@ -28,8 +28,8 @@ missed	Missed	छुटेको
 times	times	पटक
 missed_at	Missed at	छुटेको समय
 total_med_taking_time	Total medicine taking time	कुल औषधि लिने समय
-missed_med_today	Missed medicines today	आज छुटेको औषधी
-no_missed_med_msg	Congratulations!! No medicine missed today.	बधाई छ !!आज कुनै औषधि खान छुटेको छैन।
+missed_med_today	Missed medicines today	आज खान छुटेको औषधीहरू
+no_missed_med_msg	Congratulations!! No medicine missed today.	बधाई छ !! आज कुनै औषधि खान छुटेको छैन।
 total	Total	कुल
 missed	Missed	छुटेको
 taken	Taken	खानुभएको
@@ -42,7 +42,8 @@ select_time_here	Select time here >	यहाँ समय चयन गर्�
 when_can_mark	When you can tick mark medicine as taken?	तपाईले लिइएको औषधिलाई कहिले टिक मार्क गर्न सक्नुहुन्छ?
 settings_changed	settings changed	सेटिङहरू परिवर्तन भयो
 cancel	cancel	रद्द गर्नुहोस्
-thank_u	Thank You.	धन्यवाद
+thank_u	Thank You.	धन्यवाद !!
 return_back	Return	फर्कनुहोस्
 time_for_taking_med	Time of taking medicines	औषधि खाने समय
 med_name_cannot_be_empty	Medicine name can not be empty.	कृपया औषधिको नाम लेख्नुहोस्
+save	Save	सेभ गर्नुहोस 
