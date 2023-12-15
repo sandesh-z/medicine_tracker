@@ -69,6 +69,8 @@ class MyApp extends StatelessWidget {
 
 Future<void> initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await configureDependencies();
   await getIt<NotificationService>().initialize();
   await getIt<ScheduleTask>().initPeriodicTask();
