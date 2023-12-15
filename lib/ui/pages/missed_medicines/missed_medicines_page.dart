@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
 import 'package:medicine_tracker/features/settings/presentation/bloc/settings_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
@@ -33,15 +34,15 @@ class _MissedMedicinePageState extends State<MissedMedicinePage> {
           backgroundColor: Palette.primaryBackground1,
           iconTheme: IconThemeData(color: Palette.white),
           title: Text(
-            'Missed medicines today',
+            strings.missed_med_today,
             style: TextStyle(color: Palette.white),
           ),
         ),
         body: BlocBuilder<AddMedicineBloc, AddMedicineState>(
           builder: (context, state) {
             if (state.missedMedicines?.isEmpty ?? true) {
-              return const Center(
-                child: Text("Congratulations!! No medicine missed today."),
+              return Center(
+                child: Text(strings.no_missed_med_msg),
               );
             }
             return SingleChildScrollView(

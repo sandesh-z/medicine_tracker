@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/features/settings/presentation/bloc/settings_cubit.dart';
 import 'package:medicine_tracker/injections/injection.dart';
 import 'package:medicine_tracker/ui/routes/routes.dart';
@@ -29,14 +30,14 @@ class _MedicineMarkerWidgetState extends State<MedicineMarkerWidget> {
           child: Column(
             children: [
               Text(
-                "Duration when you can mark medicine as taken.",
+                strings.when_can_mark,
                 style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
               ),
               SizedBox(height: 10.h),
               RadioItem(
                 value: ValidTime.five,
                 groupValue: state.validTime,
-                title: "5 minutes before/after exact schedule. (Default) ",
+                title: strings.fifteen_min_before,
                 onChanged: (ValidTime? value) async {
                   getIt<SettingsCubit>().saveCurrentDiff(
                       MedicineFrequencyParser.parseValidMarker(value));
@@ -47,8 +48,8 @@ class _MedicineMarkerWidgetState extends State<MedicineMarkerWidget> {
                       builder: (ctx) => PopScope(
                             canPop: false,
                             child: PopUpSuccessOverLay(
-                                title: "Settings Changed",
-                                bthTitle: "Goto Homepage",
+                                title: strings.settings_changed,
+                                bthTitle: strings.go_home,
                                 onPressed: () async {
                                   await context.router.pushAndPopUntil(
                                     const HomeRoute(),
@@ -61,7 +62,7 @@ class _MedicineMarkerWidgetState extends State<MedicineMarkerWidget> {
               RadioItem(
                 value: ValidTime.ten,
                 groupValue: state.validTime,
-                title: "10 minutes before/after exact schedule.  ",
+                title: strings.ten_min_before,
                 onChanged: (ValidTime? value) async {
                   getIt<SettingsCubit>().saveCurrentDiff(
                       MedicineFrequencyParser.parseValidMarker(value));
@@ -71,8 +72,8 @@ class _MedicineMarkerWidgetState extends State<MedicineMarkerWidget> {
                       builder: (ctx) => PopScope(
                             canPop: false,
                             child: PopUpSuccessOverLay(
-                                title: "Settings Changed",
-                                bthTitle: "Goto Homepage",
+                                title: strings.settings_changed,
+                                bthTitle: strings.go_home,
                                 onPressed: () async {
                                   await context.router.pushAndPopUntil(
                                     const HomeRoute(),
@@ -85,7 +86,7 @@ class _MedicineMarkerWidgetState extends State<MedicineMarkerWidget> {
               RadioItem(
                 value: ValidTime.fifteen,
                 groupValue: state.validTime,
-                title: "15 minutes before/after exact schedule.  ",
+                title: strings.fifteen_min_before,
                 onChanged: (ValidTime? value) {
                   getIt<SettingsCubit>().saveCurrentDiff(
                       MedicineFrequencyParser.parseValidMarker(value));
@@ -95,8 +96,8 @@ class _MedicineMarkerWidgetState extends State<MedicineMarkerWidget> {
                       builder: (ctx) => PopScope(
                             canPop: false,
                             child: PopUpSuccessOverLay(
-                                title: "Settings Changed",
-                                bthTitle: "Goto Homepage",
+                                title: strings.settings_changed,
+                                bthTitle: strings.go_home,
                                 onPressed: () async {
                                   await context.router.pushAndPopUntil(
                                     const HomeRoute(),

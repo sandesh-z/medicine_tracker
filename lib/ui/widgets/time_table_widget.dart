@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medicine_tracker/core/localization/app_locale.dart';
+import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/ui/widgets/colors.dart';
 import 'package:medicine_tracker/utils/time_parser.dart';
 
@@ -23,7 +24,7 @@ class TimeTableWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Time for taking Medicine",
+            strings.time_for_taking_med,
             style: TextStyle(fontSize: 16.sp),
           ),
           SizedBox(

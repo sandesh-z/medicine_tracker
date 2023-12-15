@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/settings/presentation/bloc/settings_cubit.dart';
 import 'package:medicine_tracker/ui/pages/missed_medicines/pie_chart_widget.dart';
@@ -56,24 +57,24 @@ class MissedMedicineItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             BoldTitleWithRichText(
-              title: "Medicine name: ",
+              title: "${strings.med_name}: ",
               value: medicineName,
               boldSubtitleLightly: true,
               italicValue: true,
               valueColor: Palette.primaryBackground1,
             ),
             BoldTitleWithRichText(
-              title: "Missed : ",
-              value: "${times.length} times",
+              title: "${strings.missed} : ",
+              value: "${times.length} ${strings.times}",
               valueColor: Colors.red,
             ),
             BoldTitleWithRichText(
-              title: "Missed at: ",
+              title: "${strings.missed_at}: ",
               value: times.join(','),
               valueColor: Colors.red,
             ),
             BoldTitleWithRichText(
-              title: "Total medicine taking time: ",
+              title: "${strings.total_med_taking_time}: ",
               value: "$frequency",
               valueColor: Colors.blue,
             ),

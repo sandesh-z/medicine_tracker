@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/ui/widgets/colors.dart';
 
 class CustomDialog extends StatelessWidget {
@@ -84,7 +85,7 @@ class CustomDialog extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            dismissText ?? "Cancel",
+                            dismissText ?? strings.cancel,
                             style: const TextStyle(
                               fontSize: 10,
                               color: Colors.white,

@@ -3,6 +3,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicine_tracker/core/localization/strings.dart';
 
 import 'package:medicine_tracker/core/notification/notification_service.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Medicine Tracker',
+                  strings.app_name,
                   style: TextStyle(
                       color: Palette.white,
                       fontSize: 20.sp,
@@ -53,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                       letterSpacing: 1.1),
                 ),
                 Text(
-                  'Never miss to take medicine again.',
+                  strings.never_miss_msg,
                   style: TextStyle(
                       color: Colors.white.withOpacity(.4),
                       fontSize: 14.sp,
@@ -85,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                   color: Palette.primaryBackground1,
                   margin: EdgeInsets.all(20.r),
                   child: Text(
-                    "Please click add icon below to add medicine that you should take daily.",
+                    strings.add_medicine_msg,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.white,
@@ -107,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       children: [
                         Text(
-                          "Today's Schedule : ",
+                          "${strings.todays_shedule} : ",
                           style: TextStyle(
                               fontSize: 18.sp,
                               color: Palette.white,
@@ -140,10 +141,10 @@ class _HomePageState extends State<HomePage> {
         style: TabStyle.fixedCircle,
         backgroundColor: Palette.primaryBackground1,
         color: Colors.white,
-        items: const [
-          TabItem(icon: Icons.assessment),
-          TabItem(icon: Icons.add, title: "Add medicine"),
-          TabItem(
+        items: [
+          const TabItem(icon: Icons.assessment),
+          TabItem(icon: Icons.add, title: strings.add_mediicne),
+          const TabItem(
             icon: Icons.list,
           ),
         ],

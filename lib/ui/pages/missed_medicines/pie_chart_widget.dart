@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/ui/widgets/colors.dart';
 import 'package:medicine_tracker/utils/medicine_time_frequency_parser.dart';
@@ -33,9 +34,10 @@ class PieChartWidget extends StatelessWidget {
 
     Data data = calculate(list);
     final List<ChartData> chartData = [
-      ChartData('Total', data.total, Colors.blue),
-      ChartData('Missed', data.missed, Colors.red),
-      ChartData('Taken', data.total - data.missed, Palette.primaryBackground1),
+      ChartData(strings.total, data.total, Colors.blue),
+      ChartData(strings.missed, data.missed, Colors.red),
+      ChartData(
+          strings.taken, data.total - data.missed, Palette.primaryBackground1),
     ];
     return SfCircularChart(
         margin: EdgeInsets.zero,

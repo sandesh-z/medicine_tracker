@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medicine_tracker/app_constants/constants.dart';
+import 'package:medicine_tracker/core/localization/strings.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/enitities/medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/domain/usecases/get_medicine_details.dart';
 import 'package:medicine_tracker/features/add_medicine/presentation/bloc/add_medicine_bloc.dart';
@@ -43,7 +44,7 @@ class MedicineFormBody extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Palette.white),
         title: Text(
-          "Add medicine",
+          strings.add_mediicne,
           style: TextStyle(color: Palette.white),
         ),
         backgroundColor: Palette.primaryBackground1,
@@ -57,8 +58,8 @@ class MedicineFormBody extends StatelessWidget {
             child: Column(
               children: [
                 TextFieldWithTitle(
-                  title: "Medicine Name",
-                  hintText: "Enter the name of the Medicine",
+                  title: strings.med_name,
+                  hintText: strings.enter_name_of_med,
                   controller: controller,
                   validator: Validator.isNotEmpty,
                 ),
@@ -66,8 +67,7 @@ class MedicineFormBody extends StatelessWidget {
                   height: 20.h,
                 ),
                 CustomDropdown(
-                  title:
-                      "How many times you should take this medicine during day?",
+                  title: strings.how_many_times_med_take,
                   itmes: AppConstants.medicineTimeitems,
                   initalValue: AppConstants.medicineTimeitems.first,
                   callback: (selectedItem) {
@@ -105,8 +105,8 @@ class MedicineFormBody extends StatelessWidget {
                           builder: (_) => PopScope(
                                 canPop: false,
                                 child: PopUpSuccessOverLay(
-                                    title: "Medicine Added",
-                                    bthTitle: "Goto Homepage",
+                                    title: strings.medicine_added,
+                                    bthTitle: strings.go_home,
                                     onPressed: () async {
                                       await context.router.pushAndPopUntil(
                                         const HomeRoute(),
@@ -133,9 +133,8 @@ class MedicineFormBody extends StatelessWidget {
 
                             if (schedules.isEmpty ||
                                 list.length < state.medicineFrequency) {
-                              var snackBar = const SnackBar(
-                                content: Text(
-                                    'Please select all time by clicking on icon.'),
+                              var snackBar = SnackBar(
+                                content: Text(strings.select_all_time),
                                 backgroundColor: (Colors.red),
                               );
                               ScaffoldMessenger.of(context)

@@ -46,11 +46,10 @@ class MedicineDetailTile extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (ctx) => CustomDialog(
-                        message:
-                            "Are you sure you want to delete this medicine?",
-                        title: "Confirmation",
+                        message: strings.delete_confirmation_msg,
+                        title: strings.confirmation,
                         showDismiss: true,
-                        actionText: "Yes",
+                        actionText: strings.yes,
                         onAction: () async {
                           getIt<AddMedicineBloc>()
                               .add(AddMedicineEvent.delete(item.id ?? 0));
@@ -153,8 +152,8 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
               context: context,
               builder: (BuildContext context) => CustomDialog(
                 message:
-                    "You can only mark this medicine as taken $diff minutes before/after exact schedule",
-                title: "Information",
+                    "${strings.you_can_only_mark_as_taken} $diff ${strings.min_before_or_after}",
+                title: strings.information,
                 showDismiss: true,
                 dismissText: strings.ok,
               ),
@@ -165,11 +164,10 @@ class _CheckboxWithTimeState extends State<CheckboxWithTime> {
           showDialog(
             context: context,
             builder: (BuildContext context) => CustomDialog(
-              message:
-                  "You can not undo this action. Are you sure you have taken the medicine?",
-              title: "Information",
+              message: strings.are_you_sure_med_taken,
+              title: strings.information,
               showDismiss: true,
-              actionText: "Yes",
+              actionText: strings.yes,
               onAction: () {
                 List<String> list = [];
                 if (widget.medicineDetails.allMedicineTakenList?.isEmpty ??

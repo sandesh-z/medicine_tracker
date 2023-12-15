@@ -6,16 +6,16 @@ class MedicineFrequencyParser {
   static int parseMedicineFrequency(String? name) {
     int medicineFrequency = 1;
     switch (name) {
-      case "Once a day":
+      case "Once a day" || "दिनमा एकपटक":
         medicineFrequency = 1;
         break;
-      case "Twice a day":
+      case "Twice a day" || "दिनको दुई पटक":
         medicineFrequency = 2;
         break;
-      case "3 times a day":
+      case "3 times a day" || "दिनको तीन पटक":
         medicineFrequency = 3;
         break;
-      case "4 times a day":
+      case "4 times a day" || "दिनको चार पटक":
         medicineFrequency = 4;
         break;
       default:
