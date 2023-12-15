@@ -32,6 +32,7 @@ class TextFieldWithTitle extends StatelessWidget {
           readOnly: readOnly ?? false,
           controller: controller,
           validator: validator,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
               isDense: true,
               border:
