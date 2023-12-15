@@ -33,17 +33,19 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Palette.primaryBackground1,
       appBar: AppBar(
         backgroundColor: Palette.primaryBackground1,
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(20.r),
+          preferredSize: Size.fromHeight(height > 790 ? 40.h : 20.h),
           child: Container(
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.symmetric(horizontal: 20.r, vertical: 10.r),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   "Medicine Tracker",
