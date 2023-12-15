@@ -98,7 +98,7 @@ class MedicineFormBody extends StatelessWidget {
                       previous.medicineFrequency != current.medicineFrequency,
                   builder: (context, state) {
                     return TimeTableWidget(
-                      key: state.key,
+                      key: UniqueKey(),
                       medicineFrequency: state.medicineFrequency,
                       onSave: (list) {
                         schedules = list;
