@@ -46,7 +46,7 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
           title: strings.medicine_time,
           msg: isCurrentLanguageEnglish
               ? "It's time for taking ${event.medicineDetails.medicineName}"
-              : "${event.medicineDetails.medicineName} ${strings.medicine_time}",
+              : "${event.medicineDetails.medicineName} ${strings.medicine_time.replaceAll("औषधि", "")}",
           id: event.medicineDetails.id ?? 0,
           repeatNotif: true);
     }
