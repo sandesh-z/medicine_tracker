@@ -54,7 +54,7 @@ class MedicineProviderImpl implements MedicineDetailsProvider {
       await provider.open();
     }
     await provider.update(
-        tableName: MedicineDetailItems.medicineDetails,
+        tableName: MedicineDetailItems.medicineDetailsTable,
         columnName: MedicineDetailItems.allMedicineTaken,
         values: value,
         id: id);
@@ -84,7 +84,7 @@ class MedicineProviderImpl implements MedicineDetailsProvider {
         continue;
       }
       await provider.update(
-          tableName: MedicineDetailItems.medicineDetails,
+          tableName: MedicineDetailItems.medicineDetailsTable,
           columnName: MedicineDetailItems.allMedicineTaken,
           values:
               list[i].allMedicineTakenList?.replaceAll("true", "false") ?? "",
@@ -95,6 +95,7 @@ class MedicineProviderImpl implements MedicineDetailsProvider {
   @override
   Future delete(int id) async {
     await provider.delete(
-        tableName: MedicineDetailItems.medicineDetails, values: {"id": id});
+        tableName: MedicineDetailItems.medicineDetailsTable,
+        values: {"id": id});
   }
 }

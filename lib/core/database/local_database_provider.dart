@@ -139,7 +139,7 @@ class DBProviderImpl implements DBProvider {
       debugPrint(e.toString());
     }
     final result = await _database
-        ?.rawQuery("SELECT * from ${MedicineDetailItems.medicineDetails}");
+        ?.rawQuery("SELECT * from ${MedicineDetailItems.medicineDetailsTable}");
     final List<Map<String, dynamic>>? maps = result;
 
     if (maps == null) {
@@ -161,7 +161,7 @@ class DBProviderImpl implements DBProvider {
         continue;
       }
       await _database?.update(
-          MedicineDetailItems.medicineDetails,
+          MedicineDetailItems.medicineDetailsTable,
           {
             MedicineDetailItems.allMedicineTaken:
                 list[i].allMedicineTakenList?.replaceAll("true", "false") ?? ""
@@ -174,7 +174,7 @@ class DBProviderImpl implements DBProvider {
 
   String _createMedicineDetailsTable() {
     return '''
-    CREATE TABLE IF NOT EXISTS ${MedicineDetailItems.medicineDetails}
+    CREATE TABLE IF NOT EXISTS ${MedicineDetailItems.medicineDetailsTable}
      ( 
       ${MedicineDetailItems.medicineDetailsId} INTEGER PRIMARY KEY AUTOINCREMENT,
       ${MedicineDetailItems.medicineName} TEXT,

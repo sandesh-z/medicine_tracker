@@ -1,5 +1,5 @@
 class MedicineDetailItems {
-  static const String medicineDetails = "medicine_details";
+  static const String medicineDetailsTable = "medicine_details";
   static const String medicineDetailsId = "id";
   static const String medicineName = "medicine_name";
   static const String medicineReminderFrequency = "frequency";

@@ -28,8 +28,8 @@ class NotificationService {
         null,
         [
           NotificationChannel(
-              channelKey: 'Hight Importance',
-              channelName: 'Hight Importance',
+              channelKey: 'High Importance',
+              channelName: 'High Importance',
               channelDescription: 'Notification tests as alerts',
               playSound: true,
               onlyAlertOnce: true,
@@ -164,7 +164,7 @@ class NotificationService {
       ),
       content: NotificationContent(
         id: id,
-        channelKey: 'Hight Importance',
+        channelKey: 'High Importance',
         title: '$title ${Emojis.medical_pill} ',
         body: '  $msg',
         notificationLayout: NotificationLayout.Default,
