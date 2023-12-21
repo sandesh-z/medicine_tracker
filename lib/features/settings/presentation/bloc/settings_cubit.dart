@@ -60,13 +60,11 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   getRadioValues(int diff) {
-    switch (diff) {
-      case 10:
-        return ValidTime.ten;
-      case 15:
-        return ValidTime.fifteen;
-      default:
-        return ValidTime.five;
-    }
+    final difference = switch (diff) {
+      10 => ValidTime.ten,
+      15 => ValidTime.fifteen,
+      _ => ValidTime.five,
+    };
+    return difference;
   }
 }

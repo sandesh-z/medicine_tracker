@@ -4,56 +4,35 @@ import 'package:medicine_tracker/utils/time_parser.dart';
 
 class MedicineFrequencyParser {
   static int parseMedicineFrequency(String? name) {
-    int medicineFrequency = 1;
-    switch (name) {
-      case "Once a day" || "दिनमा एकपटक":
-        medicineFrequency = 1;
-        break;
-      case "Twice a day" || "दिनको दुई पटक":
-        medicineFrequency = 2;
-        break;
-      case "3 times a day" || "दिनको तीन पटक":
-        medicineFrequency = 3;
-        break;
-      case "4 times a day" || "दिनको चार पटक":
-        medicineFrequency = 4;
-        break;
-      default:
-        medicineFrequency = 1;
-    }
+    int medicineFrequency = switch (name) {
+      "Once a day" || "दिनमा एकपटक" => 1,
+      "Twice a day" || "दिनको दुई पटक" => 2,
+      "3 times a day" || "दिनको तीन पटक" => 3,
+      "4 times a day" || "दिनको चार पटक" => 4,
+      _ => 1
+    };
     return medicineFrequency;
   }
 
   static int parseValidMarker(ValidTime? name) {
-    switch (name) {
-      case ValidTime.five:
-        return 5;
-      case ValidTime.ten:
-        return 10;
-      case ValidTime.fifteen:
-        return 15;
-      default:
-        return 5;
-    }
+    final result = switch (name) {
+      ValidTime.five => 5,
+      ValidTime.ten => 10,
+      ValidTime.fifteen => 15,
+      _ => 5
+    };
+    return result;
   }
 
   static String getListofStatus(int frequency) {
-    switch (frequency) {
-      case 1:
-        return "false";
-
-      case 2:
-        return "false,false";
-
-      case 3:
-        return "false,false,false";
-
-      case 4:
-        return "false,false,false,false";
-
-      default:
-        return "false";
-    }
+    final result = switch (frequency) {
+      1 => "false",
+      2 => "false,false",
+      3 => "false,false,false",
+      4 => "false,false,false,false",
+      _ => "false"
+    };
+    return result;
   }
 
   static List<String> getMissedTime(
