@@ -5,7 +5,7 @@ on:
     branches:
       - development  # Change this to your main branch name
 
-jobs:
+ jobs:
   build:
     runs-on: ubuntu-latest  # Use the latest Ubuntu environment
 
@@ -17,8 +17,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build APK
-        run: |
-        ./gradlew assembleDebug   
+        run: android/gradlew assembleDebug  # Assuming Gradle-based project
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
