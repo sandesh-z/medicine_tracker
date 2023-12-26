@@ -1,0 +1,24 @@
+name: Build APK
+
+on:
+  push:
+    branches:
+      - development  # Change this to your main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
+
+    - name: Build APK
+      run: |
+        ./gradlew assembleDebug  # Adjust the build command for your project
