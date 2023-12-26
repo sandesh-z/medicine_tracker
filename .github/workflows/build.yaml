@@ -26,8 +26,8 @@ jobs:
     - name: Send APK via Email
       run: |
         echo "Subject: New APK Build\n\nPlease find the attached APK." \
-        | swaks --to recipient@example.com \
-                --from sender@example.com \
+        | swaks --to girisandesh07@gmail.com \
+                --from gsandace@gmail.com \
                 --server ${{ secrets.SMTP_SERVER }} \
                 --port ${{ secrets.SMTP_PORT }} \
                 --auth LOGIN \
