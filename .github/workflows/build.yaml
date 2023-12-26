@@ -17,7 +17,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build APK
-        run: .android/gradlew assembleDebug  # Assuming Gradle-based project
+        run: ./android/gradlew assembleDebug  # Assuming Gradle-based project
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
