@@ -3,7 +3,7 @@ name: Build APK
 on:
   push:
     branches:
-      - development   
+      - master   
 
 jobs:
   build:
@@ -22,22 +22,10 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y swaks
-        
+
     - name: Build APK
       run: |
         flutter pub get
         flutter build apk --debug
 
-    - name: Send APK via Email
-      run: |
-        echo "Subject: New APK Build\n\nPlease find the attached APK." \
-        | swaks --to girisandesh07@gmail.com \
-                --from gsandace@gmail.com \
-                --server ${{ secrets.SMTP_SERVER }} \
-                --port ${{ secrets.SMTP_PORT }} \
-                --auth LOGIN \
-                --auth-user ${{ secrets.SMTP_USERNAME }} \
-                --auth-password ${{ secrets.SMTP_PASSWORD }} \
-                --attach - \
-                --attach-type application/vnd.android.package-archive \
-                --attach-name "app-debug.apk" 
+     
