@@ -24,39 +24,15 @@ jobs:
         flutter build apk --debug
 
     - name: Send APK via Email
-      env:
-        SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
       run: |
-        curl --request POST \
-          --url https://api.sendgrid.com/v3/mail/send \
-          --header "Authorization: Bearer $SENDGRID_API_KEY" \
-          --header "Content-Type: application/json" \
-          --data '{
-            "personalizations": [
-              {
-                "to": [
-                  {
-                    "email": "girisandesh07@gmail.com"   
-                  }
-                ],
-                "subject": "New APK Build"
-              }
-            ],
-            "from": {
-              "email": "gsandace@gmail.com"  
-            },
-            "content": [
-              {
-                "type": "text/plain",
-                "value": "Please find the attached APK."
-              }
-            ],
-            "attachments": [
-              {
-                "content": "'"$(base64 -w 0 app/build/app/outputs/flutter-apk/app-debug.apk)"'",
-                "filename": "app-debug.apk",
-                "type": "application/vnd.android.package-archive",
-                "disposition": "attachment"
-              }
-            ]
-          }'    
+        echo "Subject: New APK Build\n\nPlease find the attached APK." \
+        | swaks --to recipient@example.com \
+                --from sender@example.com \
+                --server ${{ secrets.SMTP_SERVER }} \
+                --port ${{ secrets.SMTP_PORT }} \
+                --auth LOGIN \
+                --auth-user ${{ secrets.SMTP_USERNAME }} \
+                --auth-password ${{ secrets.SMTP_PASSWORD }} \
+                --attach - \
+                --attach-type application/vnd.android.package-archive \
+                --attach-name "app-debug.apk" 
