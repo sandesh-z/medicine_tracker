@@ -5,7 +5,7 @@ on:
     branches:
       - development  # Change this to your main branch name
 
- jobs:
+jobs:
   build:
     runs-on: ubuntu-latest  # Use the latest Ubuntu environment
 
