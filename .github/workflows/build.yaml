@@ -21,4 +21,4 @@ jobs:
     - name: Build APK
       run: |
         flutter pub get
-        flutter build apk
+        flutter build apk --debug
