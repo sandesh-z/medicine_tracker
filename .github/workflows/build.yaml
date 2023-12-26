@@ -17,7 +17,12 @@ jobs:
       uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.16.0'  # Use the desired Flutter version
-
+    
+    - name: Install swaks
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y swaks
+        
     - name: Build APK
       run: |
         flutter pub get
