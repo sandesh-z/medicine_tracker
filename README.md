@@ -1,6 +1,6 @@
 # medicine_tracker
 
-A new Flutter project.
+Flutter project to remind medicine taking time.
 
 ## Getting Started
 
